@@ -12,6 +12,11 @@ class OrderItemsController < ApplicationController
     redirect_to request.referrer
   end
 
+  #def update
+   # item = last_order.order_items.find(params[:id])
+    #item.update(post_params)
+    #redirect_to request.referrer
+  #end
 
   private
 

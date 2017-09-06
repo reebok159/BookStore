@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
 
   def cart
     @cart = last_order
+    @books = @cart.order_items
   end
 
 =begin
