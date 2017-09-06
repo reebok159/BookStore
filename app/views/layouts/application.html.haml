@@ -1,0 +1,10 @@
+!!! 5
+%html
+  %head
+    = render partial: 'layouts/partials/header'
+  %body
+    = render partial: 'layouts/partials/top'
+    %p.notice= notice
+    %p.alert= alert
+    = yield
+    = render partial: 'layouts/partials/footer'

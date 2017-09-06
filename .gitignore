@@ -17,4 +17,7 @@
 /yarn-error.log
 
 .byebug_history
+<<<<<<< aaf3785fccab114940c9d816d871c2fb5472c49f
 .env
+=======
+>>>>>>> Impletent some models, controllers, templates

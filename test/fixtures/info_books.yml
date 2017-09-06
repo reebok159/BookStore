@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  full_desc: MyText
+  quantity: 1
+  width: 1.5
+  height: 1.5
+  depth: 1.5
+  published: 2017-08-06
+  materials: MyString
+
+two:
+  full_desc: MyText
+  quantity: 1
+  width: 1.5
+  height: 1.5
+  depth: 1.5
+  published: 2017-08-06
+  materials: MyString

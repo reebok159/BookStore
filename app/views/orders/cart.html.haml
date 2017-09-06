@@ -1,0 +1,5 @@
+= if @cart.nil?
+  cart is empty
+= link_to clear_cart_path, class: "thumb-hover-link", method: :post do
+  clear cart
+= @cart.inspect
