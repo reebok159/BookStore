@@ -1,9 +1,14 @@
 class OrdersController < ApplicationController
 
 
-  def cart
+  def index
     @cart = last_order
-    @books = @cart.order_items
+    @items = []
+    @items = @cart.order_items.order(:id) unless @cart.nil?
+
+    @subtotal = 0
+    @coupon = 0
+
   end
 
 =begin
