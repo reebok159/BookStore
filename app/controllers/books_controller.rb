@@ -28,19 +28,18 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    pry
   end
 
   def new
     @book = Book.new
     @book.build_info_book
     @book.build_category
-  end
-
-  def edit
-    @book = Book.find(params[:id])
+    @book.images.build
   end
 
   def create
+
     @book = Book.new(post_params)
     @category = Category.new(category_params)
     #pry
@@ -50,9 +49,13 @@ class BooksController < ApplicationController
       @book.category_id = @category.id
     end
 
-    pry
+    #pry
 
     if @book.save
+      #params[:images]['image'].each do |a|
+      #  @book.images.create!(:image => a)
+      #end
+
       redirect_to @book
     else
       render "new"
@@ -60,9 +63,23 @@ class BooksController < ApplicationController
 
   end
 
+  def edit
+
+    @book = Book.find(params[:id])
+    #@category = @book.category || @book.build_category
+    @info_book = @book.info_book || @book.build_info_book
+    #@images = @book.images || @book.images.build
+    #pry
+    #@images = @book.images || @book.images.build
+  end
+
   def update
     @book = Book.find(params[:id])
-    @book.update(post_params)
+    if @book.update_attributes(post_params)
+      redirect_to @book
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def destroy
@@ -74,7 +91,7 @@ class BooksController < ApplicationController
   private
   #
     def post_params
-      params.require(:book).permit(:name, :price, :short_desc, :category_id,
+      params.require(:book).permit(:name, :price, :short_desc, :category_id, images_attributes: [:image, :_destroy, :id],
         info_book_attributes: [:width, :height, :depth, :full_desc, :published, :materials, :quantity])
     end
 

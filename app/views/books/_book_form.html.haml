@@ -1,12 +1,12 @@
-= simple_form_for @book do |f|
+= simple_form_for @book, html: { multipart: true } do |f|
   = f.input :name, :label => "Name of book"
   = f.input :price, :label => "Price"
 
-  = f.label :short_desc, "Short Description"
+  = #f.label :short_desc, "Short Description"
   %br
-  = f.input :short_desc
+  = f.input :short_desc, label: "Short Description"
   %br
-  = f.simple_fields_for :info_book do |info|
+  = f.simple_fields_for :info_book, @info_book do |info|
     = info.label :full_desc, "Full Description"
     %br
     = info.text_area :full_desc
@@ -20,5 +20,26 @@
   = f.collection_select :category_id, Category.all, :id, :title
   = simple_fields_for :category do |cat|
     = cat.input :title, :label => "Or enter name"
+
+  = f.simple_fields_for :images, Image.new do |img|
+    - #ind = ''; ind = f.object.images.count unless f.object.images.count.zero?
+    = img.file_field :image, multiple: true, name: "book[images_attributes][][image]"
+    = img.hidden_field :_destroy, name: "book[images_attributes][][_destroy]", value: ""
+    = img.hidden_field :id, name: "book[images_attributes][][id]", value: ""
+
+
+  - f.object.images.each_with_index do |img, index|
+    - if img.id
+      = f.check_box :_destroy, name: "book[images_attributes][][_destroy]", checked: "false", include_hidden: false
+      = f.hidden_field :id, name: "book[images_attributes][][id]", value: "#{img.id}"
+      = image_tag(img.image.url, style: "width: 100px;")
+
+
+
+
+  %div
+    TEST:::
+    %hr
+    = #@book.images.inspect
   %hr
   = f.button :submit
