@@ -20,7 +20,7 @@ module BooksHelper
 
   def categories_list_with_count
     cats = Category.all
-    cats_list = [get_all_for_cat(cats)]
+    cats_list = [get_all_for_cat]
     cats.each do |item|
       total_books = 0
       total_books = item.books.count unless item.books.count.nil?
@@ -31,10 +31,11 @@ module BooksHelper
 
   private
 
-    def get_all_for_cat(cats)
-      total_books = 0
-      cats.each { |item| total_books += item.books.count unless item.books.count.nil?}
-      { :path => books_path, :name => 'All', :total_books => total_books}
+    def get_all_for_cat
+      total_books = Book.all.count
+
+      #cats.each { |item| total_books += item.books.count unless item.books.count.nil?}
+      { :path => books_path, :name => 'All', :total_books => total_books }
     end
 
 end
