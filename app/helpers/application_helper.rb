@@ -7,6 +7,10 @@ module ApplicationHelper
     :highprice => 'Price: High to low'
   }
 
+  def price_format(summ)
+    #{}"€#{summ}"
+    "#{summ} UAH"
+  end
 
   def categories_list
     cats = Category.all
@@ -17,9 +21,9 @@ module ApplicationHelper
     cats_list
   end
 
-  def authors_to_list(book)
-    return "" if book.authors.nil?
-    book.authors.pluck(:name).join(', ')
+  def authors_to_list(authors)
+    return "" if authors.nil?
+    authors.pluck(:name).join(', ')
   end
 
   def get_selected_sort
@@ -32,6 +36,18 @@ module ApplicationHelper
     path += "/catid/#{params[:catid]}" unless params[:catid].nil?
     path += "/order/#{criteria}" unless criteria.nil?
     path
+  end
+
+  def try_image(book, type = {})
+    #@b = book
+    #pry
+    if book.images.empty?
+      '/uploads/noimage.png'
+    else
+      book.images[0].image.url(type)
+    end
+
+
   end
 
   def cart_empty?

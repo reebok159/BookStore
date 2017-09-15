@@ -13,10 +13,11 @@ module BooksHelper
     end
     return desc
   end
-
+=begin
   def year_published(published)
     "-"
   end
+=end
 
   def categories_list_with_count
     cats = Category.all

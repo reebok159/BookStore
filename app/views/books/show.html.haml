@@ -6,20 +6,18 @@
     .col-sm-6
       .product-gallery
         .mb-20
-          %img.img-responsive{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
-        .images.clearfix
-          %a.img-link{href: "#"}
-            %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-          %a.img-link{href: "#"}
-            %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
-          %a.img-link{href: "#"}
-            %img{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+          %img.img-responsive{src: "#{try_image(@book, :book_image)}"}
+          - unless @book.images.empty?
+            .images.clearfix
+              - @book.images[1..@book.images.size].each do |item|
+                %a.img-link{href: "#"}
+                  = image_tag(item.image.url(:smallbook_image))
     .col-sm-6
       %h1.mt-res-0= @book.name
-      %p.lead.small= @book.authors
+      %p.lead.small= authors_to_list(@book.authors)
       .row
         .col-xs-12.col-md-4
-          %p.h1.in-gold-500.mt-10= "€#{@book.price}"
+          %p.h1.in-gold-500.mt-10= "#{price_format(@book.price)}"
         .col-xs-5.col-md-3
           .input-group.general-position
             %a.input-link{href: "#"}
@@ -36,7 +34,7 @@
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Year of publication
-          %p.lead.small.pull-right= year_published(@book.info_book.published)
+          %p.lead.small.pull-right= @book.info_book.published
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Dimensions

@@ -1,7 +1,8 @@
 .col-xs-6.col-sm-3
+  =#{image_tag(book.images[0].url(:thumb))}
   .general-thumb-wrap
     .thumbnail.general-thumbnail
-      %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+      %img.img-shadow.general-thumbnail-img{src: "#{try_image(book, :thumb)}", alt: "#{book.name}"}
       .thumb-hover
         .general-thumb-link-wrap
           = link_to book_path(book), class: "thumb-hover-link" do
@@ -10,6 +11,6 @@
             %i.fa.fa-shopping-cart.thumb-icon
   .general-thumb-info
     %p.title= book.name
-    %p.font-16.in-gold-500= "€#{book.price}"
+    %p.font-16.in-gold-500= "#{price_format(book.price)}"
     %span.divider-sm
-    %p.lead.small= book.authors
+    %p.lead.small= authors_to_list(book.authors)

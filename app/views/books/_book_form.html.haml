@@ -23,7 +23,7 @@
   = #f.input :authors
   %br
   = f.label "author", "Authors (separate by comma)"
-  = f.text_field "author", value: "#{authors_to_list(@book)}", name: "authors"
+  = f.text_field "author", value: "#{authors_to_list(@book.authors)}", name: "authors"
   = f.simple_fields_for :images, Image.new do |img|
     - #ind = ''; ind = f.object.images.count unless f.object.images.count.zero?
     = img.file_field :image, multiple: true, name: "book[images_attributes][][image]"

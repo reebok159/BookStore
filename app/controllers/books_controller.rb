@@ -28,7 +28,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    pry
+    #pry
   end
 
   def new
@@ -74,7 +74,7 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    pry
+    #pry
     save_authors_to_book
     if @book.update_attributes(post_params)
       redirect_to @book
