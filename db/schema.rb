@@ -10,16 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908192021) do
+ActiveRecord::Schema.define(version: 20170915103336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "authors", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "authors_books", id: false, force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "author_id"
+    t.index ["author_id"], name: "index_authors_books_on_author_id"
+    t.index ["book_id"], name: "index_authors_books_on_book_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -29,13 +35,6 @@ ActiveRecord::Schema.define(version: 20170908192021) do
     t.datetime "updated_at", null: false
     t.text "short_desc"
     t.integer "category_id"
-  end
-
-  create_table "books_authors", id: false, force: :cascade do |t|
-    t.bigint "book_id"
-    t.bigint "authors_id"
-    t.index ["authors_id"], name: "index_books_authors_on_authors_id"
-    t.index ["book_id"], name: "index_books_authors_on_book_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -66,11 +65,11 @@ ActiveRecord::Schema.define(version: 20170908192021) do
     t.float "width"
     t.float "height"
     t.float "depth"
-    t.date "published"
     t.string "materials"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "book_id"
+    t.integer "published"
   end
 
   create_table "order_items", force: :cascade do |t|

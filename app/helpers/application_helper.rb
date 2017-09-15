@@ -17,6 +17,11 @@ module ApplicationHelper
     cats_list
   end
 
+  def authors_to_list(book)
+    return "" if book.authors.nil?
+    book.authors.pluck(:name).join(', ')
+  end
+
   def get_selected_sort
     return false if params[:order].nil? or !(params[:order].to_sym).in?(CRITERIA_FOR_SORT)
     CRITERIA_FOR_SORT[params[:order].to_sym]
