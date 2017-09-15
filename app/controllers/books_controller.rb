@@ -36,7 +36,6 @@ class BooksController < ApplicationController
     @book.build_info_book
     @book.build_category
     @book.images.build
-    #@authors = @book.authors.build
   end
 
   def create
@@ -44,13 +43,16 @@ class BooksController < ApplicationController
     @book = Book.new(post_params)
     save_authors_to_book
     pry
+=begin
     @category = Category.new(category_params)
     #pry
+
     if @category.valid?
       @category.save
       #pry
       @book.category_id = @category.id
     end
+=end
 
     if @book.save
       redirect_to @book
@@ -72,6 +74,8 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
+    pry
+    save_authors_to_book
     if @book.update_attributes(post_params)
       redirect_to @book
     else
