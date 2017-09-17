@@ -58,4 +58,4 @@ i = 1
   i += 1
 end
 puts "Books created"
-puts "SUCCESS"
+puts "success!"
