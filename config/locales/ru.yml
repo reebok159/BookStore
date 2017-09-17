@@ -32,3 +32,14 @@ ru:
     popular: "Сначала популярные"
     lowtohigh: "Цена: 1-9"
     hightolow: "Цена: 9-1"
+  auth:
+    login:
+      title_login: "Авторизация"
+      enteremail: "Введите Email"
+      password: "Введите пароль"
+      forgotpassword: "Забыли пароль?"
+      rememberme: "Запомнить меня"
+      donthaveacc: "Нет аккаунта?"
+    signup:
+  phrase:
+   or: "или"

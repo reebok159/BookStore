@@ -35,15 +35,16 @@ en:
     shop: "Shop"
     orders: "Orders"
     settings: "Settings"
+    catalog: "Catalog"
+    allcats: "All Categories"
+  action:
     login: "Log In"
     logout: "Log Out"
     signup: "Sign Up"
-    catalog: "Catalog"
-  actions:
     buynow: "Buy Now"
-    allcats: "All Categories"
     backtoresults: "Back to results"
-    viewmore: "View More"
+    view_more: "Смотреть ещё"
+    addtocart: "В Корзину"
   mainpage:
     welcome1: "Welcome to our amazing Bookstore!"
     welcome2: "We pore through hundreds of new books each month and select the five best we can find to share with our members."
@@ -63,9 +64,14 @@ en:
     popular: "Popular first"
     lowtohigh: "Price: Low to high"
     hightolow: "Price: High to low"
-  login:
-    login: "Log In"
-    enteremail: "Enter Email"
-    password: "Enter Password"
-    forgotpassword: "Forgot Password?"
-    rememberme: "Remember me"
+  auth:
+    login:
+      title_login: "Log In"
+      enteremail: "Enter Email"
+      password: "Enter Password"
+      forgotpassword: "Forgot Password?"
+      rememberme: "Remember me"
+      donthaveacc: "Don’t have an Account?"
+    signup:
+  phrase:
+   or: "or"
