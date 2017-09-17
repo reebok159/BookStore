@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   #for cart
   def last_order
+    #pry
     if current_user.nil?
       create_order
       #get order from db by cookie order id
