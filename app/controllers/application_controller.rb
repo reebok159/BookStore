@@ -1,11 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :last_order
+  before_action :last_order, :set_locale
+  before_action
 
   def index
     render 'layouts/application'
   end
 
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
 
   #for cart
   def last_order

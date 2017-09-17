@@ -4,13 +4,13 @@
       .col-sm-9
         %ul.list-inline.general-align.mb-25
           %li
-            %a.nav-link{href: "#{root_path}"} Home
+            %a.nav-link{href: "#{root_path}"} #{t('pages.home')}
           %li
-            %a.nav-link{href: "#{books_path}"} Shop
+            %a.nav-link{href: "#{books_path}"} #{t('pages.shop')}
           %li
-            %a.nav-link{href: "#"} Orders
+            %a.nav-link{href: "#"} #{t('pages.orders')}
           %li
-            %a.nav-link{href: "#"} Settings
+            %a.nav-link{href: "#"} #{t('pages.settings')}
       .col-sm-3
         %p.general-nav-mail support@bookstore.com
         %p.general-nav-number (555)-555-5555

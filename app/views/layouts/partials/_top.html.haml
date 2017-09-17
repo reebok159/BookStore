@@ -21,45 +21,45 @@
           %span{'aria-hidden': "true"} &times;
         %ul.nav.navbar-nav
           %li
-            = link_to "Home", root_path
+            = link_to "#{t('pages.home')}", root_path
           %li
-            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
+            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} #{t('pages.shop')}
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
               - categories_list.each do |cat|
                 %li
                   %a.collapse-link{href: "#{cat[:path]}"}= cat[:name]
               %li.divider{role: "separator"}
                 %li
-                  = link_to 'All categories', books_path
+                  = link_to "#{t('pages.allcats')}", books_path
           %li
             %a{href: "#{new_user_session_path}"} My account
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            = link_to "Home", root_path
+            = link_to "#{t('pages.home')}", root_path
           %li.dropdown
-            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} #{t('pages.shop')}
             %ul.dropdown-menu
               - categories_list.each do |cat|
                 %li
                   %a.collapse-link{href: "#{cat[:path]}"}= cat[:name]
               %li.divider{role: "separator"}
                 %li
-                  = link_to 'All categories', books_path
+                  = link_to "#{t('pages.allcats')}", books_path
           - unless user_signed_in?
             %li
-              %a{href: "#{new_user_session_path}"} Log In
+              %a{href: "#{new_user_session_path}"} #{t('action.login')}
             %li
-              %a{href: "#{new_user_registration_path}"} Sign Up
+              %a{href: "#{new_user_registration_path}"} #{t('action.signup')}
           - else
             %li.dropdown
               %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} My account
               %ul.dropdown-menu
                 %li
-                  %a{href: "#"} Orders
+                  %a{href: "#"} #{t('pages.orders')}
                 %li
-                  %a{href: "#"} Settings
+                  %a{href: "#"} #{t('pages.settings')}
                 %li.divider{role: "separator"}
                 %li
-                  = link_to 'Log out', destroy_user_session_path, :method => :delete
+                  = link_to "#{t('pages.logout')}", destroy_user_session_path, :method => :delete
                   /%a{href: "#{destroy_user_session_path}", method: :delete} Log out

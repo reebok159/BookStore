@@ -17,7 +17,7 @@
                 %p.lead= book.short_desc
                 %p.lead.small= authors_to_list(book.authors)
                 .general-align
-                  %button.btn.btn-primary Buy Now
+                  %button.btn.btn-primary #{t('action.buynow')}
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
       %span.icon-prev{'aria-hidden': "true"}
       %span.sr-only Previous
@@ -26,12 +26,12 @@
       %span.sr-only Next
 .container
   .jumbotron.text-center.mb-0
-    %h2.h1 Welcome to our amazing Bookstore!
+    %h2.h1 #{t('mainpage.welcome1')}
     .mb-res-50
-      %p We pore through hundreds of new books each month and select the five best we can find to share with our members.
-    = link_to "Get Started", catalog_path, class: "btn btn-default"
+      %p #{t('mainpage.welcome2')}
+    = link_to "#{t('mainpage.getstarted')}", catalog_path, class: "btn btn-default"
   .mb-35
-    %h3 Best Sellers
+    %h3 #{t('mainpage.bestsellers')}
     .row
       - @bestsellers.each do |item|
         .col-sm-6.col-md-3

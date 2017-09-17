@@ -30,4 +30,42 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  pages:
+    home: "Home"
+    shop: "Shop"
+    orders: "Orders"
+    settings: "Settings"
+    login: "Log In"
+    logout: "Log Out"
+    signup: "Sign Up"
+    catalog: "Catalog"
+  actions:
+    buynow: "Buy Now"
+    allcats: "All Categories"
+    backtoresults: "Back to results"
+    viewmore: "View More"
+  mainpage:
+    welcome1: "Welcome to our amazing Bookstore!"
+    welcome2: "We pore through hundreds of new books each month and select the five best we can find to share with our members."
+    getstarted: "Get Started"
+    bestsellers: "Best Sellers"
+  books:
+    addtocart: "Add to Cart"
+    description: "Description"
+    published: "Year of publication"
+    dimensions: "Dimensions"
+    materials: "Materials"
+    reviews: "Reviews"
+    verifyreview: "Verified Reviewer"
+    filterbycategory: "Filter by category"
+    sortby: "Sort by"
+    newest: "Newest first"
+    popular: "Popular first"
+    lowtohigh: "Price: Low to high"
+    hightolow: "Price: High to low"
+  login:
+    login: "Log In"
+    enteremail: "Enter Email"
+    password: "Enter Password"
+    forgotpassword: "Forgot Password?"
+    rememberme: "Remember me"

@@ -9,14 +9,14 @@ module ApplicationHelper
 
   def price_format(summ)
     #{}"€#{summ}"
-    "#{summ} UAH"
+    "#{summ}$"
   end
 
   def categories_list
     cats = Category.all
     cats_list = []
     cats.each do |item|
-      cats_list << { :path => books_path + "/catid/#{item.id}", :name => item.title }
+      cats_list << { :path => books_path + "/catid/#{item.id}", :name => item.name }
     end
     cats_list
   end

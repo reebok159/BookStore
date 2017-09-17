@@ -1,5 +1,5 @@
 %main.container
-  %h1.general-title-margin Сatalog
+  %h1.general-title-margin #{t('pages.catalog')}
   - unless flash[:notice].nil?
     %div.alert.alert-success= flash[:notice]
   .hidden-xs.clearfix
@@ -7,19 +7,19 @@
       .dropdown.width-240
         %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
           - unless selected = get_selected_sort
-            Newest first
+            #{t('books.newest')}
           - else
             = selected
           %i.fa.fa-angle-down.dropdown-icon.pull-right
         %ul.dropdown-menu
           %li
-            %a{href: "#{build_filter_url(:newest)}"} Newest first
+            %a{href: "#{build_filter_url(:newest)}"} #{t('books.newest')}
           %li
-            %a{href: "#{build_filter_url(:popular)}"} Popular first
+            %a{href: "#{build_filter_url(:popular)}"} #{t('books.popular')}
           %li
-            %a{href: "#{build_filter_url(:lowprice)}"} Price: Low to high
+            %a{href: "#{build_filter_url(:lowprice)}"} #{t('books.lowtohigh')}
           %li
-            %a{href: "#{build_filter_url(:highprice)}"} Price: High to low
+            %a{href: "#{build_filter_url(:highprice)}"} #{t('books.hightolow')}
     %ul.list-inline.pt-10.mb-25.mr-240
       - categories_list_with_count.each do |item|
         %li.mr-35
@@ -27,45 +27,45 @@
             = item[:name]
             %span.badge.general-badge= item[:total_books]
   .dropdowns.mb-25.visible-xs
-    %p.lead.small.mb-10 Filter by category
+    %p.lead.small.mb-10 #{t('books.filterbycategory')}
     .dropdown
       %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
         - unless selected = get_selected_sort
-          Newest first
+          #{t('books.newest')}
         - else
           = selected
         %i.fa.fa-angle-down.dropdown-icon.pull-right
       %ul.dropdown-menu
         %li
-          %a{href: "#{build_filter_url(:newest)}"} Newest first
+          %a{href: "#{build_filter_url(:newest)}"} #{t('books.newest')}
         %li
-          %a{href: "#{build_filter_url(:popular)}"} Popular first
+          %a{href: "#{build_filter_url(:popular)}"} #{t('books.popular')}
         %li
-          %a{href: "#{build_filter_url(:lowprice)}"} Price: Low to high
+          %a{href: "#{build_filter_url(:lowprice)}"} #{t('books.lowtohigh')}
         %li
-          %a{href: "#{build_filter_url(:highprice)}"} Price: High to low
-    %p.lead.small.mb-10 Sort by
+          %a{href: "#{build_filter_url(:highprice)}"} #{t('books.hightolow')}
+    %p.lead.small.mb-10 #{t('books.sortby')}
     .dropdown
       %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
         - unless selected = get_selected_sort
-          Newest first
+          #{t('books.newest')}
         - else
           = selected
         %i.fa.fa-angle-down.dropdown-icon.pull-right
       %ul.dropdown-menu
         %li
-          %a{href: "#{build_filter_url(:newest)}"} Newest first
+          %a{href: "#{build_filter_url(:newest)}"} #{t('books.newest')}
         %li
-          %a{href: "#{build_filter_url(:popular)}"} Popular first
+          %a{href: "#{build_filter_url(:popular)}"} #{t('books.popular')}
         %li
-          %a{href: "#{build_filter_url(:lowprice)}"} Price: Low to high
+          %a{href: "#{build_filter_url(:lowprice)}"} #{t('books.lowtohigh')}
         %li
-          %a{href: "#{build_filter_url(:highprice)}"} Price: High to low
+          %a{href: "#{build_filter_url(:highprice)}"} #{t('books.hightolow')}
   .mb-120
-    - @books.each_slice(4) do |slice|
-      %div.row
-        - slice.each do |book|
-          = render partial: 'book', object: book
-    - if @books.size > 8
-      .text-center
-        %button.btn.btn-primary View More
+    .books-container
+      = render partial: 'books', object: @books
+    = #paginate @books
+    = #page_entries_info @books
+    .text-center.view_more
+      = render partial: 'view_more', object: @books
+

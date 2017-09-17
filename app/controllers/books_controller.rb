@@ -18,12 +18,17 @@ class BooksController < ApplicationController
       end
     end
 
-    @books = @books.first(12)
+    @books = @books.page(params[:page]).per(12)#first(12)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
     #pry
   end
 
   def catalog
-    redirect_to books_url, notice: 'Welcome to our amazing Bookstore! We pore through hundreds of new books each month and select the five best to share with our members'
+    redirect_to books_url, notice: t('mainpage.welcome1')+t('mainpage.welcome2')
   end
 
   def show
@@ -99,7 +104,7 @@ class BooksController < ApplicationController
 
     def category_params
       #.require(:category)
-      params.permit(:title)
+      params.permit(:name)
     end
 
     def save_authors_to_book

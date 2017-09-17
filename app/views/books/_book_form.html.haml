@@ -17,7 +17,7 @@
     = info.input :materials
     = info.input :quantity
   = f.label :category_id, "Select Category: "
-  = f.collection_select :category_id, Category.all, :id, :title, :include_blank => "Uncategorized"
+  = f.collection_select :category_id, Category.all, :id, :name, :include_blank => "Uncategorized"
   = #simple_fields_for :category do |cat|
   = #cat.input :title, :label => "Or enter name"
   = #f.input :authors

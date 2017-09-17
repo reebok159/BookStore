@@ -25,7 +25,7 @@ module BooksHelper
     cats.each do |item|
       total_books = 0
       total_books = item.books.count unless item.books.count.nil?
-      cats_list << { :path => books_path + "/catid/#{item.id}", :name => item.title, :total_books => total_books }
+      cats_list << { :path => books_path + "/catid/#{item.id}", :name => item.name, :total_books => total_books }
     end
     cats_list
   end
