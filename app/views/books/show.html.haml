@@ -1,5 +1,5 @@
 %main.container
-  %a.general-back-link{href: "#"}
+  %a.general-back-link{href: "#{url_for(:back)}"}
     %i.fa.fa-long-arrow-left.mr-15
     #{t('action.backtoresults')}
   .row
@@ -16,17 +16,19 @@
       %h1.mt-res-0= @book.name
       %p.lead.small= authors_to_list(@book.authors)
       .row
-        .col-xs-12.col-md-4
-          %p.h1.in-gold-500.mt-10= "#{price_format(@book.price)}"
-        .col-xs-5.col-md-3
-          .input-group.general-position
-            %a.input-link{href: "#"}
-              %i.fa.fa-minus.line-height-40
-            %input.form-control.quantity-input{type: "text"}
-            %a.input-link{href: "#"}
-              %i.fa.fa-plus.line-height-40
-        .col-xs-7.col-md-5
-          %button.btn.btn-default.pull-right.general-position #{t('action.addtocart')}
+        = form_tag('/to_cart', method: 'post', class: "egn_book_cart") do
+          .col-xs-12.col-md-4
+            %p.h1.in-gold-500.mt-10= "#{price_format(@book.price)}"
+          .col-xs-5.col-md-3
+            .input-group.general-position
+              %a.input-link.item-change-quantity{href: "javascript:void(0)", data: { action: "minus" } }
+                %i.fa.fa-minus.line-height-40 -
+              %input.form-control.quantity-input{type: "text", name: 'quantity', value: "1"}
+              %a.input-link.item-change-quantity{href: "javascript:void(0)", data: { action: "plus" } }
+                %i.fa.fa-plus.line-height-40 +
+          .col-xs-7.col-md-5
+            %input{type: "hidden", name: "item_id", value: "#{@book.id}"}
+            %button.btn.btn-default.pull-right.general-position{type: 'submit'} #{t('action.addtocart')}
       .general-info-wrap.divider-lg
         %p #{t('books.description')}
         %p.lead.small.line-height-2
