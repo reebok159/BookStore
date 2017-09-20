@@ -1,4 +1,4 @@
 class OrderItem < ApplicationRecord
   belongs_to :order
-  has_one :book, primary_key: "item_id", foreign_key: "id"
+  belongs_to :book, primary_key: "id", foreign_key: "item_id"
 end

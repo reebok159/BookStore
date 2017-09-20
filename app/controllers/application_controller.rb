@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :last_order, :set_locale
-  before_action
+  before_action :current_ability
+
 
   def index
     render 'layouts/application'
@@ -34,5 +35,12 @@ class ApplicationController < ActionController::Base
       cookies.signed[:order_id] = order.id
     end
   end
+
+  private
+
+    def current_ability
+      @current_ability ||= Ability.new(current_user)
+      #pry
+    end
 
 end

@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #temporaly
   get 'spry', to: 'pages#spry'
   #temporaly
 
   root 'pages#index'
 
-  resources :books
+  resources :books, only: [:show, :index]
   #get 'books/:id/destroy', to: 'books#destroy', as: 'book_destroy'
   get 'catalog', to: 'books#catalog'
   get 'books(/catid/:catid)(/order/:order)', to: 'books#index'

@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
   #has_many :orders
-
-  belongs_to :order_item, optional: true
+  has_many :order_items, foreign_key: "item_id"
+  has_many :orders, through: :order_items#, optional: true
 
   has_one :info_book, dependent: :destroy
   accepts_nested_attributes_for :info_book

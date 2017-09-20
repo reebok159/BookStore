@@ -28,7 +28,7 @@ class BooksController < ApplicationController
   end
 
   def catalog
-    redirect_to books_url, notice: t('mainpage.welcome1')+t('mainpage.welcome2')
+    redirect_to books_url, notice: t('mainpage.welcome1')+' '+t('mainpage.welcome2')
   end
 
   def show

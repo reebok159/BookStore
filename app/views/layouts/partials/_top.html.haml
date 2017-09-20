@@ -61,5 +61,5 @@
                   %a{href: "#"} #{t('pages.settings')}
                 %li.divider{role: "separator"}
                 %li
-                  = link_to "#{t('pages.logout')}", destroy_user_session_path, :method => :delete
+                  = link_to "#{t('action.logout')}", destroy_user_session_path, :method => :delete
                   /%a{href: "#{destroy_user_session_path}", method: :delete} Log out

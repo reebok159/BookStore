@@ -5,4 +5,4 @@
     I18n.available_locales = [:en, :ru]
 
     # устанавливаем локаль по умолчанию на что-либо другое, чем :en
-    I18n.default_locale = :ru
+    I18n.default_locale = :en
