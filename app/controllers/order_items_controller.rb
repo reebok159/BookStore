@@ -5,7 +5,7 @@ class OrderItemsController < ApplicationController
     order = last_order.order_items.build(order_item_params)
 
     if order.save
-      flash[:notice] = 'Item was added to cart new'
+      flash[:notice] = 'Item was added to cart'
     else
       flash[:notice] = 'Couldn\'t add item to cart'
     end
