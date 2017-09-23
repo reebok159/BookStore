@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :last_order, :set_locale
   before_action :current_ability
-
+  helper_method :last_order
 
   def index
     render 'layouts/application'
@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  def set_cart
+    @cart = last_order
   end
 
   #for cart
@@ -30,11 +34,16 @@ class ApplicationController < ActionController::Base
   end
 
   def create_order
-    if current_user.nil? && !cookies[:order_id]
+    if current_user.nil?
+      if cookies[:order_id]
+        order = Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
+        return order if order
+      end
       order = Order.create
       cookies.signed[:order_id] = order.id
     end
   end
+
 
   private
 

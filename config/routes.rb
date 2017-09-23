@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
-  resources :books, only: [:show, :index]
+  resources :books, only: [:show, :index, :edit]
   #get 'books/:id/destroy', to: 'books#destroy', as: 'book_destroy'
   get 'catalog', to: 'books#catalog'
   get 'books(/catid/:catid)(/order/:order)', to: 'books#index'
@@ -22,11 +22,14 @@ Rails.application.routes.draw do
   get 'cart', to: 'orders#index', as: 'cart_page'
 
   #profile
-  get 'users/profile'
-
+  get 'users/settings'
+  get 'users/orders'
+  #get 'users/(:id)', to: redirect('users/settings')
+  patch 'users/update_password', to: 'users#update_password'
+  get 'users/update_password', to: redirect('users/settings')
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-
+  resources :users, only: [:update]
   #get 'book/show', to: 'books#show', as: 'show_book'
   #get 'books/new'
 

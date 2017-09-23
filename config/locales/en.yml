@@ -37,6 +37,7 @@ en:
     settings: "Settings"
     catalog: "Catalog"
     allcats: "All Categories"
+    myaccount: "My account"
   action:
     login: "Log In"
     logout: "Log Out"

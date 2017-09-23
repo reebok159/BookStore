@@ -6,6 +6,7 @@ ru:
     settings: "Настройки"
     catalog: "Каталог"
     allcats: "Все категории"
+    myaccount: "Мой аккаунт"
   action:
     login: "Войти"
     logout: "Выйти"

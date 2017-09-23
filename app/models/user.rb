@@ -7,6 +7,10 @@ class User < ApplicationRecord
   devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :orders
+  has_one :shipping_address, dependent: :destroy
+  accepts_nested_attributes_for :shipping_address, allow_destroy: true
+  has_one :billing_address, dependent: :destroy
+  accepts_nested_attributes_for :billing_address, allow_destroy: true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

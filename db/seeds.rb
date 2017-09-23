@@ -44,7 +44,7 @@ i = 1
         )
     )
 
-  b.images << Image.new(remote_image_url: FFaker::Book.cover)
+  b.images << Image.new(remote_image_url: FFaker::Book.cover(nil, "328x506"))
 
   rand(1..5).times do
     a = {}
@@ -58,4 +58,8 @@ i = 1
   i += 1
 end
 puts "Books created"
+puts "Creating admin..."
+User.create(email: "admin@loc.loc", is_admin: true, password: "123456")
+
+
 puts "success!"

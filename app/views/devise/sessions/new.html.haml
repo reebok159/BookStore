@@ -21,11 +21,12 @@
 
     .form-group.checkbox.text-center.mb-30
       %label.checkbox-label
-
+        = f.input :remember_me, label: false, :input_html => {:class=>"checkbox-input", hidden: true, type: "checkbox"}, wrapper: false if devise_mapping.rememberable?
+        -#%input.checkbox-input{type: "checkbox", hidden: "true"}
         %span.checkbox-icon
-          /%i.fa.fa-check
-          = f.input :remember_me, label: false, :input_html => {:class=>"checkbox-input"}, as: :boolean if devise_mapping.rememberable?
+          %i.fa.fa-check
         %span.checkbox-text #{t('auth.login.rememberme')}
+
     .text-center
       = f.button :submit, "#{t('action.login')}", class: "btn btn-default mb-20"
       /%button.btn.btn-default.mb-20 Back to Store

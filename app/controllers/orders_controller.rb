@@ -11,20 +11,12 @@ class OrdersController < ApplicationController
 
   end
 
-=begin
-  def to_cart
-    quantity = 1
-    book = Book.find(params[:item_id])
-    quantity = params[:quantity] if params[:quantity].to_i > 0
 
-    if book
-      item = [book.id, quantity]
-      to_list(item)
-
-      redirect_to request.referrer, notice: 'Item was added to cart 1'
-    end
+  def cart_empty?
+    true
   end
-=end
+
+
   def clear_cart
     cart = last_order.order_items
 

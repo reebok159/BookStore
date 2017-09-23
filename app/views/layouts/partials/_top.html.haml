@@ -7,14 +7,12 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand Bookstore
-      %a.shop-link.pull-right.visible-xs{href: "#"}
-        %span.shop-icon{ :style => ("background-color: transparent;" if cart_empty?) }
-          - unless cart_empty?
-            %span.shop-quantity 1
-    %a.shop-link.pull-right.hidden-xs{href: "#"}
-      %span.shop-icon{ :style => ("background-color: transparent;" if cart_empty?) }
-        - unless cart_empty?
-          %span.shop-quantity 1
+      %a.shop-link.pull-right.visible-xs{href: "#{cart_page_path}"}
+        %span.shop-icon{ :style => ("background-color: transparent;" unless last_order.total_quantity > 0) }
+          %span.shop-quantity= last_order.total_quantity
+    %a.shop-link.pull-right.hidden-xs{href: "#{cart_page_path}"}
+      %span.shop-icon{ :style => ("background-color: transparent;" unless last_order.total_quantity > 0) }
+        %span.shop-quantity= last_order.total_quantity
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
       .visible-xs
         %button.close{type: "button", 'aria-label': "Close"}
@@ -32,7 +30,7 @@
                 %li
                   = link_to "#{t('pages.allcats')}", books_path
           %li
-            %a{href: "#{new_user_session_path}"} My account
+            %a{href: "#{new_user_session_path}"} #{t('myaccount')}
       .hidden-xs
         %ul.nav.navbar-nav
           %li
@@ -56,9 +54,9 @@
               %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} My account
               %ul.dropdown-menu
                 %li
-                  %a{href: "#"} #{t('pages.orders')}
+                  %a{href: "#{users_orders_path}"} #{t('pages.orders')}
                 %li
-                  %a{href: "#"} #{t('pages.settings')}
+                  %a{href: "#{users_settings_path}"} #{t('pages.settings')}
                 %li.divider{role: "separator"}
                 %li
                   = link_to "#{t('action.logout')}", destroy_user_session_path, :method => :delete

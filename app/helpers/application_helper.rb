@@ -46,13 +46,11 @@ module ApplicationHelper
     else
       book.images[0].image.url(type)
     end
-
-
   end
 
-  def cart_empty?
-    true
-  end
+
+
+
 
 
 
