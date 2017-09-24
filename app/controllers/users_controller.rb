@@ -10,7 +10,6 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-
     if @user.update(user_params)
 
       #if @user.changed?
@@ -24,8 +23,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Data cannot be saved"
       render :settings
     end
-
-
   end
 
   def update_password
