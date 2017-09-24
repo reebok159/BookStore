@@ -46,16 +46,16 @@
         %td
           %p.font-16 Subtotal:
         %td
-          %p.font-16 €117.69
+          %p.font-16= price_format(@order.subtotal)
       %tr
         %td
-          %p.font-16 Coupon:
+          %p.font-16 Delivery:
         %td
-          %p.font-16 €0.00
+          %p.font-16= price_format(@order.delivery_price)
       %tr
         %td
           %strong.font-18 Order Total:
         %td
-          %strong.font-18 €117.69
+          %strong.font-18= price_format(@order.total_price)
   .text-center
     = f.button :submit, "Save and Continue", class: "btn btn-default mb-80"

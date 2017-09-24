@@ -6,8 +6,8 @@ class OrdersController < ApplicationController
     @items = []
     @items = @cart.order_items.order(:id) unless @cart.nil?
 
-    @subtotal = 0
-    @coupon = @cart.coupon.discount
+    #@subtotal = 0
+    @coupon = @cart.coupon_discount
 
   end
 
@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
     if coupon.nil?
       flash[:notice] = "Coupon isn't exist"
     else
-      if @cart.order_items.blank?
+      if last_order.order_items.nil?
         flash[:notice] = "You cannot activate coupon"
       else
         @order = last_order

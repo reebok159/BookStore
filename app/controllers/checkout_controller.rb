@@ -15,7 +15,7 @@ class CheckoutController < ApplicationController
     when 'payment'
       @credit_card = @order.credit_card || @order.build_credit_card
     when 'confirm'
-      #status = processing_confirm
+      @address = @order.order_address
     when 'complete'
       #status = processing_complete
     else
@@ -57,7 +57,7 @@ class CheckoutController < ApplicationController
   end
 
   def edit_data
-    pry
+    #pry
     @order.checkout_state = state_params[:type]
     @order.save!
     redirect_to checkout_url(edit: :edit)
@@ -118,7 +118,8 @@ class CheckoutController < ApplicationController
     @order = last_order
     @state_layout = @order.checkout_state
     @user = current_user
-
+    #pry
+    #@subtotal = @order.subtotal
   end
 
   private

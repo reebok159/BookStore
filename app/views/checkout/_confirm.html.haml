@@ -22,12 +22,16 @@
   .col-sm-3
     %h3.general-subtitle Shipping Address
     %p.general-address
-      John Doe
-      %span.general-edit edit
+      = "#{@address.shipping_first_name} #{@address.shipping_last_name}"
+      -#John Doe
+      = link_to 'edit', checkout_edit_path(:type => :address), method: "put", :class=>"general-edit"
+      -#%span.general-edit edit
       %br
-      44 Fifth Ave v231
+      = "#{@address.shipping_address}"
+      -#44 Fifth Ave v231
       %br
-      New York NY 1001
+      = "#{@address.shipping_city} #{@address.shipping_zip}"
+      -#New York NY 1001
       %br
       United States
       %br
@@ -50,14 +54,16 @@
     %h3.general-subtitle Shipments
     %p.general-address
       Delivery Next Day!
-      %span.general-edit edit
+      = link_to 'edit', checkout_edit_path(:type => :delivery), method: "put", :class=>"general-edit"
+      -#%span.general-edit edit
       %br
       By train
   .col-sm-3
     %h3.general-subtitle Payment Information
     %p.general-address
       ** ** ** 8756
-      %span.general-edit edit
+      = link_to 'edit', checkout_edit_path(:type => :payment), method: "put", :class=>"general-edit"
+      -#%span.general-edit edit
       %br
       12/2018
 .visible-xs

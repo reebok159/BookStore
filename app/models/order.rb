@@ -33,6 +33,29 @@ class Order < ApplicationRecord
     order_items.pluck(:id).count
   end
 
+  def coupon_discount
+    return 0 if self.coupon.nil?
+    self.coupon.discount
+  end
+
+  def subtotal
+    order_items.collect { |item| item.quantity * item.book.price }.sum
+  end
+
+  def total_items
+    self.subtotal - self.coupon_discount
+  end
+
+  def delivery_price
+    return 0 if self.delivery_method.nil?
+    self.delivery_method.cost
+  end
+
+  def total_price
+    self.subtotal + self.delivery_price
+  end
+
+
 
 
 end
