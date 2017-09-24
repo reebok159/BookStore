@@ -33,86 +33,66 @@
       = "#{@address.shipping_city} #{@address.shipping_zip}"
       -#New York NY 1001
       %br
-      United States
+      = "#{@address.shipping_country}"
+      -#United States
       %br
-      Phone +16507599755
+      = "Phone #{@address.shipping_phone}"
+      -#Phone +16507599755
   .col-sm-3
     %h3.general-subtitle Billing Address
     %p.general-address
-      John Doe
+      = "#{@address.billing_first_name} #{@address.billing_last_name}"
       = link_to 'edit', checkout_edit_path(:type => :address), method: "put", :class=>"general-edit"
       -#%span.general-edit edit
       %br
-      44 Fifth Ave v231
+      = "#{@address.billing_address}"
       %br
-      New York NY 1001
+      = "#{@address.billing_city} #{@address.billing_zip}"
       %br
-      United States
+      = "#{@address.billing_country}"
       %br
-      Phone +16507599755
+      = "Phone #{@address.billing_phone}"
   .col-sm-3
     %h3.general-subtitle Shipments
     %p.general-address
-      Delivery Next Day!
+      = @order.delivery_method.name
+      -#Delivery Next Day!
       = link_to 'edit', checkout_edit_path(:type => :delivery), method: "put", :class=>"general-edit"
       -#%span.general-edit edit
-      %br
-      By train
+      -#%br
+      -#By train
   .col-sm-3
     %h3.general-subtitle Payment Information
     %p.general-address
-      ** ** ** 8756
+      = @card_number
       = link_to 'edit', checkout_edit_path(:type => :payment), method: "put", :class=>"general-edit"
       -#%span.general-edit edit
       %br
-      12/2018
+      = @order.credit_card.expires
 .visible-xs
-  .general-cart-item.divider-lg
-    .general-img-wrap-table
-      %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    %p.title Android Programming for Beginners
-    %P.in-grey-600.fw-300 A recipe-based book to help you efficiently create amazing PHP-based applications with Laravel 5.x
-    %table.table
-      %tr
-        %td
-          %span.in-grey-600 Price
-        %td
-          %span.font-16.in-gold-500 €28.50
-      %tr
-        %td.vertical-middle
-          %span.in-grey-600 Quantity
-        %td
-          %span 1
-      %tr
-        %td
-          %span.in-grey-600 SubTotal
-        %td
-          %span.font-16.in-gold-500 €32.90
-  .general-cart-item.divider-lg.mb-55
-    .general-img-wrap-table
-      %img.cart-img-shadow{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-    %p.title Android Programming for Beginners
-    %table.table
-      %tr
-        %td
-          %span.in-grey-600 Price
-        %td
-          %span.font-16.in-gold-500 €28.50
-      %tr
-        %td.vertical-middle
-          %span.in-grey-600 Quantity
-        %td
-          .input-group
-            %a.input-link{href: "#"}
-              %i.fa.fa-minus.line-heaght-40
-            %input.form-control.quantity-input{type: "text"}
-            %a.input-link{href: "#"}
-              %i.fa.fa-plus.line-heaght-40
-      %tr
-        %td
-          %span.in-grey-600 SubTotal
-        %td
-          %span.font-16.in-gold-500 €32.90
+  - @items.each do |order_item|
+    - item = order_item.book
+    .general-cart-item.divider-lg
+      .general-img-wrap-table
+        %img.cart-img-shadow{src: "#{try_image(item, :thumb)}", alt: "#{item.name}"}
+      %p.title= item.name
+      %P.in-grey-600.fw-300= item.short_desc
+      %table.table
+        %tr
+          %td
+            %span.in-grey-600 Price
+          %td
+            %span.font-16.in-gold-500= price_format(item.price)
+        %tr
+          %td.vertical-middle
+            %span.in-grey-600 Quantity
+          %td
+            %span= order_item.quantity
+        %tr
+          %td
+            %span.in-grey-600 SubTotal
+          %td
+            %span.font-16.in-gold-500= "#{price_format(order_item.quantity * item.price)}"
 .hidden-xs.divider-lg.pt-20
   %table.table.table-hover
     %thead
@@ -127,19 +107,21 @@
         %th
           %span.in-grey-600 Total
     %tbody
-      %tr
-        %td
-          .general-img-wrap-table
-            %img.cart-img-shadow.pull-left{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-        %td
-          %p.title Android Programming for Beginners
-          %p.in-grey-600.fw-300 Maximize the potential of Bootstrap with a collection of real-world site projects for better, faster, more responsive web applications
-        %td
-          %span.font-16.in-gold-500 €28.50
-        %td
-          %span.ml-30 1
-        %td
-          %span.font-16.in-gold-500 €32.90
+      - @items.each do |order_item|
+        - item = order_item.book
+        %tr
+          %td
+            .general-img-wrap-table
+              %img.cart-img-shadow.pull-left{src: "#{try_image(item, :thumb)}", alt: "#{item.name}"}
+          %td
+            %p.title= item.name
+            %p.in-grey-600.fw-300= item.short_desc
+          %td
+            %span.font-16.in-gold-500= price_format(item.price)
+          %td
+            %span.ml-30= order_item.quantity
+          %td
+            %span.font-16.in-gold-500= "#{price_format(order_item.quantity * item.price)}"
 .text-center.general-text-right
   %p.in-gold-500.font-18 Order Summary
   %table.general-summary-table.general-summary-table-right.general-text-right
@@ -147,16 +129,18 @@
       %td
         %p.font-16 Subtotal:
       %td
-        %p.font-16 €117.69
+        %p.font-16= price_format(@order.subtotal)
     %tr
       %td
         %p.font-16 Coupon:
       %td
-        %p.font-16 €0.00
+        %p.font-16= price_format(@order.coupon_discount)
     %tr
       %td
         %strong.font-18 Order Total:
       %td
-        %strong.font-18 €117.69
-.text-center
-  %button.btn.btn-default.mb-20 Place Order
+        %strong.font-18= price_format(@order.pre_total_price)
+
+  -#%button.btn.btn-default.mb-20 Place Order
+  .text-center
+    = link_to "Place Order", checkout_next_path, method: :put, class: "btn btn-default mb-20"

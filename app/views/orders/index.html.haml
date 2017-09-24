@@ -1,6 +1,8 @@
 %main.container.general-main-wrap
   %h1.general-title-margin Cart
   .visible-xs
+    - if @items.count.zero?
+      Cart is empty
     - @items.each do |order_item|
       - item = order_item.book
       .general-cart-item.divider-lg-bottom
@@ -47,6 +49,11 @@
         %th.col-total
           %span.in-grey-600 SubTotal
         %th.col-close
+      - if @items.count.zero?
+        %tr
+          %td{colspan: 6}
+            .text-center
+              Cart is empty
       - @items.each do |order_item|
         - item = order_item.book
         %tr

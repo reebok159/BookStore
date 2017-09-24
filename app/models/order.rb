@@ -46,14 +46,16 @@ class Order < ApplicationRecord
     self.subtotal - self.coupon_discount
   end
 
+  def pre_total_price
+    self.subtotal + self.delivery_price - self.coupon_discount
+  end
+
   def delivery_price
     return 0 if self.delivery_method.nil?
     self.delivery_method.cost
   end
 
-  def total_price
-    self.subtotal + self.delivery_price
-  end
+
 
 
 

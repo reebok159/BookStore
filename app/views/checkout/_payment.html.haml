@@ -56,6 +56,6 @@
         %td
           %strong.font-18 Order Total:
         %td
-          %strong.font-18= price_format(@order.total_price)
+          %strong.font-18= price_format(@order.pre_total_price)
   .text-center
     = f.button :submit, "Save and Continue", class: "btn btn-default mb-80"

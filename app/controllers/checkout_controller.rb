@@ -4,6 +4,8 @@ class CheckoutController < ApplicationController
   def index
     #we start checkout or select necessary stage
 
+    check_order
+
     flash[:return_to_comfirm] = true unless params[:edit].blank?
 
     case @state_layout
@@ -16,12 +18,24 @@ class CheckoutController < ApplicationController
       @credit_card = @order.credit_card || @order.build_credit_card
     when 'confirm'
       @address = @order.order_address
+      @card_number = "** ** ** #{@order.credit_card.number.last(4)}"
+      @items = @order.order_items
     when 'complete'
-      #status = processing_complete
+      @address = @order.order_address
+      @items = @order.order_items
     else
-
     end
+  end
 
+  def check_order
+    if @order.order_items.blank?
+      if @order.checkout_state != 'address'
+        @order.checkout_state = "address"
+        @order.save
+      end
+      flash[:alert] = "You cart is empty"
+      redirect_to cart_page_url
+    end
   end
 
   def next_stage
@@ -36,8 +50,8 @@ class CheckoutController < ApplicationController
       status = processing_payment
     when 'confirm'
       status = processing_confirm
-    when 'complete'
-      status = processing_complete
+    #when 'complete'
+    #  status = processing_complete
     else
       status = :error
     end
@@ -85,6 +99,20 @@ class CheckoutController < ApplicationController
   end
 
   def processing_confirm
+    @order.completed_at = DateTime.now
+    @order.total_price = @order.pre_total_price
+    @order.status = 1
+    #pry
+
+    if @order.save
+      @order.next_state!
+      flash[:last_completed_order_id] = @order.id
+
+      #pry
+      return :success
+    end
+
+    return :error
   end
 
   def processing_complete
@@ -115,7 +143,14 @@ class CheckoutController < ApplicationController
   end
 
   def init_vars
-    @order = last_order
+    #pry
+    if flash[:last_completed_order_id].nil?
+      @order = last_order
+      #flash.keep
+    else
+      @order = Order.find(flash[:last_completed_order_id])
+    end
+
     @state_layout = @order.checkout_state
     @user = current_user
     #pry
