@@ -1,0 +1,32 @@
+- reviews = @book.reviews.accepted
+%h3.in-gold-500.mb-25 #{t('books.reviews')} (#{reviews.count})
+-#Write a review:
+= #simple_form_for @book do |f|
+- reviews.each do |item|
+  .general-message-wrap.divider-lg
+    .clearfix
+      -#%span.img-circle.logo-size.inlide-block.pull-left.logo-empty M
+      %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+      .ml-70
+        %div
+          .general-message-date.hidden-xs= item.created_at
+          .max-240
+            - if item.verified?
+              .general-message-verified #{t('books.verifyreview')}
+            .general-message-name= item.title
+        .mb-15
+          - (item.rating).times do
+            %i.fa.fa-star.rate-star
+          - (5 - item.rating).times do
+            %i.fa.fa-star.rate-star.rate-empty
+        %p= item.text
+%h3 Write a review:
+- if user_signed_in?
+  = simple_form_for @book do |f|
+    = f.simple_fields_for :reviews do |rew|
+      = rew.input :title
+      = rew.input :text, as: :text
+      = rew.input :rating, collection: 1..5
+    = f.button :submit, "Post", class: 'btn btn-default'
+- else
+  You must be logged in

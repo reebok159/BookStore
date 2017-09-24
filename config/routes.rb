@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
-  resources :books, only: [:show, :index, :edit]
+  resources :books, only: [:show, :index]
   #get 'books/:id/destroy', to: 'books#destroy', as: 'book_destroy'
   get 'catalog', to: 'books#catalog'
   get 'books(/catid/:catid)(/order/:order)', to: 'books#index'

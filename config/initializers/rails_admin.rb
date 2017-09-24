@@ -59,7 +59,7 @@ RailsAdmin.config do |config|
     visible false
   end
 =end
-  config.included_models = ["Book", "Author", "Category", "Order", "User"]
+  config.included_models = ["Book", "Author", "Category", "Order", "Review", "User"]
 
   config.actions do
     dashboard                     # mandatory

@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   devise :omniauthable, :omniauth_providers => [:facebook]
 
+  has_many :reviews
   has_many :orders
   has_one :shipping_address, dependent: :destroy
   accepts_nested_attributes_for :shipping_address, allow_destroy: true
