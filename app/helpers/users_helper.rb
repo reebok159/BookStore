@@ -1,7 +1,5 @@
 module UsersHelper
-  def number_order(num)
-    "##{num+10000000}"
-  end
+
 
   def format_mdate(dt)
     #dt.strftime("%Y-%m-%d")
