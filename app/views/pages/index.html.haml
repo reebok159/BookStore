@@ -17,7 +17,7 @@
                 %p.lead= book.short_desc
                 %p.lead.small= authors_to_list(book.authors)
                 .general-align
-                  %button.btn.btn-primary #{t('action.buynow')}
+                  = link_to t('action.buynow'), to_cart_path(book), class: "btn btn-primary", method: :post
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
       %span.icon-prev{'aria-hidden': "true"}
       %span.sr-only Previous

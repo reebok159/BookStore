@@ -7,7 +7,7 @@ module BooksHelper
       return capture_haml :div do
         haml_concat parts[0]
         haml_tag :span, '...', :class => "full_txt_dots"
-        haml_tag :a, 'Read More', {:class => "in-gold-500 ml-10", :href => "#"}
+        haml_tag :a, 'Read More', {:class => "in-gold-500 ml-10 egn-read-more", :href => "javascript:void(0)"}
         haml_tag :span, parts[1], {:class => "full_txt", :style => "display: none" }
       end
     end

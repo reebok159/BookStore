@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   end
 
   def orders
-    #ORDERS
+    @orders = current_user.orders
   end
 
   private
