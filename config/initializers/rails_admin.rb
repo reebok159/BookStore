@@ -34,7 +34,7 @@ RailsAdmin.config do |config|
   config.model 'Author' do
     exclude_fields :book
   end
-
+=begin
   config.model 'InfoBook' do
     visible false
   end
@@ -46,6 +46,20 @@ RailsAdmin.config do |config|
   config.model 'OrderItem' do
     visible false
   end
+
+  config.model 'CreditCard' do
+    visible false
+  end
+
+  config.model 'CreditCard' do
+    visible false
+  end
+
+  config.model 'ShippingAddress' do
+    visible false
+  end
+=end
+  config.included_models = ["Book", "Author", "Category", "Order", "Users"]
 
   config.actions do
     dashboard                     # mandatory
