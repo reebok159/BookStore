@@ -77,12 +77,16 @@
   .general-order-wrap
     .row
       .col-sm-4
-        .input-group.general-input-group
-          %label.input-label Enter Your Coupon Code
-          %input.form-control.mb-30{type: "text", placeholder: "Enter Your Coupon Code "}
-          %div
-            %button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
-            %button.btn.btn-primary.mb-15.res-block Update cart
+        = simple_form_for @cart, method: :post, url: "#{activate_coupon_path}", html: {novalidate: false} do |f|
+          .input-group.general-input-group
+            %label.input-label Enter Your Coupon Code
+            = f.input :coupon_id, :input_html => {placeholder: "Enter Your Coupon Code ", class: "form-control mb-30", type: "text"}, required: true
+            -#%input.form-control.mb-30{type: "text", placeholder: "Enter Your Coupon Code "}
+            %div
+              = f.button :submit, "Apply Coupon", class: "btn btn-primary mr-5 mb-15 visible-xs-inline-block"
+              = f.button :submit, "Update cart", class: "btn btn-primary mb-15 res-block"
+              -#%button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
+              -#%button.btn.btn-primary.mb-15.res-block Update cart
       .col-sm-8
         .res-mr-200.text-center.general-text-right
           %p.in-gold-500.font-18 Order Summary

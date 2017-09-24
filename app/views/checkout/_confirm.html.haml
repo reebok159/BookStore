@@ -36,7 +36,8 @@
     %h3.general-subtitle Billing Address
     %p.general-address
       John Doe
-      %span.general-edit edit
+      = link_to 'edit', checkout_edit_path(:type => :address), method: "put", :class=>"general-edit"
+      -#%span.general-edit edit
       %br
       44 Fifth Ave v231
       %br

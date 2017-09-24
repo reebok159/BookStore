@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   #post 'clear_cart', to: 'orders#clear_cart', as: 'clear_cart'
   get 'cart', to: 'orders#index', as: 'cart_page'
+  post 'cart', to: 'orders#activate_coupon', as: 'activate_coupon'
 
   #profile
   get 'users/settings'
@@ -31,7 +32,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users, only: [:update]
 
-  get 'checkout', to: 'checkout#index'
+  get 'checkout(/:edit)', to: 'checkout#index', as: 'checkout'
+  put 'checkout/edit_data', as: 'checkout_edit'
   get 'checkout/next_stage', to: redirect('checkout')
   put 'checkout/next_stage', as: 'checkout_next'
 

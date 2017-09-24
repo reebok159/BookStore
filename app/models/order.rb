@@ -19,12 +19,15 @@ class Order < ApplicationRecord
   end
 
   belongs_to :delivery_method, optional: true
-  accepts_nested_attributes_for :delivery_method
+  belongs_to :coupon, optional: true
   has_one :order_address, dependent: :destroy
   has_many :order_items
   has_many :books, through: :order_items
 
-  enum  status: [:in_progress, :in_queue, :in_delivery, :delivered, :canceled]
+  has_one :credit_card, dependent: :destroy
+  accepts_nested_attributes_for :credit_card
+
+  enum status: [:in_progress, :in_queue, :in_delivery, :delivered, :canceled]
 
   def total_quantity
     order_items.pluck(:id).count

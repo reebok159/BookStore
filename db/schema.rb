@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924065732) do
+ActiveRecord::Schema.define(version: 20170924124228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,26 @@ ActiveRecord::Schema.define(version: 20170924065732) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.string "name"
+    t.float "min_sum_to_activate"
+    t.date "expires"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "code"
+    t.float "discount", default: 0.0
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.string "number"
+    t.string "name"
+    t.string "expires"
+    t.string "cvv"
+    t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -128,6 +148,7 @@ ActiveRecord::Schema.define(version: 20170924065732) do
     t.integer "status", default: 0
     t.string "checkout_state"
     t.integer "delivery_method_id"
+    t.integer "coupon_id"
   end
 
   create_table "shipping_addresses", force: :cascade do |t|
