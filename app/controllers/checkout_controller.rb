@@ -1,9 +1,16 @@
 class CheckoutController < ApplicationController
-  before_action :authenticate_user!, :init_vars
+  before_action :authenticate_user!, except: [:start]
+  before_action :init_vars
+
+
+  def start
+    save_cart_if_no_auth
+    redirect_to :checkout
+  end
 
   def index
     #we start checkout or select necessary stage
-
+    save_cart if cookies[:save_cart]
     check_order
 
     flash[:return_to_comfirm] = true unless params[:edit].blank?
@@ -158,6 +165,30 @@ class CheckoutController < ApplicationController
   end
 
   private
+
+
+    def save_cart_if_no_auth
+      #pry
+      unless user_signed_in?
+        unless last_order.order_items.blank?
+          cookies[:save_cart] = true
+        end
+      end
+    end
+
+    def save_cart
+      #cookies.signed[:order_id] = order.id
+      order = Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
+      if order
+        @order.delete
+        order.user = current_user
+        order.save
+        init_vars
+        #@order.save
+        cookies.delete(:save_cart)
+        cookies.delete(:order_id)
+      end
+    end
 
     def user_params
       params.require(:user).permit(

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users, only: [:update]
 
+  get 'checkout/start', to: 'checkout#start', as: 'checkout_start'
   get 'checkout(/:edit)', to: 'checkout#index', as: 'checkout'
   put 'checkout/edit_data', as: 'checkout_edit'
   get 'checkout/next_stage', to: redirect('checkout')
