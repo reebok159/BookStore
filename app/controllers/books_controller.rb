@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
   def index
-
     @books = Book
     unless params[:catid].nil?
       @books = @books.where(category_id: params[:catid])
@@ -18,13 +17,12 @@ class BooksController < ApplicationController
       end
     end
 
-    @books = @books.page(params[:page]).per(12)#first(12)
+    @books = @books.page(params[:page]).per(12)
 
     respond_to do |format|
       format.html
       format.js
     end
-    #pry
   end
 
   def catalog
@@ -45,27 +43,15 @@ class BooksController < ApplicationController
   end
 
   def create
-
     @book = Book.new(post_params)
     save_authors_to_book
     pry
-=begin
-    @category = Category.new(category_params)
-    #pry
-
-    if @category.valid?
-      @category.save
-      #pry
-      @book.category_id = @category.id
-    end
-=end
 
     if @book.save
       redirect_to @book
     else
       render "new"
     end
-
   end
 
   def edit

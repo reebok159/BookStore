@@ -1,13 +1,15 @@
 
-author_1:
+image_1:
   id: 1
+  imageable_type: Book
+  imageable_id: 1
+  image: eb323fd254.png
   created_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &1 2017-09-23 07:53:51.258956000 Z
+    utc: &1 2017-09-23 07:53:54.905328000 Z
     zone: &2 !ruby/object:ActiveSupport::TimeZone
       name: Etc/UTC
     time: *1
   updated_at: !ruby/object:ActiveSupport::TimeWithZone
-    utc: &3 2017-09-23 07:53:51.258956000 Z
+    utc: &3 2017-09-23 07:53:54.905328000 Z
     zone: *2
     time: *3
-  name: Devin Casper
