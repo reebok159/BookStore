@@ -5,21 +5,21 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'i18n'
-gem 'devise'
+gem 'i18n', '~> 0.8.6'
+gem 'devise', '~> 4.3'
 gem 'cancancan', '~> 2.0'
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'kaminari'
-gem 'bootstrap-sass'
-gem 'simple_form'
-gem 'country_select'
-gem 'haml-rails'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'carrierwave'
-gem 'mini_magick'
-gem 'rails_admin'
+gem 'omniauth-oauth2', '~> 1.4'
+gem 'omniauth-facebook', '~> 4.0'
+gem 'kaminari', '~> 1.0', '>= 1.0.1'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'simple_form', '~> 3.5'
+gem 'country_select', '~> 3.1', '>= 3.1.1'
+gem 'haml-rails', '~> 1.0'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
+gem 'carrierwave', '~> 1.1'
+gem 'mini_magick', '~> 4.8'
+gem 'rails_admin', '~> 1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 # Use postgresql as the database for Active Record
@@ -28,8 +28,10 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-gem 'compass-rails'
-gem 'aasm'
+gem 'compass-rails', '~> 3.0', '>= 3.0.2'
+gem 'aasm', '~> 4.12', '>= 4.12.2'
+
+
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -46,7 +48,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'file_validators'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -63,6 +64,7 @@ end
 group :test do
   gem 'rails-controller-testing'
   gem 'database_cleaner'
+  gem 'factory_girl_rails', '~> 4.8'
 end
 
 group :development do
