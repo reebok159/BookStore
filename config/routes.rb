@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   #get 'books/:id/destroy', to: 'books#destroy', as: 'book_destroy'
   get 'catalog', to: 'books#catalog'
   get 'books(/catid/:catid)(/order/:order)', to: 'books#index'
+  put 'reviews/create'
 
   #order_items
   resources :order_items, except: [:edit, :show]

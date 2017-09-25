@@ -33,7 +33,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @review = @book.reviews.build
+    @review = Review.new
     #pry
   end
 
@@ -67,7 +67,7 @@ class BooksController < ApplicationController
     end
 
   end
-=begin
+
   def edit
 
     @book = Book.find(params[:id])
@@ -88,19 +88,7 @@ class BooksController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
-=end
 
-  def update
-    @book = Book.find(params[:id])
-
-    if @book.update(review_params)
-      flash[:notice] = "Thanks for Review. It will be published as soon as Admin will approve it."
-      redirect_to @book
-    else
-      flash[:alert] = "Cannot create review"
-      redirect_back(fallback_location: root_path)
-    end
-  end
 
   def destroy
     #pry

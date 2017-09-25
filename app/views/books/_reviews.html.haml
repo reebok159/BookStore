@@ -22,11 +22,6 @@
         %p= item.text
 %h3 Write a review:
 - if user_signed_in?
-  = simple_form_for @book do |f|
-    = f.simple_fields_for :reviews do |rew|
-      = rew.input :title
-      = rew.input :text, as: :text
-      = rew.input :rating, collection: 1..5
-    = f.button :submit, "Post", class: 'btn btn-default'
+  = render 'reviews/new', object: @book
 - else
   You must be logged in
