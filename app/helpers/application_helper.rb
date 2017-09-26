@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def price_format(summ)
     #{}"€#{summ}"
-    "#{summ}$"
+    "#{summ.round(2)}$"
   end
 
   def categories_list
