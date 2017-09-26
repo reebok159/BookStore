@@ -1,8 +1,10 @@
 class OrderItemsController < ApplicationController
-
   def create
-    #pry
-    order = last_order.order_items.build(order_item_params)
+    if order = last_order.order_items.find_by(item_id: params[:item_id])
+      order.quantity += quantity_param(params[:quantity])
+    else
+      order = last_order.order_items.build(order_item_params)
+    end
 
     if order.save
       flash[:notice] = 'Item was added to cart'
@@ -42,8 +44,13 @@ class OrderItemsController < ApplicationController
 
   private
 
+  def quantity_param(quantity)
+    return 1 if quantity.to_i <= 0
+    quantity
+  end
+
   def order_item_params
-    params[:quantity] = 1 if params[:quantity].to_i <= 0
+    params[:quantity] = quantity_param(params[:quantity])
     params.permit(:item_id, :quantity)
   end
 end
