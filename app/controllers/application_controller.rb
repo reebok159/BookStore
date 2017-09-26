@@ -16,12 +16,9 @@ class ApplicationController < ActionController::Base
     @cart = last_order
   end
 
-  #for cart
   def last_order
-    #pry
     if current_user.nil?
       create_order
-      #get order from db by cookie order id
       Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
     else
       order = current_user.orders.find_by(status: :in_progress)
@@ -33,23 +30,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def create_order
-    if current_user.nil?
-      if cookies[:order_id]
-        order = Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
-        return order if order
-      end
-      order = Order.create
-      cookies.signed[:order_id] = order.id
-    end
-  end
 
+  def create_order
+    return unless current_user.nil?
+
+    if cookies[:order_id]
+      order = Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
+      return order if order
+    end
+    order = Order.create
+    cookies.signed[:order_id] = order.id
+  end
 
   private
 
-    def current_ability
-      @current_ability ||= Ability.new(current_user)
-      #pry
-    end
+  def current_ability
+    @current_ability ||= Ability.new(current_user)
+  end
 
 end
