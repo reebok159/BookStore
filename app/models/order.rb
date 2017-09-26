@@ -30,7 +30,7 @@ class Order < ApplicationRecord
   enum status: [:in_progress, :in_queue, :in_delivery, :delivered, :canceled]
 
   def total_quantity
-    order_items.pluck(:id).count
+    order_items.pluck(:quantity).sum
   end
 
   def coupon_discount
