@@ -33,6 +33,7 @@ $(document).ready ->
 
     event.preventDefault()
 
+
   $(".egn-read-more").click (event) ->
     $(this).hide()
     $('.full_txt_dots').hide()
