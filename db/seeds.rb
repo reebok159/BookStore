@@ -60,6 +60,10 @@ end
 puts "Books created"
 puts "Creating admin..."
 User.create(email: "admin@loc.loc", is_admin: true, password: "123456")
-
+push "Admin created"
+puts "Creating delivery methods..."
+DeliveryMethod.create(name: 'Pick Up In-Store', delay: '5 to 20 days', cost: 13)
+DeliveryMethod.create(name: 'Delivery Next Day!', delay: '3 to 7 days', cost: 15)
+DeliveryMethod.create(name: 'Expressit', delay: '2 to 3 days', cost: 20)
 
 puts "success!"
