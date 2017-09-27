@@ -33,5 +33,4 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @review = Review.new
   end
-
 end

@@ -13,10 +13,9 @@ RSpec.describe ApplicationController, type: :controller do
       routes.draw { get "test" => "anonymous#test" }
     end
 
-    let(:user){ FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
 
     context 'if no auth' do
-
       it "check last_order is not nil" do
         get :test
         expect(assigns(:last_order)).not_to be nil
@@ -33,7 +32,6 @@ RSpec.describe ApplicationController, type: :controller do
         get :test
         expect(assigns(:last_order)).not_to be nil
       end
-
     end
 
     context 'with auth user' do
@@ -51,8 +49,5 @@ RSpec.describe ApplicationController, type: :controller do
         expect(assigns(:last_order)).not_to eq(order1)
       end
     end
-
-
-
   end
 end
