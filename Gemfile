@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
 gem 'i18n', '~> 0.8.6'
 gem 'devise', '~> 4.3'
 gem 'cancancan', '~> 2.0'
@@ -20,7 +21,10 @@ gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'carrierwave', '~> 1.1'
 gem 'mini_magick', '~> 4.8'
 gem 'rails_admin', '~> 1.2'
-gem 'fog-aws'
+gem 'fog-aws', '~> 1.4', '>= 1.4.1'
+gem "fog-google"
+gem "google-api-client", "> 0.8.5", "< 0.9"
+gem "mime-types"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 # Use postgresql as the database for Active Record

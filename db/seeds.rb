@@ -20,14 +20,14 @@ end
 
 puts "Categories created..."
 puts "Creating Autors..."
-50.times do
+30.times do
   Author.create(name: FFaker::Book.author)
 end
 
 puts "Authors created..."
 puts "Creating Books..."
 i = 1
-100.times do
+50.times do
   b = Book.create!(
       name: FFaker::Book.title,
       price: rand(1.0..99.00).round(2),
@@ -49,7 +49,7 @@ i = 1
   rand(1..5).times do
     a = {}
     loop do
-      a = Author.find(rand(1..50))
+      a = Author.find(rand(1..30))
       break unless b.authors.include?(a)
     end
     b.authors << a
@@ -59,7 +59,7 @@ i = 1
 end
 puts "Books created"
 puts "Creating admin..."
-User.create(email: "admin@loc.loc", is_admin: true, password: "123456")
+User.create(email: "admin@loc.loc", is_admin: true, password: "123456q")
 push "Admin created"
 puts "Creating delivery methods..."
 DeliveryMethod.create(name: 'Pick Up In-Store', delay: '5 to 20 days', cost: 13)

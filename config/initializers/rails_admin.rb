@@ -24,6 +24,7 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
+  #config.included_models = ["Book", "Author", "Category", "Order", "Review", "User", "DeliveryMethod"]
   config.model 'Book' do
     config.model 'InfoBook' do
       exclude_fields :book
@@ -34,7 +35,7 @@ RailsAdmin.config do |config|
   config.model 'Author' do
     exclude_fields :book
   end
-=begin
+
   config.model 'InfoBook' do
     visible false
   end
@@ -51,15 +52,22 @@ RailsAdmin.config do |config|
     visible false
   end
 
-  config.model 'CreditCard' do
+  config.model 'BillingAddress' do
+    visible false
+  end
+
+  config.model 'BillingAddress' do
+    visible false
+  end
+
+  config.model 'OrderAddress' do
     visible false
   end
 
   config.model 'ShippingAddress' do
     visible false
   end
-=end
-  config.included_models = ["Book", "Author", "Category", "Order", "Review", "User", "DeliveryMethod"]
+
 
   config.actions do
     dashboard                     # mandatory

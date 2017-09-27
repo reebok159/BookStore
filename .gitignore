@@ -18,7 +18,7 @@
 /yarn-error.log
 
 .byebug_history
-<<<<<<< aaf3785fccab114940c9d816d871c2fb5472c49f
+
+/config/database.yml
 .env
-=======
->>>>>>> Impletent some models, controllers, templates
+.rake_tasks~
