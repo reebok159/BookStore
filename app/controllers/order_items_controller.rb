@@ -46,7 +46,7 @@ class OrderItemsController < ApplicationController
 
   def quantity_param(quantity)
     return 1 if quantity.to_i <= 0
-    quantity
+    quantity.to_i
   end
 
   def order_item_params
