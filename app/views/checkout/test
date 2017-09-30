@@ -1,0 +1,16 @@
+SELECT books.*, COUNT(order_items.item_id) as count_books
+FROM books
+LEFT OUTER JOIN order_items ON order_items.item_id = books.id
+LEFT OUTER JOIN orders ON orders.id = order_items.order_id AND orders.status != 0
+GROUP BY books.id
+ORDER BY count_books DESC
+LIMIT 4
+
+
+SELECT books.*
+FROM books
+LEFT OUTER JOIN order_items ON order_items.item_id = books.id
+LEFT OUTER JOIN orders ON orders.id = order_items.order_id AND orders.status != 0
+GROUP BY books.id
+ORDER BY COUNT(order_items.item_id) DESC
+LIMIT 4

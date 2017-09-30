@@ -18,4 +18,14 @@ class Book < ApplicationRecord
 
   validates :name, :price, presence: true
 
+  scope :bestsellers, -> {
+    find_by_sql("SELECT books.*
+    FROM books
+    LEFT OUTER JOIN order_items ON order_items.item_id = books.id
+    LEFT OUTER JOIN orders ON orders.id = order_items.order_id AND orders.status != 0
+    GROUP BY books.id
+    ORDER BY COUNT(order_items.item_id) DESC
+    LIMIT 4")
+  }
+
 end
