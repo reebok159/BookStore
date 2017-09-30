@@ -30,7 +30,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def create_order
     return unless current_user.nil?
 
