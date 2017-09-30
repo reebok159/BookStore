@@ -44,6 +44,9 @@
           %span.checkbox-icon
             %i.fa.fa-check
           %span.checkbox-text Use Billing Adress
-  = render partial: "cost", object: @order
+  .general-text-align.mb-60
+    %p.in-gold-500.font-18 Order Summary
+    %table.general-summary-table
+      = render partial: "cost", object: @order
 
   = f.button :submit, "Save and Continue", class: "btn btn-default center-block mb-20"

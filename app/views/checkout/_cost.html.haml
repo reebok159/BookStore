@@ -1,13 +1,20 @@
-.general-text-align.mb-60
-  %p.in-gold-500.font-18 Order Summary
-  %table.general-summary-table
-    %tr
-      %td
-        %p.font-16 Item Total:
-      %td
-        %p.font-16= price_format(@order.subtotal)
-    %tr
-      %td
-        %p.font-16 Order Total:
-      %td
-        %p.font-16= price_format(@order.total_items)
+%tr
+  %td
+    %p.font-16 Subtotal:
+  %td
+    %p.font-16= price_format(@order.total_items)
+%tr
+  %td
+    %p.font-16 Coupon:
+  %td
+    %p.font-16= price_format(@order.coupon_discount)
+%tr
+  %td
+    %p.font-16 Shipping:
+  %td
+    %p.font-16= price_format(@order.delivery_price)
+%tr
+  %td
+    %p.font-16 Total:
+  %td
+    %p.font-16= price_format(@order.pre_total_price)
