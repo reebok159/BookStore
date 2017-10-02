@@ -55,9 +55,4 @@ class Order < ApplicationRecord
     self.delivery_method.cost
   end
 
-
-
-
-
-
 end

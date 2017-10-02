@@ -75,4 +75,10 @@ en:
       donthaveacc: "Don’t have an Account?"
     signup:
   phrase:
-   or: "or"
+    or: "or"
+  coupon:
+    noexist: "Coupon isn't exist"
+    cantactivate: "You cannot activate coupon"
+    sumerror: "You cannot activate coupon (order sum is not enough)"
+    termerror: "You cannot activate coupon (coupon has expired)"
+    activatesuccess: "Coupon activated!"
