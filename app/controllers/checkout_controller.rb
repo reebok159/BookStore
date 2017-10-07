@@ -2,7 +2,6 @@ class CheckoutController < ApplicationController
   before_action :authenticate_user!, except: [:start]
   before_action :init_vars
 
-
   def start
     save_cart_if_no_auth
     redirect_to :checkout
@@ -40,7 +39,7 @@ class CheckoutController < ApplicationController
         @order.checkout_state = "address"
         @order.save
       end
-      flash[:alert] = "You cart is empty"
+      flash[:alert] = "Your cart is empty"
       redirect_to cart_page_url
     end
   end
@@ -57,8 +56,6 @@ class CheckoutController < ApplicationController
       status = processing_payment
     when 'confirm'
       status = processing_confirm
-    #when 'complete'
-    #  status = processing_complete
     else
       status = :error
     end
@@ -125,30 +122,6 @@ class CheckoutController < ApplicationController
   def processing_complete
   end
 
-
-  def save_addresses_to_order(use_billing = nil)
-    keys = ['first_name', 'last_name', 'address', 'city', 'zip', 'country', 'phone']
-    data = {}
-    bl_address_data = @user.billing_address
-
-    keys.each do |item|
-      data["billing_#{item}".to_sym] = bl_address_data[item]
-    end
-
-    if use_billing == "on"
-      keys.each do |item|
-        data["shipping_#{item}".to_sym] = bl_address_data[item]
-      end
-    else
-      sh_address_data = @user.shipping_address
-      keys.each do |item|
-        data["shipping_#{item}".to_sym] = sh_address_data[item]
-      end
-    end
-
-    last_order.build_order_address(data).save
-  end
-
   def init_vars
     #pry
     if flash[:last_completed_order_id].nil?
@@ -189,6 +162,31 @@ class CheckoutController < ApplicationController
         cookies.delete(:order_id)
       end
     end
+
+    def save_addresses_to_order(use_billing = nil)
+      keys = ['first_name', 'last_name', 'address', 'city', 'zip', 'country', 'phone']
+      data = {}
+      bl_address_data = @user.billing_address
+
+      keys.each do |item|
+        data["billing_#{item}".to_sym] = bl_address_data[item]
+      end
+
+      if use_billing == "on"
+        keys.each do |item|
+          data["shipping_#{item}".to_sym] = bl_address_data[item]
+        end
+      else
+        sh_address_data = @user.shipping_address
+        keys.each do |item|
+          data["shipping_#{item}".to_sym] = sh_address_data[item]
+        end
+      end
+
+      last_order.build_order_address(data).save
+    end
+
+
 
     def user_params
       params.require(:user).permit(
