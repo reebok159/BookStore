@@ -7,39 +7,35 @@ class OrderItemsController < ApplicationController
     end
 
     if order.save
-      flash[:notice] = 'Item was added to cart'
+      flash[:notice] = t('order_item.create_success')
     else
-      flash[:notice] = 'Couldn\'t add item to cart'
+      flash[:notice] = t('order_item.create_fail')
     end
 
-    redirect_to request.referrer
+    redirect_back(fallback_location: root_path)
   end
 
   def update
-    item = last_order.order_items.find(params[:id])
+    item = last_order.order_items.find_by(id: params[:id])
 
-    unless item.update_attributes(order_item_params)
-      flash[:alert] = 'Couldn\'t update item'
+    unless item&.update_attributes(order_item_params)
+      flash[:alert] = t('order_item.update_fail')
     end
 
-    redirect_to request.referrer
+    redirect_back(fallback_location: root_path)
   end
 
 
   def destroy
     cart = last_order.order_items
 
-    if(params[:id] == :all)
-      if cart.delete(:all)
-        flash[:notice] = 'Cart was cleared successfully'
-      else
-        flash[:notice] = 'Couldn\'t clear cart'
-      end
+    if(params[:id] == 'all')
+      cart.destroy_all
     else
       cart.delete(params[:id])
     end
 
-    redirect_to request.referrer
+    redirect_back(fallback_location: root_path)
   end
 
   private

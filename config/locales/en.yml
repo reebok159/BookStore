@@ -82,3 +82,10 @@ en:
     sumerror: "You cannot activate coupon (order sum is not enough)"
     termerror: "You cannot activate coupon (coupon has expired)"
     activatesuccess: "Coupon activated!"
+  order_item:
+    create_success: "Item was added to cart"
+    create_fail: "Couldn't add item to cart"
+    update_fail: "Couldn't update item'"
+    clear_cart_fail: "Couldn't clear cart"
+    clear_cart_success: "Cart was cleared successfully"
+
