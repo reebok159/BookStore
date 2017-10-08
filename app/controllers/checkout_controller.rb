@@ -12,7 +12,7 @@ class CheckoutController < ApplicationController
     save_cart if cookies[:save_cart]
     check_order
 
-    flash[:return_to_comfirm] = true unless params[:edit].blank?
+    cookies[:return_to_confirm] = true unless params[:edit].blank?
 
     case @state_layout
     when 'address'
@@ -39,7 +39,7 @@ class CheckoutController < ApplicationController
         @order.checkout_state = "address"
         @order.save
       end
-      flash[:alert] = "Your cart is empty"
+      flash[:alert] = t('checkout.emptycart')
       redirect_to cart_page_url
     end
   end
@@ -60,12 +60,15 @@ class CheckoutController < ApplicationController
       status = :error
     end
 
-    unless flash[:return_to_comfirm].nil?
+    unless cookies[:return_to_confirm].nil?
       if status == :error
-        flash.keep
+        #flash.keep
       else
+
         @order.checkout_state = :confirm
         @order.save
+        cookies.delete(:return_to_confirm)
+        #pry
       end
     end
 
@@ -138,7 +141,6 @@ class CheckoutController < ApplicationController
   end
 
   private
-
 
     def save_cart_if_no_auth
       #pry

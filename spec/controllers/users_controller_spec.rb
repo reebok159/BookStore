@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  #user create
+
   context 'PATCH #update_password' do
     it 'update password success'
     it 'must show error (passwords is not the same)'

@@ -35,7 +35,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Error. Password cannot be saved"
       render :settings
     end
-
   end
 
   def delete_account

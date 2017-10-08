@@ -88,4 +88,6 @@ en:
     update_fail: "Couldn't update item'"
     clear_cart_fail: "Couldn't clear cart"
     clear_cart_success: "Cart was cleared successfully"
+  checkout:
+    emptycart: 'Your cart is empty'
 
