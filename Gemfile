@@ -65,13 +65,16 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'pry'
-
+  gem 'rubycritic'
+  gem 'simplecov'
+  gem 'brakeman'
 end
 
 group :test do
   gem 'rails-controller-testing'
   gem 'database_cleaner', '~> 1.6.1'
   gem 'factory_girl_rails', '~> 4.8'
+  gem 'simplecov', :require => false
 end
 
 group :development do

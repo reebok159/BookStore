@@ -13,14 +13,14 @@ class UsersController < ApplicationController
     if @user.update(user_params)
 
       #if @user.changed?
-        flash[:notice] = "User was updated"
+      flash[:notice] = t('users.updatesuccess')
       #else
         #flash[:notice] = "Nothing was updated"
       #end
 
       redirect_back(fallback_location: root_path)
     else
-      flash[:notice] = "Data cannot be saved"
+      flash[:notice] = t('users.updatefail')
       render :settings
     end
   end
@@ -29,18 +29,13 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update_with_password(password_params)
       # Sign in the user by passing validation in case their password changed
-      sign_in @user, :bypass => true
-      redirect_to users_settings_path, flash: { notice: "Successfully updated password" }
+      bypass_sign_in @user#, :bypass => true
+      redirect_to users_settings_path, flash: { notice: t('users.updpasssuccess') }
     else
-      flash[:notice] = "Error. Password cannot be saved"
+      flash[:notice] = t('users.updpassfail')
       render :settings
     end
   end
-
-  def delete_account
-
-  end
-
 
   def settings
     @user = current_user

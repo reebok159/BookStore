@@ -90,4 +90,14 @@ en:
     clear_cart_success: "Cart was cleared successfully"
   checkout:
     emptycart: 'Your cart is empty'
+  reviews:
+    createsuccess: 'Thanks for Review. It will be published as soon as Admin will approve it.'
+    createfail: 'Cannot create review'
+  users:
+    updatesuccess: 'User was updated'
+    updatefail: 'Data cannot be saved'
+    updpasssuccess: 'Successfully updated password'
+    updpassfail: 'Error. Password cannot be saved'
+
+
 

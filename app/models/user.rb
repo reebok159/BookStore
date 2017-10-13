@@ -13,6 +13,13 @@ class User < ApplicationRecord
   has_one :billing_address, dependent: :destroy
   accepts_nested_attributes_for :billing_address, allow_destroy: true
 
+  validates :email, uniqueness: true
+  validates :email, presence: true
+  validates_confirmation_of :password
+  validates :password, presence: true, unless: ->(u) { u.password.nil? }
+  #validates :password, format: { with: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[\w-]{8,}/,
+                                 #message: I18n.t('validations.password.format') }, unless: ->(u) { u.password.nil? }
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

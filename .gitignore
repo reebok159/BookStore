@@ -21,4 +21,6 @@
 
 /config/database.yml
 .env
+/coverage/
+output.html
 .rake_tasks~
