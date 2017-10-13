@@ -98,6 +98,6 @@ en:
     updatefail: 'Data cannot be saved'
     updpasssuccess: 'Successfully updated password'
     updpassfail: 'Error. Password cannot be saved'
-
+    mustlogin: 'You must be logged in'
 
 

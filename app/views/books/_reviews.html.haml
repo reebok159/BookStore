@@ -24,4 +24,4 @@
 - if user_signed_in?
   = render 'reviews/new', object: @book
 - else
-  You must be logged in
+  = t('users.mustlogin')
