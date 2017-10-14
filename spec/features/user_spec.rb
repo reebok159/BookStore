@@ -5,8 +5,8 @@ describe "Some user actions", :type => :feature do
   end
 
   it "signs me in" do
-    expect(page).to have_content 'Signed in successfully'
-    expect(page).to have_link 'My account'
+    expect(page).to have_content I18n.t('devise.sessions.signed_in')
+    expect(page).to have_link I18n.t('pages.myaccount')
   end
 
   context 'get started' do

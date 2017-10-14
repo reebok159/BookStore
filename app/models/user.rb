@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_one :billing_address, dependent: :destroy
   accepts_nested_attributes_for :billing_address, allow_destroy: true
 
-  validates :email, uniqueness: true
+  validates :email, { format: { with: %r{\A[^-.]\w+[-.]?(\w+[-!#$%&'*+\/=?^_`{|}~.]\w+)*[^-]@([\w\d]+)\.([\w\d]+)\z}, uniqueness: true }
   validates :email, presence: true
   validates_confirmation_of :password
   validates :password, presence: true, unless: ->(u) { u.password.nil? }

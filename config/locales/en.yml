@@ -90,6 +90,8 @@ en:
     clear_cart_success: "Cart was cleared successfully"
   checkout:
     emptycart: 'Your cart is empty'
+    thanks: 'Thank You for your Order!'
+    thanks2: 'An order confirmation has been has been sent to'
   reviews:
     createsuccess: 'Thanks for Review. It will be published as soon as Admin will approve it.'
     createfail: 'Cannot create review'
