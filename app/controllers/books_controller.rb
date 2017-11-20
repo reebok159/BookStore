@@ -1,23 +1,9 @@
 class BooksController < ApplicationController
   def index
-    @books = Book
-    unless params[:catid].nil?
-      @books = @books.where(category_id: params[:catid])
-    end
-    unless params[:order].nil?
-      case params[:order]
-      when "newest"
-        @books = @books.order('created_at DESC')
-      when "popular"
-        @books = @books.order('created_at ASC')
-      when "lowprice"
-        @books = @books.order('price ASC')
-      when "highprice"
-        @books = @books.order('price DESC')
-      end
-    end
-
-    @books = @books.page(params[:page]).per(12)
+    @books = Book.where(select_category)
+                 .order(sort_items)
+                 .page(params[:page])
+                 .per(12)
 
     respond_to do |format|
       format.html
@@ -25,8 +11,25 @@ class BooksController < ApplicationController
     end
   end
 
+  def select_category
+    return { category_id: params[:catid] } unless params[:catid].nil?
+    nil
+  end
+
+  SORT_PARAMS = {
+    "newest" => { created_at: :desc },
+    "popular" => { created_at: :asc },
+    "lowprice" => { price: :asc },
+    "highprice" => { price: :desc }
+  }
+
+  def sort_items
+    SORT_PARAMS[params[:order].to_s]
+  end
+
   def catalog
-    redirect_to books_url, notice: t('mainpage.welcome1')+' '+t('mainpage.welcome2')
+    message = "#{t('mainpage.welcome1')} #{t('mainpage.welcome2')}"
+    redirect_to books_url, notice: message
   end
 
   def show
