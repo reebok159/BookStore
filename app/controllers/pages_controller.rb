@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    @books_slider = get_latest
+    @latest = get_latest
     @bestsellers = Book.bestsellers
   end
 
