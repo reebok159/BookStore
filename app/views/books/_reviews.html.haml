@@ -17,7 +17,7 @@
           - (5 - item.rating).times do
             %i.fa.fa-star.rate-star.rate-empty
         %p= item.text
-%h3 Write a review:
+%h3= t('reviews.writereview')
 - if user_signed_in?
   = render 'reviews/new', object: @book
 - else

@@ -95,11 +95,37 @@ en:
   reviews:
     createsuccess: 'Thanks for Review. It will be published as soon as Admin will approve it.'
     createfail: 'Cannot create review'
+    writereview: 'Write a review:'
   users:
     updatesuccess: 'User was updated'
     updatefail: 'Data cannot be saved'
     updpasssuccess: 'Successfully updated password'
     updpassfail: 'Error. Password cannot be saved'
     mustlogin: 'You must be logged in'
+    addrform:
+      firstname: 'First Name'
+      lastname: 'Last Name'
+      address: 'Address'
+      city: 'City'
+      zip: 'Zip'
+      country: 'Country'
+      selcountry: 'Select a country'
+      phone: 'Phone'
+      example: 'Example'
+  checkout:
+    allrequired: 'all fields are required'
+    saveandcontinue: 'Save and Continue'
+    ordersumm: 'Order Summary'
+    steps:
+      address: 'Address'
+      delivery: 'Delivery'
+      payment: 'Payment'
+      confirm: 'Confirm'
+      complete: 'Complete'
+    address:
+      billaddress: 'Billing Address'
+      shaddress: 'Shipping Address'
+      usebilladdress: 'Use Billing Address'
+
 
 

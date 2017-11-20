@@ -62,8 +62,6 @@
   .mb-120
     .books-container
       = render partial: 'books', object: @books
-    = #paginate @books
-    = #page_entries_info @books
     .text-center.view_more
       = render partial: 'view_more', object: @books
 

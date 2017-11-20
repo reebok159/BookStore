@@ -1,41 +1,41 @@
 %ul.steps.list-inline
   %li.step.active
     %span.step-number 1
-    %span.step-text.hidden-xs Address
+    %span.step-text.hidden-xs= t('checkout.steps.address')
   %li.step-divider
   %li.step
     %span.step-number 2
-    %span.step-text.hidden-xs Delivery
+    %span.step-text.hidden-xs= t('checkout.steps.delivery')
   %li.step-divider
   %li.step
     %span.step-number 3
-    %span.step-text.hidden-xs Payment
+    %span.step-text.hidden-xs= t('checkout.steps.payment')
   %li.step-divider
   %li.step
     %span.step-number 4
-    %span.step-text.hidden-xs Confirm
+    %span.step-text.hidden-xs= t('checkout.steps.confirm')
   %li.step-divider
   %li.step
     %span.step-number 5
-    %span.step-text.hidden-xs Complete
+    %span.step-text.hidden-xs= t('checkout.steps.complete')
 = simple_form_for @user, method: :put, url: "#{checkout_next_path}", html: {novalidate: false}, class: "res-mb-100" do |f|
   .hidden-xs.hidden-sm
     .row
       .col-md-5
-        %h3.general-subtitle Billing Address
+        %h3.general-subtitle= t('.billaddress')
         %p.general-info-text all fields are required
       .col-md-5.col-md-offset-1
-        %h3.general-subtitle Shipping Address
+        %h3.general-subtitle= t('.shaddress')
   .row
     .col-md-5.mb-40
       .visible-xs.visible-sm
-        %h3.general-subtitle Billing Address
-        %p.general-info-text all fields are required
+        %h3.general-subtitle= t('.billaddress')
+        %p.general-info-text= t('checkout.allrequired')
       = f.simple_fields_for :billing_address, wrapper: :custom do |bia|
         = render partial: "users/address", locals: { adr: bia }
     .col-md-5.col-md-offset-1.mb-60
       .visible-xs.visible-sm
-        %h3.general-subtitle Shipping Address
+        %h3.general-subtitle= t('.shaddress')
       = f.simple_fields_for :shipping_address, wrapper: :custom do |sh|
         = render partial: "users/address", locals: { adr: sh }
       .form-group.checkbox
@@ -43,10 +43,10 @@
           %input.checkbox-input{type: "checkbox", hidden: "true", name: "use_billing"}
           %span.checkbox-icon
             %i.fa.fa-check
-          %span.checkbox-text Use Billing Address
+          %span.checkbox-text= t('.usebilladdress')
   .general-text-align.mb-60
-    %p.in-gold-500.font-18 Order Summary
+    %p.in-gold-500.font-18= t('checkout.ordersumm')
     %table.general-summary-table
       = render partial: "cost", object: @order
 
-  = f.button :submit, "Save and Continue", class: "btn btn-default center-block mb-20"
+  = f.button :submit, "#{t('checkout.saveandcontinue')}", class: "btn btn-default center-block mb-20"
