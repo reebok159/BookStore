@@ -81,10 +81,11 @@ class CheckoutController < ApplicationController
 
   def init_vars
     @user = current_user
-    @order = if flash[:last_completed_order_id].nil?
+    last_completed_order_id = flash[:last_completed_order_id]
+    @order = if last_completed_order_id.nil?
                last_order
              else
-               @user.orders.find(flash[:last_completed_order_id])
+               @user.orders.find(last_completed_order_id)
              end
 
     @state_layout = @order.checkout_state

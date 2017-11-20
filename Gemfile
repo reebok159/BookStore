@@ -35,6 +35,7 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'compass-rails', '~> 3.0', '>= 3.0.2'
 gem 'aasm', '~> 4.12', '>= 4.12.2'
+gem 'draper', '~> 3.0', '>= 3.0.1'
 
 
 
