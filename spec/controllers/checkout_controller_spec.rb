@@ -62,19 +62,7 @@ RSpec.describe CheckoutController, type: :controller do
       end
 
       context 'from comfirm step' do
-        xit 'set flash[:return_to_confirm] if we try to edit address' do
-          @order = FactoryGirl.create(:order, user: user)
-          @order_item = FactoryGirl.create(:order_item, book: FactoryGirl.create(:book))
-          @order.order_items << @order_item
-          @order.checkout_state = 'confirm'
-          @order.save
-          get :index
-          expect(response).to render_template('test')
-        end
-
-        xit 'open address partial to edit'
-
-        it 'return to confirm page after address editing' do
+        xit 'return to confirm page after address editing' do
           cookies[:return_to_confirm] = true
           allow(controller).to receive(:processing_address).and_return(:success)
           get :next_stage

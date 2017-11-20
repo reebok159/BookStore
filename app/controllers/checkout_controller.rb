@@ -2,209 +2,114 @@ class CheckoutController < ApplicationController
   before_action :authenticate_user!, except: [:start]
   before_action :init_vars
 
+  include CheckoutHelper
+
+  def index
+    save_cart if cookies[:save_cart]
+    check_order
+    cookies[:return_to_confirm] = true unless params[:edit].blank?
+
+    show_current_step(@state_layout)
+  end
+
   def start
     save_cart_if_no_auth
     redirect_to :checkout
   end
 
-  def index
-    #we start checkout or select necessary stage
-    save_cart if cookies[:save_cart]
-    check_order
-
-    cookies[:return_to_confirm] = true unless params[:edit].blank?
-
-    case @state_layout
-    when 'address'
-      @billing_address = @user.billing_address || @user.build_billing_address
-      @shipping_address = @user.shipping_address || @user.build_shipping_address
-    when 'delivery'
-      @delivery_methods = DeliveryMethod.all
-    when 'payment'
-      @credit_card = @order.credit_card || @order.build_credit_card
-    when 'confirm'
-      @address = @order.order_address
-      @card_number = "** ** ** #{@order.credit_card.number.last(4)}"
-      @items = @order.order_items
-    when 'complete'
-      @address = @order.order_address
-      @items = @order.order_items
-    else
+  def check_order
+    return unless @order.order_items.blank?
+    if @order.checkout_state != 'address'
+      @order.checkout_state = 'address'
+      @order.save
     end
+    flash[:alert] = t('checkout.emptycart')
+    redirect_to cart_page_url
   end
 
-  def check_order
-    if @order.order_items.blank?
-      if @order.checkout_state != 'address'
-        @order.checkout_state = "address"
-        @order.save
-      end
-      flash[:alert] = t('checkout.emptycart')
-      redirect_to cart_page_url
+  def show_current_step(state_layout)
+    begin
+      eval("#{state_layout}_page")
+    rescue
+      address_page
     end
   end
 
   def next_stage
-    status = :ok
-
-    case @state_layout
-    when 'address'
-      status = processing_address
-    when 'delivery'
-      status = processing_delivery
-    when 'payment'
-      status = processing_payment
-    when 'confirm'
-      status = processing_confirm
-    else
-      status = :error
-    end
-
-    unless cookies[:return_to_confirm].nil?
-      if status == :error
-        #flash.keep
-      else
-
-        @order.checkout_state = :confirm
-        @order.save
-        cookies.delete(:return_to_confirm)
-        #pry
-      end
-    end
+    service = CheckoutService.new(params, cookies, @user, @order)
+    status = service.next_stage(@state_layout)
+    service.return_to_confirm?(status)
+    complete_order if status == :success && @state_layout == 'confirm'
 
     render "index" and return if status == :error
-
     redirect_to :checkout
   end
 
+  def address_page
+    @billing_address = @user.billing_address || @user.build_billing_address
+    @shipping_address = @user.shipping_address || @user.build_shipping_address
+  end
+
+  def delivery_page
+    @delivery_methods = DeliveryMethod.all
+  end
+
+  def payment_page
+    @credit_card = @order.credit_card || @order.build_credit_card
+  end
+
+  def confirm_page
+    @address = @order.order_address
+    @card_number = credit_card_format(@order.credit_card)
+    @items = @order.order_items
+  end
+
+  def complete_page
+    @address = @order.order_address
+    @items = @order.order_items
+  end
+
+  def complete_order
+    flash[:last_completed_order_id] = @order.id
+  end
+
   def edit_data
-    #pry
     @order.checkout_state = state_params[:type]
     @order.save!
     redirect_to checkout_url(edit: :edit)
   end
 
-  def processing_address
-    params[:user].delete(:shipping_address_attributes) if(params[:use_billing] == "on")
-
-    if @user.update(user_params)
-      save_addresses_to_order(params[:use_billing])
-      last_order.next_state! and return :success
-    end
-
-    return :error
-  end
-
-  def processing_delivery
-    last_order.next_state! and return :success if @order.update(delivery_params)
-    return :error
-  end
-
-  def processing_payment
-    last_order.next_state! and return :success if @order.update(payment_params)
-    return :error
-  end
-
-  def processing_confirm
-    @order.completed_at = DateTime.now
-    @order.total_price = @order.pre_total_price
-    @order.status = 1
-    #pry
-
-    if @order.save
-      @order.next_state!
-      flash[:last_completed_order_id] = @order.id
-
-      #pry
-      return :success
-    end
-
-    return :error
-  end
-
-  def processing_complete
-  end
-
   def init_vars
-    #pry
-    if flash[:last_completed_order_id].nil?
-      @order = last_order
-      #flash.keep
-    else
-      @order = Order.find(flash[:last_completed_order_id])
-    end
+    @user = current_user
+    @order = if flash[:last_completed_order_id].nil?
+               last_order
+             else
+               @user.orders.find(flash[:last_completed_order_id])
+             end
 
     @state_layout = @order.checkout_state
-    @user = current_user
-    #pry
-    #@subtotal = @order.subtotal
   end
 
   private
 
-    def save_cart_if_no_auth
-      #pry
-      unless user_signed_in?
-        unless last_order.order_items.blank?
-          cookies[:save_cart] = true
-        end
-      end
-    end
+  def save_cart_if_no_auth
+    return if user_signed_in?
+    cookies[:save_cart] = true unless last_order.order_items.blank?
+  end
 
-    def save_cart
-      #cookies.signed[:order_id] = order.id
-      order = Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
-      if order
-        @order.delete
-        order.user = current_user
-        order.save
-        init_vars
-        #@order.save
-        cookies.delete(:save_cart)
-        cookies.delete(:order_id)
-      end
-    end
+  def save_cart
+    order = Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
+    return unless order
 
-    def save_addresses_to_order(use_billing = nil)
-      keys = ['first_name', 'last_name', 'address', 'city', 'zip', 'country', 'phone']
-      data = {}
-      bl_address_data = @user.billing_address
+    @order.delete
+    order.user = current_user
+    order.save
+    init_vars
+    cookies.delete(:save_cart)
+    cookies.delete(:order_id)
+  end
 
-      keys.each do |item|
-        data["billing_#{item}".to_sym] = bl_address_data[item]
-      end
-
-      if use_billing == "on"
-        keys.each do |item|
-          data["shipping_#{item}".to_sym] = bl_address_data[item]
-        end
-      else
-        sh_address_data = @user.shipping_address
-        keys.each do |item|
-          data["shipping_#{item}".to_sym] = sh_address_data[item]
-        end
-      end
-
-      last_order.build_order_address(data).save
-    end
-
-
-
-    def user_params
-      params.require(:user).permit(
-        billing_address_attributes: [:first_name, :last_name, :address, :city, :zip, :country, :phone, :id],
-        shipping_address_attributes: [:first_name, :last_name, :address, :city, :zip, :country, :phone, :id])
-    end
-
-    def delivery_params
-      params.require(:order).permit( :delivery_method_id )
-    end
-
-    def payment_params
-      params.require(:order).permit( credit_card_attributes: [:number, :name, :cvv, :expires] )
-    end
-
-    def state_params
-      params.permit(:type)
-    end
+  def state_params
+    params.permit(:type)
+  end
 end
