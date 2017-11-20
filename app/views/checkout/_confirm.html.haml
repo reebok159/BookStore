@@ -67,7 +67,7 @@
   .col-sm-3
     %h3.general-subtitle Payment Information
     %p.general-address
-      = @card_number
+      = @order.short_card_number
       = link_to 'edit', checkout_edit_path(:type => :payment), method: "put", :class=>"general-edit"
       -#%span.general-edit edit
       %br

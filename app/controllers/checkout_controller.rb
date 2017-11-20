@@ -60,7 +60,6 @@ class CheckoutController < ApplicationController
 
   def confirm_page
     @address = @order.order_address
-    @card_number = credit_card_format(@order.credit_card)
     @items = @order.order_items
   end
 
@@ -87,7 +86,7 @@ class CheckoutController < ApplicationController
              else
                @user.orders.find(last_completed_order_id)
              end
-
+    @order = @order.decorate
     @state_layout = @order.checkout_state
   end
 
