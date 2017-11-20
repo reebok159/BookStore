@@ -1,8 +1,8 @@
 class Book < ApplicationRecord
   #has_many :orders
-  has_many :order_items, foreign_key: "item_id"
+  has_many :order_items, foreign_key: "item_id", dependent: :destroy
   has_many :orders, through: :order_items#, optional: true
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   accepts_nested_attributes_for :reviews
 
   has_one :info_book, dependent: :destroy

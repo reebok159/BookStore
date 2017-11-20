@@ -9,7 +9,7 @@
         %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
           %span{'aria-hidden': "true"} &times;
         .general-img-wrap-table
-          %img.cart-img-shadow{src: "#{try_image(item, :thumb)}", alt: "#{item.name}"}
+          %img.cart-img-shadow{src: "#{item.cover(:thumb)}", alt: "#{item.name}"}
         %p.title= item.name
         %table.table
           %tr
@@ -59,7 +59,7 @@
         %tr
           %td
             .general-img-wrap-table
-              %img.cart-img-shadow.pull-left{src: "#{try_image(item, :thumb)}", alt: "#{item.name}"}
+              %img.cart-img-shadow.pull-left{src: "#{item.cover(:thumb)}", alt: "#{item.name}"}
           %td
             %p.title= item.name
           %td

@@ -2,7 +2,6 @@
   #slider.carousel.slide{'data-ride': "carousel"}
     %ol.carousel-indicators
       - @latest.each_with_index do |book, i|
-        /%li.active{'data-target': "#slider", 'data-slide-to': "0"}
         %li{:class => ("active" if i.zero?), 'data-target': "#slider", 'data-slide-to': i}
     .carousel-inner{role: "listbox"}
       - @latest.each_with_index do |book, i|
@@ -10,12 +9,12 @@
           .row
             .col-sm-5
               .general-img-wrap
-                %img.img-shadow.general-thumbnail-img{src: "#{try_image(book, :book_image)}", alt: "#{book.name}"}
+                %img.img-shadow.general-thumbnail-img{src: "#{book.cover(:book_image)}", alt: "#{book.name}"}
             .col-sm-7
               .mb-60
                 %h1= book.name
                 %p.lead= book.short_desc
-                %p.lead.small= authors_to_list(book.authors)
+                %p.lead.small= book.authors_list
                 .general-align
                   = link_to t('action.buynow'), to_cart_path(book), class: "btn btn-primary", method: :post
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
@@ -37,7 +36,7 @@
         .col-sm-6.col-md-3
           .general-thumb-wrap
             .thumbnail.general-thumbnail
-              %img.img-shadow.general-thumbnail-img{src: "#{try_image(item, :thumb)}", alt: "#{item.name}"}
+              %img.img-shadow.general-thumbnail-img{src: "#{item.cover(:thumb)}", alt: "#{item.name}"}
               .thumb-hover
                 .general-thumb-link-wrap
                   = link_to book_path(item), class: "thumb-hover-link" do
@@ -49,5 +48,5 @@
               %p.pull-right.font-16.in-gold-500= "#{number_to_currency(item.price, price_options)}"
               %p.title.mr-55= item.name
             %span.divider-sm
-            %p.lead.small= authors_to_list(item.authors)
+            %p.lead.small= item.authors_list
 

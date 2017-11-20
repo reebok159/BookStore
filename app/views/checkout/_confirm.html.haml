@@ -77,7 +77,7 @@
     - item = order_item.book
     .general-cart-item.divider-lg
       .general-img-wrap-table
-        %img.cart-img-shadow{src: "#{try_image(item, :thumb)}", alt: "#{item.name}"}
+        %img.cart-img-shadow{src: "#{item.cover(:thumb)}", alt: "#{item.name}"}
       %p.title= item.name
       %P.in-grey-600.fw-300= item.short_desc
       %table.table
@@ -115,7 +115,7 @@
         %tr
           %td
             .general-img-wrap-table
-              %img.cart-img-shadow.pull-left{src: "#{try_image(item, :thumb)}", alt: "#{item.name}"}
+              %img.cart-img-shadow.pull-left{src: "#{item.cover(:thumb)}", alt: "#{item.name}"}
           %td
             %p.title= item.name
             %p.in-grey-600.fw-300= item.short_desc

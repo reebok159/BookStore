@@ -55,12 +55,12 @@ class CheckoutController < ApplicationController
 
   def confirm_page
     @address = @order.order_address
-    @items = @order.order_items
+    @items = @order.order_items.decorate
   end
 
   def complete_page
     @address = @order.order_address
-    @items = @order.order_items
+    @items = @order.order_items.decorate
   end
 
   def complete_order

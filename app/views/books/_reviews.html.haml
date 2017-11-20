@@ -1,10 +1,9 @@
-- reviews = @book.reviews.accepted
-%h3.in-gold-500.mb-25 #{t('books.reviews')} (#{reviews.count})
-- reviews.each do |item|
+%h3.in-gold-500.mb-25 #{t('books.reviews')} (#{@reviews.count})
+- @reviews.each do |item|
+  - @user_letter = item.user.email.first.capitalize
   .general-message-wrap.divider-lg
     .clearfix
-      -#%span.img-circle.logo-size.inlide-block.pull-left.logo-empty M
-      %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+      %span.img-circle.logo-size.inlide-block.pull-left.logo-empty= @user_letter
       .ml-70
         %div
           .general-message-date.hidden-xs= item.created_at

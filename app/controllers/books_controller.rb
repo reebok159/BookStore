@@ -1,9 +1,11 @@
 class BooksController < ApplicationController
+
   def index
     @books = Book.where(select_category)
                  .order(sort_items)
                  .page(params[:page])
                  .per(12)
+                 .decorate
 
     respond_to do |format|
       format.html
@@ -33,7 +35,8 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.find(params[:id]).decorate
     @review = Review.new
+    @reviews = @book.reviews.accepted
   end
 end

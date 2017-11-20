@@ -6,7 +6,7 @@
     .col-sm-6
       .product-gallery
         .mb-20
-          %img.img-responsive{src: "#{try_image(@book, :book_image)}"}
+          %img.img-responsive{src: "#{@book.cover(:book_image)}"}
           - unless @book.images.empty?
             .images.clearfix
               - @book.images[1..@book.images.size].each do |item|
@@ -14,7 +14,7 @@
                   = image_tag(item.image.url(:smallbook_image))
     .col-sm-6
       %h1.mt-res-0= @book.name
-      %p.lead.small= authors_to_list(@book.authors)
+      %p.lead.small= @book.authors_list
       .row
         = form_tag('/to_cart', method: 'post', class: "egn_book_cart") do
           .col-xs-12.col-md-4

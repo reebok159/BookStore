@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   def index
     @cart = last_order
     @items = []
-    @items = @cart.order_items.order(:id) unless @cart.nil?
+    @items = @cart.order_items.order(:id).decorate unless @cart.nil?
 
     @coupon = @cart.coupon_discount
   end
@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
 
   private
 
-    def coupon_params
-      params.require(:order).permit(:coupon_id)
-    end
+  def coupon_params
+    params.require(:order).permit(:coupon_id)
+  end
 end

@@ -1,17 +1,17 @@
 class PagesController < ApplicationController
+
   def index
-    @latest = get_latest
-    @bestsellers = Book.bestsellers
+    @latest = BookDecorator.decorate_collection(get_latest)
+    @bestsellers = BookDecorator.decorate_collection(Book.bestsellers)
   end
 
   def spry
     pry
   end
 
-
   private
 
-    def get_latest(count = 2)
-      @book = Book.last(count)
-    end
+  def get_latest(count = 2)
+    Book.last(count)
+  end
 end

@@ -25,7 +25,7 @@ class Order < ApplicationRecord
   belongs_to :delivery_method, optional: true
   belongs_to :coupon, optional: true
   has_one :order_address, dependent: :destroy
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   has_many :books, through: :order_items
 
   has_one :credit_card, dependent: :destroy
