@@ -16,7 +16,7 @@
             %td
               %span.in-grey-600 Price
             %td
-              %span.font-16.in-gold-500= "#{price_format(item.price)}"
+              %span.font-16.in-gold-500= number_to_currency(item.price, price_options)
           %tr
             %td.vertical-middle
               %span.in-grey-600 Quantity
@@ -35,7 +35,7 @@
             %td
               %span.in-grey-600 SubTotal
             %td
-              %span.font-16.in-gold-500= "#{price_format(order_item.quantity * item.price)}"
+              %span.font-16.in-gold-500= number_to_currency((order_item.quantity * item.price), price_options)
   .hidden-xs
     %table.table.table-hover
       %tr.no-hover
@@ -63,7 +63,7 @@
           %td
             %p.title= item.name
           %td
-            %span.font-16.in-gold-500= "#{price_format(item.price)}"
+            %span.font-16.in-gold-500= number_to_currency(item.price, price_options)
           %td
             .input-group
               - if order_item.quantity.to_i == 1
@@ -76,7 +76,7 @@
               = link_to change_order_item_path(order_item.id, order_item.quantity + 1), method: "post", class: "input-link" do
                 %i.fa.fa-plus.line-heaght-40
           %td
-            %span.font-16.in-gold-500= "#{price_format(order_item.quantity * item.price)}"
+            %span.font-16.in-gold-500= number_to_currency((order_item.quantity * item.price), price_options)
           %td
             = link_to order_item_path(order_item), method: "delete", class: "close general-cart-close" do
               %span{'aria-hidden': "true"} &times;
@@ -101,17 +101,17 @@
               %td
                 %p.font-16 Subtotal:
               %td
-                %p.font-16= "#{price_format(@cart.subtotal)}"
+                %p.font-16= "#{number_to_currency(@cart.subtotal, price_options)}"
             %tr
               %td
                 %p.font-16 Coupon:
               %td
-                %p.font-16= "#{price_format(@cart.coupon_discount)}"
+                %p.font-16= "#{number_to_currency(@cart.coupon_discount, price_options)}"
             %tr
               %td
                 %strong.font-18 Order Total:
               %td
-                %strong.font-18= "#{price_format(@cart.total_items)}"
+                %strong.font-18= "#{number_to_currency(@cart.total_items, price_options)}"
           %a.btn.btn-default.mb-20.visible-xs-inline-block{href: "#{checkout_path}"} Checkout
   .text-center
     %a.btn.btn-default.mb-20.hidden-xs{href: "#{checkout_start_path}"} Checkout

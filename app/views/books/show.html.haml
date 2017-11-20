@@ -18,7 +18,7 @@
       .row
         = form_tag('/to_cart', method: 'post', class: "egn_book_cart") do
           .col-xs-12.col-md-4
-            %p.h1.in-gold-500.mt-10= "#{price_format(@book.price)}"
+            %p.h1.in-gold-500.mt-10= "#{number_to_currency(@book.price, price_options)}"
           .col-xs-5.col-md-3
             .input-group.general-position
               %a.input-link.item-change-quantity{href: "javascript:void(0)", data: { action: "minus" } }

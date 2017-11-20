@@ -7,9 +7,8 @@ module ApplicationHelper
     :highprice => 'Price: High to low'
   }
 
-  def price_format(summ)
-    #{}"€#{summ}"
-    "#{summ.round(2)}$"
+  def price_options
+    { unit: '$', format: "%n%u" }
   end
 
   def categories_list

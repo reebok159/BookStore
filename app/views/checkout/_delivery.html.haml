@@ -44,7 +44,7 @@
             %td
               %span.in-grey-600 Price
             %td
-              %span.font-16.in-gold-500= "#{price_format(item.cost)}"
+              %span.font-16.in-gold-500= number_to_currency(item.cost, price_options)
   .hidden-xs.mb-res-50
     %table.table.table-hover
       %thead
@@ -67,7 +67,7 @@
             %td
               %span= item.delay
             %td
-              %span.font-16.in-gold-500= "#{price_format(item.cost)}"
+              %span.font-16.in-gold-500= number_to_currency(item.cost, price_options)
   .general-text-align
     %p.in-gold-500.font-18 Order Summary
     %table.general-summary-table

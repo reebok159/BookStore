@@ -1,7 +1,5 @@
 - reviews = @book.reviews.accepted
 %h3.in-gold-500.mb-25 #{t('books.reviews')} (#{reviews.count})
--#Write a review:
-= #simple_form_for @book do |f|
 - reviews.each do |item|
   .general-message-wrap.divider-lg
     .clearfix

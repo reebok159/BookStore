@@ -2,19 +2,19 @@
   %td
     %p.font-16 Subtotal:
   %td
-    %p.font-16= price_format(@order.total_items)
+    %p.font-16= number_to_currency(@order.total_items, price_options)
 %tr
   %td
     %p.font-16 Coupon:
   %td
-    %p.font-16= price_format(@order.coupon_discount)
+    %p.font-16= number_to_currency(@order.coupon_discount, price_options)
 %tr
   %td
     %p.font-16 Shipping:
   %td
-    %p.font-16= price_format(@order.delivery_price)
+    %p.font-16= number_to_currency(@order.delivery_price, price_options)
 %tr
   %td
     %p.font-16 Total:
   %td
-    %p.font-16= price_format(@order.pre_total_price)
+    %p.font-16= number_to_currency(@order.pre_total_price, price_options)
