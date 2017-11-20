@@ -10,6 +10,10 @@ class Order < ApplicationRecord
     state :confirm
     state :complete
 
+    event :reset_state do
+      transitions to: :address
+    end
+
     event :next_state do
       transitions from: :address, to: :delivery
       transitions from: :delivery, to: :payment

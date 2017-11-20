@@ -5,7 +5,7 @@ class CheckoutController < ApplicationController
   include CheckoutHelper
 
   def index
-    save_cart if cookies[:save_cart]
+    save_cart_after_login if cookies[:save_cart]
     check_order
     cookies[:return_to_confirm] = true unless params[:edit].blank?
 
@@ -13,26 +13,21 @@ class CheckoutController < ApplicationController
   end
 
   def start
-    save_cart_if_no_auth
+    start_save_cart_if_no_auth
     redirect_to :checkout
   end
 
   def check_order
     return unless @order.order_items.blank?
-    if @order.checkout_state != 'address'
-      @order.checkout_state = 'address'
-      @order.save
-    end
+    @order.reset_state! unless @order.address?
     flash[:alert] = t('checkout.emptycart')
     redirect_to cart_page_url
   end
 
   def show_current_step(state_layout)
-    begin
-      eval("#{state_layout}_page")
-    rescue
-      address_page
-    end
+    eval("#{state_layout}_page")
+  rescue
+    address_page
   end
 
   def next_stage
@@ -92,12 +87,12 @@ class CheckoutController < ApplicationController
 
   private
 
-  def save_cart_if_no_auth
+  def start_save_cart_if_no_auth
     return if user_signed_in?
     cookies[:save_cart] = true unless last_order.order_items.blank?
   end
 
-  def save_cart
+  def save_cart_after_login
     order = Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
     return unless order
 
