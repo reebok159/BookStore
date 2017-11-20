@@ -1,12 +1,12 @@
 class OrderItemsController < ApplicationController
   def create
-    if order = last_order.order_items.find_by(item_id: params[:item_id])
-      order.quantity += quantity_param(params[:quantity])
+    if item = last_order.order_items.find_by(item_id: params[:item_id])
+      item.increment(:quantity, quantity_param(params[:quantity]))
     else
-      order = last_order.order_items.build(order_item_params)
+      item = last_order.order_items.build(order_item_params)
     end
 
-    if order.save
+    if item.save
       flash[:notice] = t('order_item.create_success')
     else
       flash[:notice] = t('order_item.create_fail')
@@ -28,13 +28,7 @@ class OrderItemsController < ApplicationController
 
   def destroy
     cart = last_order.order_items
-
-    if(params[:id] == 'all')
-      cart.destroy_all
-    else
-      cart.delete(params[:id])
-    end
-
+    cart.destroy(params[:id])
     redirect_back(fallback_location: root_path)
   end
 
@@ -49,4 +43,5 @@ class OrderItemsController < ApplicationController
     params[:quantity] = quantity_param(params[:quantity])
     params.permit(:item_id, :quantity)
   end
+
 end
