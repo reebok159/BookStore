@@ -2,24 +2,24 @@
   %li.step.done
     %span.step-number
       %i.fa.fa-check.step-icon
-    %span.step-text.hidden-xs Address
+    %span.step-text.hidden-xs= t('checkout.steps.address')
   %li.step-divider
   %li.step.active
     %span.step-number 2
-    %span.step-text.hidden-xs Delivery
+    %span.step-text.hidden-xs= t('checkout.steps.delivery')
   %li.step-divider
   %li.step
     %span.step-number 3
-    %span.step-text.hidden-xs Payment
+    %span.step-text.hidden-xs= t('checkout.steps.payment')
   %li.step-divider
   %li.step
     %span.step-number 4
-    %span.step-text.hidden-xs Confirm
+    %span.step-text.hidden-xs= t('checkout.steps.confirm')
   %li.step-divider
   %li.step
     %span.step-number 5
-    %span.step-text.hidden-xs Complete
-%h3.general-subtitle Delivery Method
+    %span.step-text.hidden-xs= t('checkout.steps.complete')
+%h3.general-subtitle= t('.dmethod')
 = simple_form_for @order, method: :put, url: "#{checkout_next_path}", html: {novalidate: false} do |f|
   .visible-xs
     - @delivery_methods.each do |item|
@@ -27,7 +27,7 @@
         %table.table
           %tr
             %td.col-half
-              %span.in-grey-600 Method
+              %span.in-grey-600= t('.method')
             %td.col-half
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
@@ -37,12 +37,12 @@
                   %span.radio-text= item.name
           %tr
             %td
-              %span.in-grey-600 Days
+              %span.in-grey-600= t('.days')
             %td
               %span.font-16.fw-300= item.delay
           %tr
             %td
-              %span.in-grey-600 Price
+              %span.in-grey-600= t('.price')
             %td
               %span.font-16.in-gold-500= number_to_currency(item.cost, price_options)
   .hidden-xs.mb-res-50
@@ -50,11 +50,11 @@
       %thead
         %tr
           %th.col-method
-            %span.in-grey-600.ml-40 Method
+            %span.in-grey-600.ml-40= t('.method')
           %th
-            %span.in-grey-600 Days
+            %span.in-grey-600= t('.days')
           %th
-            %span.in-grey-600 Price
+            %span.in-grey-600= t('.price')
       %tbody
         - @delivery_methods.each_with_index do |item, index|
           %tr
@@ -69,9 +69,9 @@
             %td
               %span.font-16.in-gold-500= number_to_currency(item.cost, price_options)
   .general-text-align
-    %p.in-gold-500.font-18 Order Summary
+    %p.in-gold-500.font-18= t('checkout.ordersumm')
     %table.general-summary-table
       = render partial: "cost", object: @order
   .text-center
-    %button.btn.btn-default.mb-20 Save and Continue
+    %button.btn.btn-default.mb-20= t('checkout.saveandcontinue')
 

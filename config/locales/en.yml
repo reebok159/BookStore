@@ -133,7 +133,11 @@ en:
       billaddress: 'Billing Address'
       shaddress: 'Shipping Address'
       usebilladdress: 'Use Billing Address'
-
+    delivery:
+      dmethod: 'Delivery Method'
+      method: 'Method'
+      days: 'Days'
+      price: 'Price'
 
 
 
