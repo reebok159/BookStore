@@ -129,6 +129,11 @@ en:
       payment: 'Payment'
       confirm: 'Confirm'
       complete: 'Complete'
+    cost_p:
+      subtotal: 'Subtotal'
+      coupon: 'Coupon'
+      shipping: 'Shipping'
+      total: 'Total'
     address:
       billaddress: 'Billing Address'
       shaddress: 'Shipping Address'
