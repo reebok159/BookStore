@@ -138,6 +138,13 @@ en:
       method: 'Method'
       days: 'Days'
       price: 'Price'
+    payment:
+      creditcard: 'Credit Card'
+      cardnumber: 'Card Number'
+      nameoncard: 'Name on Card'
+      mmyy: 'MM / YY'
+      cvv: 'CVV'
+
 
 
 
