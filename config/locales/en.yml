@@ -46,6 +46,7 @@ en:
     backtoresults: "Back to results"
     view_more: "View More"
     addtocart: "Add to Cart"
+    save: "Save"
   mainpage:
     welcome1: "Welcome to our amazing Bookstore!"
     welcome2: "We pore through hundreds of new books each month and select the five best we can find to share with our members."
@@ -187,6 +188,24 @@ en:
       subtotal: 'Subtotal'
       coupon: 'Coupon'
       ordertotal: 'Order Total'
+  settings:
+    title: 'Settings'
+    tabs:
+      address: 'Address'
+      privacy: 'Privacy'
+    billaddress: 'Billing Address'
+    shaddress: 'Shipping Address'
+    privacy:
+      email: 'Email'
+      enteremail: 'Enter your email'
+      password: 'Password'
+      old_pass: 'Old Password'
+      new_pass: 'New Password'
+      confirm_pass: 'Confirm Password'
+      removeacc: 'Remove Account'
+      areyousure: 'Are you sure?'
+      pleaseremove: 'Please Remove My Account'
+      iunderstantdatalost: 'I understand that all data will be lost'
   device:
     confirmations:
       new:
