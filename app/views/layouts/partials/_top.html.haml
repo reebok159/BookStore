@@ -30,7 +30,7 @@
                 %li
                   = link_to "#{t('pages.allcats')}", books_path
           %li
-            %a{href: "#{new_user_session_path}"} #{t('myaccount')}
+            %a{href: "#{new_user_session_path}"} #{t('pages.myaccount')}
       .hidden-xs
         %ul.nav.navbar-nav
           %li
@@ -51,7 +51,7 @@
               %a{href: "#{new_user_registration_path}"} #{t('action.signup')}
           - else
             %li.dropdown
-              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} My account
+              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} #{t('pages.myaccount')}
               %ul.dropdown-menu
                 %li
                   %a{href: "#{users_orders_path}"} #{t('pages.orders')}
@@ -60,4 +60,3 @@
                 %li.divider{role: "separator"}
                 %li
                   = link_to "#{t('action.logout')}", destroy_user_session_path, :method => :delete
-                  /%a{href: "#{destroy_user_session_path}", method: :delete} Log out

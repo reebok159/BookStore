@@ -109,6 +109,7 @@ en:
       phone: 'Phone'
       example: 'Example'
   checkout:
+    title: 'Checkout'
     emptycart: 'Your cart is empty'
     thanks: 'Thank You for your Order!'
     thanks2: 'An order confirmation has been has been sent to'
@@ -153,7 +154,23 @@ en:
     confirm:
       shipments: 'Shipments'
       paymentinfo: 'Payment Information'
-
-
-
+  orders:
+    title: 'My Orders'
+    sortby: 'Sort By'
+    donthaveorders: "You don't have any orders"
+    filter:
+      waitforproc: 'Waiting for processing'
+      newest: 'Newest first'
+      popular: 'Popular first'
+      lowtohigh: 'Price: Low to hight'
+      hightolow: 'Price: Low to hight'
+    list:
+      number: 'Number'
+      completedat: 'Completed at'
+      status: 'Status'
+      total: 'Total'
+  device:
+    confirmations:
+      new:
+        resendinstructions: 'Resend confirmation instructions'
 

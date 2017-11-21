@@ -1,41 +1,41 @@
 %main.container.general-main-wrap
-  %h1.mt-0.mb-25 My Orders
-  %p.lead.small.mb-10.visible-xs Sort by
+  %h1.mt-0.mb-25= t('orders.title')
+  %p.lead.small.mb-10.visible-xs= t('orders.sortby')
   .dropdowns.dropdown.general-order-dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-      Waiting for processing
+      = t('orders.filter.waitforproc')
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
       %li
-        %a{href: "#"} Newest first
+        %a{href: "#"}= t('orders.filter.newest')
       %li
-        %a{href: "#"} Popular first
+        %a{href: "#"}= t('orders.filter.popular')
       %li
-        %a{href: "#"} Price: Low to hight
+        %a{href: "#"}= t('orders.filter.lowtohigh')
       %li
-        %a{href: "#"} Price: Low to hight
+        %a{href: "#"}= t('orders.filter.hightolow')
   .visible-xs
     - @orders.each do |order|
       .general-cart-item.divider-lg-bottom.pt-0
         %table.table
           %tr
             %td.col-half
-              %span.in-grey-600 Number
+              %span.in-grey-600= t('orders.list.number')
             %td.col-half
-              %span.general-order-number= number_order(order.id)
+              %span.general-order-number= "##{order.number}"
           %tr
             %td
-              %span.in-grey-600 Completed at
+              %span.in-grey-600= t('orders.list.completedat')
             %td
-              %span.in-grey-900.font-16.fw-300= format_mdate(order.completed_at)
+              %span.in-grey-900.font-16.fw-300= order.format_mdate
           %tr
             %td
-              %span.in-grey-600 Status
+              %span.in-grey-600= t('orders.list.status')
             %td
-              %span.font-16.in-grey-900.fw-300= format_status(order.status)
+              %span.font-16.in-grey-900.fw-300= order.format_status
           %tr
             %td
-              %span.in-grey-600 Total
+              %span.in-grey-600= t('orders.list.total')
             %td
               %strong.font-16= number_to_currency(order.total_price, price_options)
   .hidden-xs.mb-res-50
@@ -43,23 +43,23 @@
       %thead
         %tr
           %th
-            %span.in-grey-600 Number
+            %span.in-grey-600= t('orders.list.number')
           %th
-            %span.in-grey-600 Completed at
+            %span.in-grey-600= t('orders.list.completedat')
           %th
-            %span.in-grey-600 Status
+            %span.in-grey-600= t('orders.list.status')
           %th
-            %span.in-grey-600 Total
+            %span.in-grey-600= t('orders.list.total')
       %tbody
         - if @orders.count.zero?
-          You don't have any orders
+          = t('orders.donthaveorders')
         - @orders.each do |order|
           %tr
             %td
-              %span.general-order-number= number_order(order.id)
+              %span.general-order-number= "##{order.number}"
             %td
-              %span.in-grey-900.font-16.fw-300= format_mdate(order.completed_at)
+              %span.in-grey-900.font-16.fw-300= order.format_mdate
             %td
-              %span.font-16.in-grey-900.fw-300= format_status(order.status)
+              %span.font-16.in-grey-900.fw-300= order.format_status
             %td
               %strong.font-16= number_to_currency(order.total_price, price_options)
