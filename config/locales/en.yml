@@ -88,10 +88,6 @@ en:
     update_fail: "Couldn't update item'"
     clear_cart_fail: "Couldn't clear cart"
     clear_cart_success: "Cart was cleared successfully"
-  checkout:
-    emptycart: 'Your cart is empty'
-    thanks: 'Thank You for your Order!'
-    thanks2: 'An order confirmation has been has been sent to'
   reviews:
     createsuccess: 'Thanks for Review. It will be published as soon as Admin will approve it.'
     createfail: 'Cannot create review'
@@ -113,9 +109,20 @@ en:
       phone: 'Phone'
       example: 'Example'
   checkout:
+    emptycart: 'Your cart is empty'
+    thanks: 'Thank You for your Order!'
+    thanks2: 'An order confirmation has been has been sent to'
     allrequired: 'all fields are required'
     saveandcontinue: 'Save and Continue'
     ordersumm: 'Order Summary'
+    backtostore: 'Back to Store'
+    order: 'Order'
+    itemlist:
+      book: 'Book'
+      price: 'Price'
+      quantity: 'Quantity'
+      total: 'Total'
+      subtotal: 'SubTotal'
     steps:
       address: 'Address'
       delivery: 'Delivery'
@@ -126,6 +133,7 @@ en:
       billaddress: 'Billing Address'
       shaddress: 'Shipping Address'
       usebilladdress: 'Use Billing Address'
+
 
 
 

@@ -2,33 +2,33 @@
   %li.step.done
     %span.step-number
       %i.fa.fa-check.step-icon
-    %span.step-text.hidden-xs Address
+    %span.step-text.hidden-xs= t('checkout.steps.address')
   %li.step-divider
   %li.step.done
     %span.step-number
       %i.fa.fa-check.step-icon
-    %span.step-text.hidden-xs Delivery
+    %span.step-text.hidden-xs= t('checkout.steps.delivery')
   %li.step-divider
   %li.step.done
     %span.step-number
       %i.fa.fa-check.step-icon
-    %span.step-text.hidden-xs Payment
+    %span.step-text.hidden-xs= t('checkout.steps.payment')
   %li.step-divider
   %li.step.done
     %span.step-number
       %i.fa.fa-check.step-icon
-    %span.step-text.hidden-xs Confirm
+    %span.step-text.hidden-xs= t('checkout.steps.confirm')
   %li.step-divider
   %li.step.active
     %span.step-number 5
-    %span.step-text.hidden-xs Complete
+    %span.step-text.hidden-xs= t('checkout.steps.complete')
 .text-center.mb-40
   %h3.general-subtitle= t('checkout.thanks')
   %p.fw-300= "#{t('checkout.thanks2')} #{@user.email}"
 .row.mb-20
   .col-sm-6
     .visible-xs
-      %p.general-order-number.mb-0= "Order ##{number_order(@order.id)}"
+      %p.general-order-number.mb-0= "#{t('checkout.order')} ##{@order.number}"
       %p.general-address.mb-30= @order.completed_at
     %p.general-address
       = "#{@address.billing_first_name} #{@address.billing_last_name}"
@@ -39,9 +39,9 @@
       %br
       = "#{@address.billing_country}"
       %br
-      = "Phone #{@address.billing_phone}"
+      = "#{t('users.addrform.phone')} #{@address.billing_phone}"
   .col-sm-6.hidden-xs.text-right
-    %p.general-order-number.mb-0= "Order ##{number_order(@order.id)}"
+    %p.general-order-number.mb-0= "#{t('checkout.order')} ##{@order.number}"
     %p.general-address.mb-30= @order.completed_at
 .visible-xs
   - @items.each do |order_item|
@@ -54,17 +54,17 @@
       %table.table
         %tr
           %td
-            %span.in-grey-600 Price
+            %span.in-grey-600= t('checkout.itemlist.price')
           %td
             %span.font-16.in-gold-500= number_to_currency(item.price, price_options)
         %tr
           %td.vertical-middle
-            %span.in-grey-600 Quantity
+            %span.in-grey-600= t('checkout.itemlist.quantity')
           %td
             %span= order_item.quantity
         %tr
           %td
-            %span.in-grey-600 SubTotal
+            %span.in-grey-600= t('checkout.itemlist.subtotal')
           %td
             %span.font-16.in-gold-500= "#{number_to_currency((order_item.quantity * item.price), price_options)}"
 .hidden-xs.divider-lg.pt-20
@@ -72,14 +72,14 @@
     %thead
       %tr
         %th
-          %span.in-grey-600 Book
+          %span.in-grey-600= t('checkout.itemlist.book')
         %th.col-method
         %th
-          %span.in-grey-600 Price
+          %span.in-grey-600= t('checkout.itemlist.price')
         %th
-          %span.in-grey-600 Quantity
+          %span.in-grey-600= t('checkout.itemlist.quantity')
         %th
-          %span.in-grey-600 Total
+          %span.in-grey-600= t('checkout.itemlist.total')
     %tbody
       - @items.each do |order_item|
         - item = order_item.book
@@ -97,8 +97,8 @@
           %td
             %span.font-16.in-gold-500= "#{number_to_currency((order_item.quantity * item.price), price_options)}"
 .text-center.general-text-right
-  %p.in-gold-500.font-18 Order Summary
+  %p.in-gold-500.font-18= t('checkout.ordersumm')
   %table.general-summary-table.general-summary-table-right.general-text-right
     = render partial: "cost", object: @order
 .text-center
-  %a.btn.btn-default.mb-20{href: "#{root_path}"} Back to Store
+  %a.btn.btn-default.mb-20{href: "#{root_path}"}= t('checkout.backtostore')

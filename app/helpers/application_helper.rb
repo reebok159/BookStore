@@ -19,12 +19,7 @@ module ApplicationHelper
     end
     cats_list
   end
-=begin
-  def authors_to_list(authors)
-    return "" if authors.nil?
-    authors.pluck(:name).join(', ')
-  end
-=end
+
   def get_selected_sort
     return false if params[:order].nil? or !(params[:order].to_sym).in?(CRITERIA_FOR_SORT)
     CRITERIA_FOR_SORT[params[:order].to_sym]
@@ -35,18 +30,6 @@ module ApplicationHelper
     path += "/catid/#{params[:catid]}" unless params[:catid].nil?
     path += "/order/#{criteria}" unless criteria.nil?
     path
-  end
-
-  #def try_image(book, type = {})
-  #  if book.images.empty?
-  #    '/uploads/noimage.png'
-  #  else
-   #   book.images[0].image.url(type)
-   # end
-  #end
-
-  def number_order(num)
-    "##{num+10000000}"
   end
 
 end

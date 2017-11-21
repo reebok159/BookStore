@@ -23,7 +23,7 @@
     .row
       .col-md-5
         %h3.general-subtitle= t('.billaddress')
-        %p.general-info-text all fields are required
+        %p.general-info-text= t('checkout.allrequired')
       .col-md-5.col-md-offset-1
         %h3.general-subtitle= t('.shaddress')
   .row
@@ -48,5 +48,4 @@
     %p.in-gold-500.font-18= t('checkout.ordersumm')
     %table.general-summary-table
       = render partial: "cost", object: @order
-
   = f.button :submit, "#{t('checkout.saveandcontinue')}", class: "btn btn-default center-block mb-20"
