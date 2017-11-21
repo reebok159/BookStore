@@ -169,6 +169,24 @@ en:
       completedat: 'Completed at'
       status: 'Status'
       total: 'Total'
+  cart:
+    checkout: 'Checkout'
+    title: 'Cart'
+    empty: 'Cart is empty'
+    itemlist:
+      product: 'Product'
+      price: 'Price'
+      quantity: 'Quantity'
+      subtotal: 'SubTotal'
+    coupon:
+      enteryourcode: 'Enter Your Coupon Code'
+      apply: 'Apply Coupon'
+      updcart: 'Update cart'
+    total:
+      ordersumm: 'Order Summary'
+      subtotal: 'Subtotal'
+      coupon: 'Coupon'
+      ordertotal: 'Order Total'
   device:
     confirmations:
       new:
