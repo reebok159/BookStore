@@ -116,6 +116,7 @@ en:
     saveandcontinue: 'Save and Continue'
     ordersumm: 'Order Summary'
     backtostore: 'Back to Store'
+    placeorder: 'Place Order'
     order: 'Order'
     itemlist:
       book: 'Book'
@@ -149,6 +150,9 @@ en:
       nameoncard: 'Name on Card'
       mmyy: 'MM / YY'
       cvv: 'CVV'
+    confirm:
+      shipments: 'Shipments'
+      paymentinfo: 'Payment Information'
 
 
 

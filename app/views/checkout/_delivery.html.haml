@@ -32,7 +32,6 @@
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
                   = f.input :delivery_method_id, :input_html => {hidden: true, class: "radio-input", type: "radio", value: "#{item.id}"}, wrapper: false, label: false
-                  -#%input.radio-input{type: "radio", hidden: "true"}
                   %span.radio-icon
                   %span.radio-text= item.name
           %tr
