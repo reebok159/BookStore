@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924193723) do
+ActiveRecord::Schema.define(version: 20171122125800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.index ["user_id"], name: "index_billing_addresses_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -48,13 +49,7 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.datetime "updated_at", null: false
     t.text "short_desc"
     t.integer "category_id"
-  end
-
-  create_table "carts", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "count"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_books_on_category_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -81,6 +76,7 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_credit_cards_on_order_id"
   end
 
   create_table "delivery_methods", force: :cascade do |t|
@@ -111,6 +107,7 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.datetime "updated_at", null: false
     t.integer "book_id"
     t.integer "published"
+    t.index ["book_id"], name: "index_info_books_on_book_id"
   end
 
   create_table "order_addresses", force: :cascade do |t|
@@ -131,6 +128,7 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order_id"
+    t.index ["order_id"], name: "index_order_addresses_on_order_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -139,6 +137,8 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_order_items_on_item_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -151,6 +151,9 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.integer "coupon_id"
     t.decimal "total_price", precision: 11, scale: 2, default: "0.0"
     t.datetime "completed_at"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
+    t.index ["delivery_method_id"], name: "index_orders_on_delivery_method_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -163,6 +166,8 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "accepted", default: false
+    t.index ["book_id"], name: "index_reviews_on_book_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "shipping_addresses", force: :cascade do |t|
@@ -176,6 +181,7 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.index ["user_id"], name: "index_shipping_addresses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -198,4 +204,19 @@ ActiveRecord::Schema.define(version: 20170924193723) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "authors_books", "authors"
+  add_foreign_key "authors_books", "books"
+  add_foreign_key "billing_addresses", "users"
+  add_foreign_key "books", "categories"
+  add_foreign_key "credit_cards", "orders"
+  add_foreign_key "info_books", "books"
+  add_foreign_key "order_addresses", "orders"
+  add_foreign_key "order_items", "books", column: "item_id"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "coupons"
+  add_foreign_key "orders", "delivery_methods"
+  add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "books"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "shipping_addresses", "users"
 end

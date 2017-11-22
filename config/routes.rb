@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :books, only: [:show, :index]
-  get 'catalog', to: 'books#catalog'
   get 'books(/catid/:catid)(/order/:order)', to: 'books#index'
-  put 'reviews/create'
+  get 'catalog', to: 'books#catalog'
+
+  resources :reviews, only: [:create]
 
   #order_items
   resources :order_items, except: [:edit, :show]
