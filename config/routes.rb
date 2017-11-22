@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #temporaly
   get 'spry', to: 'pages#spry'
@@ -8,7 +7,6 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :books, only: [:show, :index]
-  #get 'books/:id/destroy', to: 'books#destroy', as: 'book_destroy'
   get 'catalog', to: 'books#catalog'
   get 'books(/catid/:catid)(/order/:order)', to: 'books#index'
   put 'reviews/create'
@@ -19,7 +17,6 @@ Rails.application.routes.draw do
 
   post 'to_cart/(:item_id)/(:quantity)', to: 'order_items#create', as: 'to_cart'
 
-  #post 'clear_cart', to: 'orders#clear_cart', as: 'clear_cart'
   get 'cart', to: 'orders#index', as: 'cart_page'
   post 'cart', to: 'orders#activate_coupon', as: 'activate_coupon'
 
@@ -39,16 +36,4 @@ Rails.application.routes.draw do
   get 'checkout/next_stage', to: redirect('checkout')
   put 'checkout/next_stage', as: 'checkout_next'
 
-  #get 'book/show', to: 'books#show', as: 'show_book'
-  #get 'books/new'
-
-  #get 'books/create'
-
-  #get 'books/edit(/:id)(/.:format)', to: 'books#edit', as: 'book_delete'
-
-  #get 'books/update'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  #get 'pages/index'
 end
