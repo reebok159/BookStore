@@ -49,13 +49,13 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:id, :email,
-                            billing_address_attributes: [:first_name, :last_name, :address, :city, :zip, :country, :phone],
-                            shipping_address_attributes: [:first_name, :last_name, :address, :city, :zip, :country, :phone])
-    end
+  def user_params
+    params.require(:user).permit(:id, :email,
+                          billing_address_attributes: [:first_name, :last_name, :address, :city, :zip, :country, :phone],
+                          shipping_address_attributes: [:first_name, :last_name, :address, :city, :zip, :country, :phone])
+  end
 
-    def password_params
-      params.require(:user).permit(:current_password, :password, :password_confirmation)
-    end
+  def password_params
+    params.require(:user).permit(:current_password, :password, :password_confirmation)
+  end
 end

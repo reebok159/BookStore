@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   #order_items
   resources :order_items, except: [:edit, :show]
-  post 'change_order_item/(:id)/(:quantity)', to: 'order_items#update', as: 'change_order_item'
 
   post 'to_cart/(:item_id)/(:quantity)', to: 'order_items#create', as: 'to_cart'
 

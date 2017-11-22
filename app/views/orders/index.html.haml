@@ -26,10 +26,10 @@
                   %a{href:"javascript:void(0)", class: 'input-link'}
                     %i.fa.fa-minus.line-heaght-40
                 - else
-                  = link_to change_order_item_path(order_item.id, order_item.quantity - 1), method: "post", class: "input-link" do
+                  = link_to order_item_path(id: order_item.id, quantity: order_item.quantity - 1), method: "patch", class: "input-link" do
                     %i.fa.fa-minus.line-heaght-40
                 %input.form-control.quantity-input{type: "text", value: "#{order_item.quantity}", disabled: true}
-                = link_to change_order_item_path(order_item.id, order_item.quantity + 1), method: "post", class: "input-link" do
+                = link_to order_item_path(id: order_item.id, quantity: order_item.quantity + 1), method: "patch", class: "input-link" do
                   %i.fa.fa-plus.line-heaght-40
           %tr
             %td
@@ -70,10 +70,10 @@
                 %a{href:"javascript:void(0)", class: 'input-link'}
                   %i.fa.fa-minus.line-heaght-40
               - else
-                = link_to change_order_item_path(order_item.id, order_item.quantity - 1), method: "post", class: "input-link" do
+                = link_to order_item_path(id: order_item.id, quantity: order_item.quantity - 1), method: "patch", class: "input-link" do
                   %i.fa.fa-minus.line-heaght-40
               %input.form-control.quantity-input{type: "text", value: "#{order_item.quantity}", disabled: true}
-              = link_to change_order_item_path(order_item.id, order_item.quantity + 1), method: "post", class: "input-link" do
+              = link_to order_item_path(id: order_item.id, quantity: order_item.quantity + 1), method: "patch", class: "input-link" do
                 %i.fa.fa-plus.line-heaght-40
           %td
             %span.font-16.in-gold-500= number_to_currency((order_item.quantity * item.price), price_options)

@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
   def index; end
 
   def create
-    if Book.exists?(params[:review][:book_id])
+    if Book.exists?(params[:review][:book_id].to_i)
       @review = current_user.reviews.build(review_params).save
       flash[:notice] = t('reviews.createsuccess') if @review
     end
