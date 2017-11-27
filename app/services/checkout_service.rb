@@ -9,20 +9,13 @@ class CheckoutService
   end
 
   def next_stage(state_layout)
-    status = :error
-
     case state_layout
-    when 'address'
-      status = processing_address
-    when 'delivery'
-      status = processing_delivery
-    when 'payment'
-      status = processing_payment
-    when 'confirm'
-      status = processing_confirm
+    when 'address' then processing_address
+    when 'delivery' then processing_delivery
+    when 'payment' then processing_payment
+    when 'confirm' then processing_confirm
+    else :error
     end
-
-    status
   end
 
   def return_to_confirm?(status)
