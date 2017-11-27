@@ -84,7 +84,8 @@ RSpec.describe OrdersController, type: :controller do
 
         it 'check that coupon have effect to order sum' do
           post :activate_coupon, params: { order: { coupon_id: coupon.code } }
-          expect(assigns(:order).coupon_discount).to eq coupon.discount
+          get :index
+          expect(assigns(:cart).coupon_discount).to eq coupon.discount
         end
 
         it 'try activate expired coupon' do

@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
 
   def create_order
     return unless current_user.nil?
-
     if cookies[:order_id]
       order = Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
       return order if order
