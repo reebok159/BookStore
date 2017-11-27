@@ -206,7 +206,7 @@ en:
       areyousure: 'Are you sure?'
       pleaseremove: 'Please Remove My Account'
       iunderstantdatalost: 'I understand that all data will be lost'
-  device:
+  devise:
     confirmations:
       new:
         resendinstructions: 'Resend confirmation instructions'
