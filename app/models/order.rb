@@ -33,6 +33,8 @@ class Order < ApplicationRecord
 
   enum status: [:in_progress, :in_queue, :in_delivery, :delivered, :canceled]
 
+  scope :completed, -> { where.not(status: :in_progress) }
+
   def total_quantity
     order_items.pluck(:quantity).sum
   end
@@ -58,5 +60,7 @@ class Order < ApplicationRecord
     return 0 if self.delivery_method.nil?
     self.delivery_method.cost
   end
+
+
 
 end
