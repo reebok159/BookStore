@@ -33,15 +33,13 @@ i = 1
       price: rand(1.0..99.00).round(2),
       short_desc: FFaker::Book.description(1),
       category: Category.find(rand(1..5)),
-      info_book: InfoBook.new(
-          full_desc: FFaker::Book.description(rand(2..5)),
-          quantity: rand(1..3),
-          width: rand(100..250),
-          height: rand(100..250),
-          depth: rand(10..250),
-          materials: FFaker::CheesyLingo.words(rand(1..3)).join(', '),
-          published: rand(1950..2017)
-        )
+      full_desc: FFaker::Book.description(rand(2..5)),
+      quantity: rand(1..3),
+      width: rand(100..250),
+      height: rand(100..250),
+      depth: rand(10..250),
+      materials: FFaker::CheesyLingo.words(rand(1..3)).join(', '),
+      published: rand(1950..2017)
     )
 
   b.images << Image.new(remote_image_url: FFaker::Book.cover(nil, "328x506"))

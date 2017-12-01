@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122125800) do
+ActiveRecord::Schema.define(version: 20171201111349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 20171122125800) do
     t.datetime "updated_at", null: false
     t.text "short_desc"
     t.integer "category_id"
+    t.text "full_desc"
+    t.integer "width"
+    t.integer "height"
+    t.integer "depth"
+    t.integer "published"
+    t.string "materials"
     t.index ["category_id"], name: "index_books_on_category_id"
   end
 
@@ -94,20 +100,6 @@ ActiveRecord::Schema.define(version: 20171122125800) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
-  end
-
-  create_table "info_books", force: :cascade do |t|
-    t.text "full_desc"
-    t.integer "quantity", default: 1
-    t.float "width"
-    t.float "height"
-    t.float "depth"
-    t.string "materials"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "book_id"
-    t.integer "published"
-    t.index ["book_id"], name: "index_info_books_on_book_id"
   end
 
   create_table "order_addresses", force: :cascade do |t|
@@ -209,7 +201,6 @@ ActiveRecord::Schema.define(version: 20171122125800) do
   add_foreign_key "billing_addresses", "users"
   add_foreign_key "books", "categories"
   add_foreign_key "credit_cards", "orders"
-  add_foreign_key "info_books", "books"
   add_foreign_key "order_addresses", "orders"
   add_foreign_key "order_items", "books", column: "item_id"
   add_foreign_key "order_items", "orders"

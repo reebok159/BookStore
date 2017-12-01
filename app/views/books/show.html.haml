@@ -32,18 +32,18 @@
       .general-info-wrap.divider-lg
         %p #{t('books.description')}
         %p.lead.small.line-height-2
-          = cutted_desc(@book.info_book.full_desc)
+          = cutted_desc(@book.full_desc)
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left #{t('books.published')}
-          %p.lead.small.pull-right= @book.info_book.published
+          %p.lead.small.pull-right= @book.published
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left #{t('books.dimensions')}
-          %p.lead.small.pull-right= "H: #{@book.info_book.height} x W: #{@book.info_book.width} x D: #{@book.info_book.depth}"
+          %p.lead.small.pull-right= "H: #{@book.height} x W: #{@book.width} x D: #{@book.depth}"
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left #{t('books.materials')}
-          %p.lead.small.pull-right= @book.info_book.materials
+          %p.lead.small.pull-right= @book.materials
   .mb-80
     = render partial: "reviews", object: @book
