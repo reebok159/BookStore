@@ -34,7 +34,7 @@ i = 1
       short_desc: FFaker::Book.description(1),
       category: Category.find(rand(1..5)),
       full_desc: FFaker::Book.description(rand(2..5)),
-      quantity: rand(1..3),
+      #quantity: rand(1..3),
       width: rand(100..250),
       height: rand(100..250),
       depth: rand(10..250),
