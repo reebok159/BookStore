@@ -1,6 +1,5 @@
 class AddIndexesAndForeignKeys < ActiveRecord::Migration[5.1]
   def change
-    drop_table :carts
 
     add_foreign_key :authors_books, :books
     add_foreign_key :authors_books, :authors
