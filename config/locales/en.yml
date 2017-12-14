@@ -221,8 +221,8 @@ en:
       confirmpass: 'Confirm password'
       change: 'Change'
     new:
-      forgotpass: 'Forgot your password?'
-      howtoresetphrase: 'We'll email your instructions on how to reset it'
+      forgotpass: "Forgot your password?"
+      howtoresetphrase: "We'll email your instructions on how to reset it"
       entermail: 'Enter your email'
       emailinstructions: 'Email Instructions'
       cancel: 'Cancel'
