@@ -7,17 +7,12 @@ module BooksHelper
       return capture_haml :div do
         haml_concat parts[0]
         haml_tag :span, '...', :class => "full_txt_dots"
-        haml_tag :a, 'Read More', {:class => "in-gold-500 ml-10 egn-read-more", :href => "javascript:void(0)"}
+        haml_tag :a, I18n.t('action.readmore'), {:class => "in-gold-500 ml-10 egn-read-more", :href => "javascript:void(0)"}
         haml_tag :span, parts[1], {:class => "full_txt", :style => "display: none" }
       end
     end
     return desc
   end
-=begin
-  def year_published(published)
-    "-"
-  end
-=end
 
   def categories_list_with_count
     cats = Category.all
@@ -35,8 +30,7 @@ module BooksHelper
     def get_all_for_cat
       total_books = Book.all.count
 
-      #cats.each { |item| total_books += item.books.count unless item.books.count.nil?}
-      { :path => books_path, :name => 'All', :total_books => total_books }
+      { :path => books_path, :name => I18n.t('books.all'), :total_books => total_books }
     end
 
 end
