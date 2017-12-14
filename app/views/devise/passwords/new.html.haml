@@ -1,17 +1,14 @@
 %main.container.general-main-wrap
   .text-center
-    %h1.mb-30 Forgot your password?
-    %p.general-password-text We'll email your instructions on how to reset it
+    %h1.mb-30= I18n.t('password.new.forgotpass')
+    %p.general-password-text= I18n.t('password.new.howtoresetphrase')
   = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "general-form" }) do |f|
     .form-group.mb-25
-      /= f.label :email, "Enter your email", class: "control-label input-label"
-      /%label.control-label.input-label{for: "email"} Enter Email
-      /%input#email.form-control{name:"email", type: "email", placeholder: "Enter Email"}
-      = f.input :email, required: true, autofocus: true, :input_html => { :class => "form-control"}, placeholder: "Enter your email", label: false
+      = f.input :email, required: true, autofocus: true, :input_html => { :class => "form-control"}, placeholder: "I18n.t('password.new.entermail')", label: false
     .text-center
-      = f.button :submit, "Email Instructions", class: "btn btn-default mb-20"
+      = f.button :submit, "#{I18n.t('password.new.emailinstructions')}", class: "btn btn-default mb-20"
       .text-center
-        %a.in-gold-500.mb-20{href: "#{new_user_session_path}"} Cancel
+        %a.in-gold-500.mb-20{href: "#{new_user_session_path}"}= I18n.t('password.new.cancel')
 
 
 
