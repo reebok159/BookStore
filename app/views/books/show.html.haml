@@ -40,7 +40,7 @@
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left #{t('books.dimensions')}
-          %p.lead.small.pull-right= "H: #{@book.height} x W: #{@book.width} x D: #{@book.depth}"
+          %p.lead.small.pull-right= @book.sizes
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left #{t('books.materials')}

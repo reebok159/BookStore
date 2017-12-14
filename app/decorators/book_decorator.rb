@@ -18,4 +18,12 @@ class BookDecorator < Draper::Decorator
     return '' if object.authors.nil?
     object.authors.pluck(:name).join(', ')
   end
+
+  def sizes
+    width = object.width.nil? ? "-" : object.width
+    height = object.height.nil? ? "-" : object.height
+    depth = object.depth.nil? ? "-" : object.depth
+
+    "H: #{width} x W: #{height} x D: #{depth}"
+  end
 end
