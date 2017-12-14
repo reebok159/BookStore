@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: book_store_production
-  username: book_store
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USER'] %>
   password: <%= ENV['BOOK_STORE_DATABASE_PASSWORD'] %>

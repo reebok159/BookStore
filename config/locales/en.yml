@@ -170,6 +170,12 @@ en:
       completedat: 'Completed at'
       status: 'Status'
       total: 'Total'
+    status:
+      inprogress: 'In Progress'
+      inqueue: 'In Queue'
+      indelivery: 'In Delivery'
+      delivered: ' Delivered'
+      canceled: 'Canceled'
   cart:
     checkout: 'Checkout'
     title: 'Cart'

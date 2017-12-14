@@ -17,15 +17,15 @@ class OrderDecorator < Draper::Decorator
   def format_status
     case object.status
     when 'in_progress'
-      'In Progress'
+      I18n.t('orders.status.inprogress')
     when 'in_queue'
-      'In Queue'
+      I18n.t('orders.status.inqueue')
     when 'in_delivery'
-      'In Delivery'
+      I18n.t('orders.status.indelivery')
     when 'delivered'
-      'Delivered'
+      I18n.t('orders.status.delivered')
     when 'canceled'
-      'Canceled'
+      I18n.t('orders.status.canceled')
     else
       object.status
     end

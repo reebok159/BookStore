@@ -12,10 +12,9 @@
 /yarn-error.log
 
 .byebug_history
-
-/config/database.yml
-.env
+/.env
 /coverage/
 output.html
 .rake_tasks~
-.rubocop.yml
+/.rubocop.yml
+/.rspec
