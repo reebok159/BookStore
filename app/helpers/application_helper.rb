@@ -1,12 +1,5 @@
 module ApplicationHelper
 
-  CRITERIA_FOR_SORT = {
-    :newest => 'Newest first',
-    :popular => 'Popular first',
-    :lowprice => 'Price: Low to high',
-    :highprice => 'Price: High to low'
-  }
-
   def price_options
     { unit: '$', format: "%n%u" }
   end
