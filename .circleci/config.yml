@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     parallelism: 3
-    working_directory: ~/circleci-demo-ruby-rails
     docker:
       - image: circleci/ruby:2.4-node
         environment:
@@ -20,6 +19,11 @@ jobs:
     working_directory: ~/bookstore-test
     steps:
       - checkout
+
+      # Install System Dependencies
+      - run:
+          name: Install System Dependencies
+          command: sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
       # Restore bundle cache
       - type: cache-restore
