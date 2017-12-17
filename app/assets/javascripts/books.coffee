@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$(document).ready ->
+$(document).on "turbolinks:load", ->
   $("a[data-remote]").on("ajax:success", (e, data, status, xhr) ->
     console.log('loaded')
     ).on "ajax:error", (e, xhr, status, error) ->
