@@ -42,6 +42,7 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
   gem 'capybara', '~> 2.13.0'
   gem 'rspec-rails', '~> 3.6', '>= 3.6.1'
+  gem 'rspec_junit_formatter', '~> 0.3.0'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'selenium-webdriver'
   gem 'pry'
