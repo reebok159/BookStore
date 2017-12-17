@@ -9,7 +9,7 @@
           %img.img-responsive{src: "#{@book.cover(:book_image)}"}
           - unless @book.images.empty?
             .images.clearfix
-              - @book.images[1..@book.images.size].each do |item|
+              - @book.images[0, @book.images.size - 1].each do |item|
                 %a.img-link{href: "#"}
                   = image_tag(item.image.url(:smallbook_image))
     .col-sm-6
