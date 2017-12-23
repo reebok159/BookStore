@@ -59,6 +59,11 @@ puts "Books created"
 puts "Creating admin..."
 User.create(email: "admin@loc.loc", is_admin: true, password: "123456q")
 puts "Admin created"
+
+puts "Creating coupon..."
+Coupon.create(name: "New Year DISCOUNT", min_sum_to_activate: 0, discount: 5, code: "zzafg-8", expires: DateTime.now + 365.days)
+puts "Coupon created"
+
 puts "Creating delivery methods..."
 DeliveryMethod.create(name: 'Pick Up In-Store', delay: '5 to 20 days', cost: 13)
 DeliveryMethod.create(name: 'Delivery Next Day!', delay: '3 to 7 days', cost: 15)
