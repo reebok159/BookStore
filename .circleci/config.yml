@@ -21,7 +21,7 @@ jobs:
 
       - run:
           name: Update repositories
-          command: sudp apt-get update
+          command: sudo apt-get update
 
       # Install System Dependencies
       - run:
