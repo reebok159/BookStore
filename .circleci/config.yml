@@ -19,6 +19,10 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: Update repositories
+          command: sudp apt-get update
+
       # Install System Dependencies
       - run:
           name: Install System Dependencies
