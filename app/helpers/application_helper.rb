@@ -13,6 +13,13 @@ module ApplicationHelper
     cats_list
   end
 
+  CRITERIA_FOR_SORT = {
+    :newest => 'Newest first',
+    :popular => 'Popular first',
+    :lowprice => 'Price: Low to high',
+    :highprice => 'Price: High to low'
+  }
+
   def get_selected_sort
     return false if params[:order].nil? or !(params[:order].to_sym).in?(CRITERIA_FOR_SORT)
     CRITERIA_FOR_SORT[params[:order].to_sym]
