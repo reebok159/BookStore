@@ -17,5 +17,7 @@
       = f.input :password_confirmation, required: false, placeholder: t(".confirm_password"), :input_html => {:class=> "form-control", :id=>"password"}, label: false
     .text-center
       %button.btn.btn-default.mb-20 #{t('action.signup')}
-  %p.general-sign-text.text-center= t(".have_an_account")
-    %a.in-gold-500{href: "#{new_user_session_path}"} #{t('action.login')}
+  %p.general-sign-text.text-center
+    = t(".have_an_account")
+    %a.in-gold-500{href: "#{new_user_session_path}"}
+      #{t('action.login')}
