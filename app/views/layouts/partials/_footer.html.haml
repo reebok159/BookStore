@@ -4,13 +4,13 @@
       .col-sm-9
         %ul.list-inline.general-align.mb-25
           %li
-            %a.nav-link{href: "#{root_path}"} #{t('pages.home')}
+            = link_to t('pages.home'), root_path, class: "nav-link"
           %li
-            %a.nav-link{href: "#{books_path}"} #{t('pages.shop')}
+            = link_to t('pages.shop'), books_path, class: "nav-link"
           %li
-            %a.nav-link{href: "#{users_orders_path}"} #{t('pages.orders')}
+            = link_to t('pages.orders'), users_orders_path, class: "nav-link"
           %li
-            %a.nav-link{href: "#{users_settings_path}"} #{t('pages.settings')}
+            = link_to t('pages.settings'), settings_users_path, class: "nav-link"
       .col-sm-3
         %p.general-nav-mail support@bookstore.com
         %p.general-nav-number (555)-555-5555

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :last_order, unless: :current_user
+  before_action :last_order
   before_action :set_locale, :current_ability
   helper_method :last_order
 
@@ -14,15 +14,22 @@ class ApplicationController < ActionController::Base
   end
 
   def create_order
-    return unless current_user.nil?
     if cookies[:order_id]
-      order = Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
+      order = guest_order
       return order if order
     end
     order = Order.create
     cookies.signed[:order_id] = order.id
-
     order
+  end
+
+  def guest_order
+    Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
+  end
+
+  def clear_guest_cookies
+    cookies.delete(:save_cart)
+    cookies.delete(:order_id)
   end
 
   private

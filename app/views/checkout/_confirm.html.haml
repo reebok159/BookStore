@@ -25,33 +25,33 @@
   .col-sm-3
     %h3.general-subtitle= t('checkout.address.shaddress')
     %p.general-address
-      = "#{@address.shipping_first_name} #{@address.shipping_last_name}"
+      = "#{@order.shipping_address.first_name} #{@order.shipping_address.last_name}"
       = link_to 'edit', checkout_edit_path(:type => :address), method: "put", :class=>"general-edit"
       %br
-      = "#{@address.shipping_address}"
+      = "#{@order.shipping_address.address}"
       %br
-      = "#{@address.shipping_city} #{@address.shipping_zip}"
+      = "#{@order.shipping_address.city} #{@order.shipping_address.zip}"
       %br
-      = "#{@address.shipping_country}"
+      = "#{@order.shipping_address.country}"
       %br
-      = "Phone #{@address.shipping_phone}"
+      = "Phone #{@order.shipping_address.phone}"
   .col-sm-3
     %h3.general-subtitle= t('checkout.address.billaddress')
     %p.general-address
-      = "#{@address.billing_first_name} #{@address.billing_last_name}"
+      = "#{@order.billing_address.last_name} #{@order.billing_address.last_name}"
       = link_to 'edit', checkout_edit_path(:type => :address), method: "put", :class=>"general-edit"
       %br
-      = "#{@address.billing_address}"
+      = "#{@order.billing_address.address}"
       %br
-      = "#{@address.billing_city} #{@address.billing_zip}"
+      = "#{@order.billing_address.city} #{@order.billing_address.zip}"
       %br
-      = "#{@address.billing_country}"
+      = "#{@order.billing_address.country}"
       %br
-      = "Phone #{@address.billing_phone}"
+      = "Phone #{@order.billing_address.phone}"
   .col-sm-3
     %h3.general-subtitle= t('.shipments')
     %p.general-address
-      = @order.delivery_method.name
+      = @order.delivery_method.try(:name)
       = link_to 'edit', checkout_edit_path(:type => :delivery), method: "put", :class=>"general-edit"
   .col-sm-3
     %h3.general-subtitle= t('.paymentinfo')
@@ -61,11 +61,11 @@
       %br
       = @order.credit_card.expires
 .visible-xs
-  - @items.each do |order_item|
+  - @service.items.each do |order_item|
     - item = order_item.book
     .general-cart-item.divider-lg
       .general-img-wrap-table
-        %img.cart-img-shadow{src: "#{item.cover(:thumb)}", alt: "#{item.name}"}
+        = image_tag(item.cover(:thumb), class: 'cart-img-shadow', alt: "#{item.name}")
       %p.title= item.name
       %P.in-grey-600.fw-300= item.short_desc
       %table.table
@@ -98,12 +98,12 @@
         %th
           %span.in-grey-600= t('checkout.itemlist.total')
     %tbody
-      - @items.each do |order_item|
+      - @service.items.each do |order_item|
         - item = order_item.book
         %tr
           %td
             .general-img-wrap-table
-              %img.cart-img-shadow.pull-left{src: "#{item.cover(:thumb)}", alt: "#{item.name}"}
+              = image_tag(item.cover(:thumb), class: 'cart-img-shadow pull-left', alt: "#{item.name}")
           %td
             %p.title= item.name
             %p.in-grey-600.fw-300= item.short_desc

@@ -18,7 +18,7 @@
   %li.step
     %span.step-number 5
     %span.step-text.hidden-xs= t('checkout.steps.complete')
-= simple_form_for @user, method: :put, url: "#{checkout_next_path}", html: {novalidate: false}, class: "res-mb-100" do |f|
+= simple_form_for @order, method: :put, url: "#{checkout_next_path}", html: {novalidate: false}, class: "res-mb-100" do |f|
   .hidden-xs.hidden-sm
     .row
       .col-md-5
@@ -31,12 +31,12 @@
       .visible-xs.visible-sm
         %h3.general-subtitle= t('.billaddress')
         %p.general-info-text= t('checkout.allrequired')
-      = f.simple_fields_for :billing_address, wrapper: :custom do |bia|
+      = f.simple_fields_for :billing_address, @form.billing_address, wrapper: :custom do |bia|
         = render partial: "users/address", locals: { adr: bia }
     .col-md-5.col-md-offset-1.mb-60
       .visible-xs.visible-sm
         %h3.general-subtitle= t('.shaddress')
-      = f.simple_fields_for :shipping_address, wrapper: :custom do |sh|
+      = f.simple_fields_for :shipping_address, @form.shipping_address, wrapper: :custom do |sh|
         = render partial: "users/address", locals: { adr: sh }
       .form-group.checkbox
         %label.checkbox-label

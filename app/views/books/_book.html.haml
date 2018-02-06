@@ -1,7 +1,7 @@
 .col-xs-6.col-sm-3
   .general-thumb-wrap
     .thumbnail.general-thumbnail
-      %img.img-shadow.general-thumbnail-img{src: "#{book.cover(:thumb)}", alt: "#{book.name}"}
+      = image_tag(book.cover(:thumb), class: 'img-shadow general-thumbnail-img', alt: "#{book.name}")
       .thumb-hover
         .general-thumb-link-wrap
           = link_to book_path(book), class: "thumb-hover-link" do

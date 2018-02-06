@@ -22,7 +22,7 @@
 %h3.general-subtitle= t('.dmethod')
 = simple_form_for @order, method: :put, url: "#{checkout_next_path}", html: {novalidate: false} do |f|
   .visible-xs
-    - @delivery_methods.each do |item|
+    - @form.delivery_methods.each do |item|
       .general-cart-item.divider-lg-bottom
         %table.table
           %tr
@@ -55,7 +55,7 @@
           %th
             %span.in-grey-600= t('.price')
       %tbody
-        - @delivery_methods.each_with_index do |item, index|
+        - @form.delivery_methods.each_with_index do |item, index|
           %tr
             %td
               .form-group.radio.mt-0.mb-0

@@ -5,25 +5,42 @@ class BookDecorator < Draper::Decorator
     PaginatingDecorator
   end
 
-  def cover(type)
-    return '/uploads/noimage.png' if object.images.empty?
+  def cover(type = :book_image)
+    return Image::NOIMAGE_IMG if object.images.empty?
     object.images.first.image.url(type)
   end
 
-  def short_card_number
-    "** ** ** #{credit_card.number.last(4)}"
-  end
-
   def authors_list
-    return '' if object.authors.nil?
-    object.authors.pluck(:name).join(', ')
+    object.authors.pluck(:name)&.join(', ') || ''
   end
 
   def sizes
-    width = object.width.nil? ? "-" : object.width
-    height = object.height.nil? ? "-" : object.height
-    depth = object.depth.nil? ? "-" : object.depth
+    width = object.width || '-'
+    height = object.height || '-'
+    depth = object.depth || '-'
 
     "H: #{width} x W: #{height} x D: #{depth}"
+  end
+
+  def start_cutted_desc
+    return object.full_desc unless have_more_desc?
+    object.full_desc.truncate(Book::MAX_FULL_DESC_SHOW, omission: '')
+  end
+
+  def have_more_desc?
+    return false if object.full_desc.nil?
+    object.full_desc.length.to_i > Book::MAX_FULL_DESC_SHOW
+  end
+
+  def other_cutted_desc
+    object.full_desc[Book::MAX_FULL_DESC_SHOW, object.full_desc.length - 1]
+  end
+
+  def more_images?
+    object.images.size > 1
+  end
+
+  def other_images
+    object.images[0, object.images.size - 1]
   end
 end

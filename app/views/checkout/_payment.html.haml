@@ -23,7 +23,7 @@
 %h3.general-subtitle= t('.creditcard')
 = simple_form_for @order, method: :put, url: "#{checkout_next_path}", html: {novalidate: false} do |f|
   %div.max-600.mb-80
-    = f.simple_fields_for :credit_card do |card|
+    = f.simple_fields_for :credit_card, @form.credit_card do |card|
       .form-group
         = card.label :number, "#{t('.cardnumber')}", class: "control-label input-label"
         = card.input :number, :input_html => { class: "form-control"}, placeholder: "#{t('.cardnumber')}", label: false, required: true

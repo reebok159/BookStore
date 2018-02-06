@@ -14,83 +14,57 @@ class CheckoutService
     when 'delivery' then processing_delivery
     when 'payment' then processing_payment
     when 'confirm' then processing_confirm
-    else :error
     end
   end
 
   def return_to_confirm?(status)
     return if @cookies[:return_to_confirm].nil?
-    return if status == :error
+    return if status != :success
     @order.checkout_state = :confirm
     @order.save
     @cookies.delete(:return_to_confirm)
   end
 
   def processing_address
-    params[:user].delete(:shipping_address_attributes) if(@params[:use_billing] == "on")
-
-    if @user.update(user_params)
-      save_addresses_to_order(@params[:use_billing])
-      @order.next_state! and return :success
-    end
-
-    :error
+    addresses = prepare_addresses
+    @order.next_state! and return :success if @order.update(addresses)
   end
 
   def processing_delivery
     @order.next_state! and return :success if @order.update(delivery_params)
-    :error
   end
 
   def processing_payment
     @order.next_state! and return :success if @order.update(payment_params)
-    :error
   end
 
   def processing_confirm
     @order.completed_at = DateTime.now
     @order.total_price = @order.pre_total_price
-    @order.status = 1
+    @order.status = :in_queue
+    @order.next_state! and return :success if @order.save
+  end
 
-    if @order.save
-      @order.next_state!
-      return :success
-    end
-
-    :error
+  def items
+    @order.order_items.decorate
   end
 
   private
 
-  def save_addresses_to_order(use_billing = nil)
-    keys = ['first_name', 'last_name', 'address', 'city', 'zip', 'country', 'phone']
-    data = {}
-    bl_address_data = @user.billing_address
-
-    keys.each do |item|
-      data["billing_#{item}".to_sym] = bl_address_data[item]
+  def prepare_addresses
+    addresses = order_params
+    if(params[:use_billing] == "on")
+      addresses[:shipping_address_attributes] = addresses[:billing_address_attributes]
     end
-
-    if use_billing == "on"
-      keys.each do |item|
-        data["shipping_#{item}".to_sym] = bl_address_data[item]
-      end
-    else
-      sh_address_data = @user.shipping_address
-      keys.each do |item|
-        data["shipping_#{item}".to_sym] = sh_address_data[item]
-      end
-    end
-
-    @order.build_order_address(data).save
+    addresses
   end
 
-  def user_params
-    params.require(:user).permit(
+  def order_params
+    params.require(:order).permit(
       billing_address_attributes:
-            %i[first_name last_name address city zip country phone id],
+            %i[first_name last_name address city zip country phone],
       shipping_address_attributes:
-            %i[first_name last_name address city zip country phone id]
+            %i[first_name last_name address city zip country phone]
     )
   end
 

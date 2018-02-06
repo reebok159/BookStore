@@ -10,10 +10,6 @@
         %a{href: "#"}= t('orders.filter.newest')
       %li
         %a{href: "#"}= t('orders.filter.popular')
-      %li
-        %a{href: "#"}= t('orders.filter.lowtohigh')
-      %li
-        %a{href: "#"}= t('orders.filter.hightolow')
   .visible-xs
     - @orders.each do |order|
       .general-cart-item.divider-lg-bottom.pt-0

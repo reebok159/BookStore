@@ -9,7 +9,7 @@
           .row
             .col-sm-5
               .general-img-wrap
-                %img.img-shadow.general-thumbnail-img{src: "#{book.cover(:book_image)}", alt: "#{book.name}"}
+                = image_tag(book.cover(:book_image), class: 'img-shadow general-thumbnail-img', alt: "#{book.name}")
             .col-sm-7
               .mb-60
                 %h1= book.name
@@ -36,7 +36,7 @@
         .col-sm-6.col-md-3
           .general-thumb-wrap
             .thumbnail.general-thumbnail
-              %img.img-shadow.general-thumbnail-img{src: "#{item.cover(:thumb)}", alt: "#{item.name}"}
+              = image_tag(item.cover(:thumb), class: 'img-shadow general-thumbnail-img', alt: "#{item.name}")
               .thumb-hover
                 .general-thumb-link-wrap
                   = link_to book_path(item), class: "thumb-hover-link" do

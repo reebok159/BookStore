@@ -16,7 +16,7 @@
 
     <%= f.input :password, autocomplete: "off", hint: t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it"), required: false %>
     <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: <%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %>, required: true %>
+    <%= f.input :current_password, hint: t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') , required: true %>
   </div>
 
   <div class="form-actions">

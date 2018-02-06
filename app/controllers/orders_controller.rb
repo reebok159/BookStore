@@ -1,15 +1,15 @@
 class OrdersController < ApplicationController
   def index
     @cart = last_order
-    @items = []
-    @items = @cart.order_items.order(:id).decorate unless @cart.nil?
-
+    @items = @cart.nil? ? [] : @cart.order_items.order(:id).decorate
     @coupon = @cart.coupon_discount
   end
 
   def activate_coupon
     service = OrderService.new(last_order)
-    flash[:notice] = service.activate_coupon(coupon_params[:coupon_id])
+    msg = service.activate_coupon(coupon_params[:coupon_id])
+    msg = I18n.t('coupon.activatesuccess') if msg == :success
+    flash[:notice] = msg
     redirect_to cart_page_url
   end
 

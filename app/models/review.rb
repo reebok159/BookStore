@@ -5,5 +5,5 @@ class Review < ApplicationRecord
 
   validates :title, :text, :rating, presence: true
 
-  scope :accepted, -> { where(:accepted => true) }
+  scope :accepted, -> { where(accepted: true) }
 end

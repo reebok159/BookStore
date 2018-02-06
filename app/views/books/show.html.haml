@@ -1,16 +1,16 @@
 %main.container
-  %a.general-back-link{href: "#{url_for(:back)}"}
+  = link_to(url_for(:back), class: "general-back-link") do
     %i.fa.fa-long-arrow-left.mr-15
     #{t('action.backtoresults')}
   .row
     .col-sm-6
       .product-gallery
         .mb-20
-          %img.img-responsive{src: "#{@book.cover(:book_image)}"}
-          - unless @book.images.empty?
+          = image_tag(@book.cover(:book_image), class: "img-responsive")
+          - if @book.more_images?
             .images.clearfix
-              - @book.images[0, @book.images.size - 1].each do |item|
-                %a.img-link{href: "#"}
+              - @book.other_images.each do |item|
+                = link_to(item.image.url(:book_image), class: "img-link", target: "blank") do
                   = image_tag(item.image.url(:smallbook_image))
     .col-sm-6
       %h1.mt-res-0= @book.name
@@ -32,7 +32,14 @@
       .general-info-wrap.divider-lg
         %p #{t('books.description')}
         %p.lead.small.line-height-2
-          = cutted_desc(@book.full_desc)
+          %div<
+            = @book.start_cutted_desc
+            - if @book.have_more_desc?
+              %span.full_txt_dots> ...
+              %a.in-gold-500.ml-10.egn-read-more{ href: "javascript:void(0)" }<>
+                = I18n.t('action.readmore')
+              %span.full_txt{ style: "display: none" }<>
+                = @book.other_cutted_desc
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left #{t('books.published')}

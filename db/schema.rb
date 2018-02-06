@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201111349) do
+ActiveRecord::Schema.define(version: 20180204174928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,10 @@ ActiveRecord::Schema.define(version: 20171201111349) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "addressable_type"
+    t.string "billing_a_type"
+    t.bigint "billing_a_id"
+    t.index ["billing_a_type", "billing_a_id"], name: "index_billing_addresses_on_billing_a_type_and_billing_a_id"
     t.index ["user_id"], name: "index_billing_addresses_on_user_id"
   end
 
@@ -102,27 +106,6 @@ ActiveRecord::Schema.define(version: 20171201111349) do
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
-  create_table "order_addresses", force: :cascade do |t|
-    t.string "billing_first_name"
-    t.string "billing_last_name"
-    t.string "billing_address"
-    t.string "billing_city"
-    t.string "billing_zip"
-    t.string "billing_country"
-    t.string "billing_phone"
-    t.string "shipping_first_name"
-    t.string "shipping_last_name"
-    t.string "shipping_address"
-    t.string "shipping_city"
-    t.string "shipping_zip"
-    t.string "shipping_country"
-    t.string "shipping_phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "order_id"
-    t.index ["order_id"], name: "index_order_addresses_on_order_id"
-  end
-
   create_table "order_items", force: :cascade do |t|
     t.integer "order_id"
     t.integer "item_id"
@@ -173,6 +156,10 @@ ActiveRecord::Schema.define(version: 20171201111349) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "addressable_type"
+    t.string "shipping_a_type"
+    t.bigint "shipping_a_id"
+    t.index ["shipping_a_type", "shipping_a_id"], name: "index_shipping_addresses_on_shipping_a_type_and_shipping_a_id"
     t.index ["user_id"], name: "index_shipping_addresses_on_user_id"
   end
 
@@ -201,7 +188,6 @@ ActiveRecord::Schema.define(version: 20171201111349) do
   add_foreign_key "billing_addresses", "users"
   add_foreign_key "books", "categories"
   add_foreign_key "credit_cards", "orders"
-  add_foreign_key "order_addresses", "orders"
   add_foreign_key "order_items", "books", column: "item_id"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "coupons"

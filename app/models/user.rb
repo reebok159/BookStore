@@ -8,10 +8,10 @@ class User < ApplicationRecord
 
   has_many :reviews, dependent: :destroy
   has_many :orders, dependent: :destroy
-  has_one :shipping_address, dependent: :destroy
-  accepts_nested_attributes_for :shipping_address, allow_destroy: true
-  has_one :billing_address, dependent: :destroy
+  has_one :billing_address, as: :billing_a, dependent: :destroy
+  has_one :shipping_address, as: :shipping_a, dependent: :destroy
   accepts_nested_attributes_for :billing_address, allow_destroy: true
+  accepts_nested_attributes_for :shipping_address, allow_destroy: true
 
   validates :email,  format: { with: %r{\A[^-.]\w+[-.]?(\w+[-!#$%&'*+\/=?^_`{|}~.]\w+)*[^-]@([\w\d]+)\.([\w\d]+)\z} }, uniqueness: true
   validates :email, presence: true

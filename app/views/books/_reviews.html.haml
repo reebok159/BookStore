@@ -1,9 +1,8 @@
 %h3.in-gold-500.mb-25 #{t('books.reviews')} (#{@reviews.count})
 - @reviews.each do |item|
-  - @user_letter = item.user.email.first.capitalize
   .general-message-wrap.divider-lg
     .clearfix
-      %span.img-circle.logo-size.inlide-block.pull-left.logo-empty= @user_letter
+      %span.img-circle.logo-size.inlide-block.pull-left.logo-empty= item.user_letter
       .ml-70
         %div
           .general-message-date.hidden-xs= item.created_at

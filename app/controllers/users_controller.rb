@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
-  def create; end
-
-  def edit; end
-
   def update
     @user = current_user
     if @user.update(user_params)
@@ -19,9 +15,8 @@ class UsersController < ApplicationController
   def update_password
     @user = current_user
     if @user.update_with_password(password_params)
-      # Sign in the user by passing validation in case their password changed
-      bypass_sign_in @user #, :bypass => true
-      redirect_to users_settings_path, flash: { notice: t('users.updpasssuccess') }
+      bypass_sign_in @user
+      redirect_to settings_users_path, flash: { notice: t('users.updpasssuccess') }
     else
       flash[:notice] = t('users.updpassfail')
       render :settings
@@ -42,8 +37,8 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:id, :email,
-                          billing_address_attributes: [:first_name, :last_name, :address, :city, :zip, :country, :phone],
-                          shipping_address_attributes: [:first_name, :last_name, :address, :city, :zip, :country, :phone])
+                          billing_address_attributes: %i[first_name last_name address city zip country phone],
+                          shipping_address_attributes: %i[first_name last_name address city zip country phone])
   end
 
   def password_params
