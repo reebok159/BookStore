@@ -19,13 +19,12 @@ class Book < ApplicationRecord
   validates :name, :price, presence: true
 
   scope :bestsellers, -> (num = 4) {
-    find_by_sql(["SELECT books.*
-    FROM books
-    LEFT OUTER JOIN order_items ON order_items.item_id = books.id
-    LEFT OUTER JOIN orders ON orders.id = order_items.order_id AND orders.status != 0
-    GROUP BY books.id
-    ORDER BY COUNT(order_items.item_id) DESC
-    LIMIT ?", num])
+    find_by_sql(["SELECT books.* FROM order_items AS oi
+      INNER JOIN orders ON orders.id = oi.order_id AND orders.status != 0
+      RIGHT OUTER JOIN books ON books.id = oi.item_id
+      GROUP BY books.id
+      ORDER BY COUNT(oi.item_id) DESC
+      LIMIT ?", num])
   }
 
   scope :latest, -> (num = 2) { last(num) }

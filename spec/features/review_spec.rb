@@ -1,6 +1,6 @@
 describe "reviews", :type => :feature do
   before :each do
-    @book = FactoryGirl.create(:book)
+    @book = create(:book)
   end
 
   context 'unlogged user' do
@@ -12,7 +12,7 @@ describe "reviews", :type => :feature do
 
   context 'logged in user' do
     before :each do
-      FactoryGirl.create(:user, email: "tsets@ss.ss", password: "12345678q")
+      create(:user, email: "tsets@ss.ss", password: "12345678q")
       login("tsets@ss.ss", "12345678q")
       visit book_path(@book)
     end

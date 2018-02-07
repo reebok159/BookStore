@@ -13,7 +13,7 @@ RSpec.describe ApplicationController, type: :controller do
       routes.draw { get "test" => "anonymous#test" }
     end
 
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
 
     context 'if no auth' do
       it "check last_order is not nil" do

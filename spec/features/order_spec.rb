@@ -1,8 +1,8 @@
 describe "Actions with order", :type => :feature do
 
   before :each do
-    @book = FactoryGirl.create(:book)
-    FactoryGirl.create(:user, email: "tsets@ss.ss", password: "12345678q")
+    @book = create(:book)
+    create(:user, email: "tsets@ss.ss", password: "12345678q")
     login("tsets@ss.ss", "12345678q")
     visit root_path
   end
@@ -35,7 +35,7 @@ describe "Actions with order", :type => :feature do
   describe 'cart' do
     before :each do
       click_link 'Buy Now'
-      FactoryGirl.create(:coupon, code: "testcoupon")
+      create(:coupon, code: "testcoupon")
     end
 
     it 'change item quantity' do

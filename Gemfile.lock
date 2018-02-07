@@ -149,10 +149,10 @@ GEM
     excon (0.59.0)
     execjs (2.7.0)
     extlib (0.9.16)
-    factory_girl (4.8.1)
+    factory_bot (4.8.2)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.8.0)
-      factory_girl (~> 4.8.0)
+    factory_bot_rails (4.8.2)
+      factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
@@ -496,7 +496,7 @@ DEPENDENCIES
   devise (~> 4.3)
   dotenv-rails (~> 2.2, >= 2.2.1)
   draper (~> 3.0, >= 3.0.1)
-  factory_girl_rails (~> 4.8)
+  factory_bot_rails (~> 4.8, >= 4.8.2)
   ffaker
   fog-aws (~> 1.4, >= 1.4.1)
   fog-google

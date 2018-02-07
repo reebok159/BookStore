@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe CheckoutController, type: :controller do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
+  let!(:order) { create(:order) }
 
   describe '#start' do
     context 'when user no auth' do
       before(:each) do
-        @order = FactoryGirl.create(:order)
-        @order_item = FactoryGirl.create(:order_item, book: FactoryGirl.create(:book))
-        @order.order_items << @order_item
-        @order.save
-        cookies.signed[:order_id] = @order.id
+        @order_item = create(:order_item, book: create(:book))
+        order.order_items << @order_item
+        order.save
+        cookies.signed[:order_id] = order.id
       end
 
       it 'set cookie :save_cart to true' do
@@ -49,16 +49,15 @@ RSpec.describe CheckoutController, type: :controller do
       end
 
       it 'move cart to current user if :save_cart cookie is true' do
-        @order = FactoryGirl.create(:order)
-        @order_item = FactoryGirl.create(:order_item, book: FactoryGirl.create(:book))
-        @order.order_items << @order_item
-        @order.save
-        cookies.signed[:order_id] = @order.id
+        @order_item = create(:order_item, book: create(:book))
+        order.order_items << @order_item
+        order.save
+        cookies.signed[:order_id] = order.id
         cookies[:save_cart] = true
         get :index
-        @order.reload
-        expect(@order.user_id).to eq user.id
-        expect(assigns(:order).id).to eq @order.id
+        order.reload
+        expect(order.user_id).to eq user.id
+        expect(assigns(:order).id).to eq order.id
       end
 
       context 'from comfirm step' do

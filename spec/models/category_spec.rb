@@ -1,5 +1,5 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  it { should have_many(:books) }
+  it { is_expected.to have_many(:books) }
 end

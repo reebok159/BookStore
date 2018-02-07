@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  #temporaly
-  get 'spry', to: 'pages#spry'
-  #temporaly
-
   root 'pages#index'
 
   resources :books, only: %i[show index]
@@ -28,7 +24,6 @@ Rails.application.routes.draw do
   get 'users/orders'
   get 'users/update_password', to: redirect('users/settings')
   get 'users/:id', to: redirect('users/settings')
-
 
   get 'checkout/start', to: 'checkout#start', as: 'checkout_start'
   get 'checkout(/:edit)', to: 'checkout#index', as: 'checkout'

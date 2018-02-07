@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  #user create
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   before(:each) do
     sign_in user

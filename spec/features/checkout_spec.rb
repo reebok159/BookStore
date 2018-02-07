@@ -1,8 +1,8 @@
 describe "checkout process", :type => :feature do
   before :each do
-    @book = FactoryGirl.create(:book)
-    FactoryGirl.create(:user, email: "tsets@ss.ss", password: "12345678q")
-    FactoryGirl.create(:delivery_method)
+    @book = create(:book)
+    @user = create(:user, email: "tsets@ss.ss", password: "12345678q")
+    create(:delivery_method)
     login("tsets@ss.ss", "12345678q")
   end
 
@@ -13,21 +13,21 @@ describe "checkout process", :type => :feature do
     click_link "Checkout", match: :first
 
     expect(page).to have_content 'Billing Address'
-    fill_in 'user[billing_address_attributes][first_name]', with: "Eugene"
-    fill_in 'user[billing_address_attributes][last_name]', with: "Tester"
-    fill_in 'user[billing_address_attributes][address]', with: "Gagarina 18"
-    fill_in 'user[billing_address_attributes][city]', with: "Dnipro"
-    fill_in 'user[billing_address_attributes][zip]', with: "50001"
-    page.select 'Ukraine', :from => 'user[billing_address_attributes][country]'
-    fill_in 'user[billing_address_attributes][phone]', with: "+380504567895"
+    fill_in 'order[billing_address_attributes][first_name]', with: "Eugene"
+    fill_in 'order[billing_address_attributes][last_name]', with: "Tester"
+    fill_in 'order[billing_address_attributes][address]', with: "Gagarina 18"
+    fill_in 'order[billing_address_attributes][city]', with: "Dnipro"
+    fill_in 'order[billing_address_attributes][zip]', with: "50001"
+    page.select 'Ukraine', :from => 'order[billing_address_attributes][country]'
+    fill_in 'order[billing_address_attributes][phone]', with: "+380504567895"
 
-    fill_in 'user[shipping_address_attributes][first_name]', with: "Eugene"
-    fill_in 'user[shipping_address_attributes][last_name]', with: "Tester"
-    fill_in 'user[shipping_address_attributes][address]', with: "Pravda 53"
-    fill_in 'user[shipping_address_attributes][city]', with: "Dnipro"
-    fill_in 'user[shipping_address_attributes][zip]', with: "53001"
-    page.select 'Ukraine', :from => 'user[shipping_address_attributes][country]'
-    fill_in 'user[shipping_address_attributes][phone]', with: "+380504567895"
+    fill_in 'order[shipping_address_attributes][first_name]', with: "Eugene"
+    fill_in 'order[shipping_address_attributes][last_name]', with: "Tester"
+    fill_in 'order[shipping_address_attributes][address]', with: "Pravda 53"
+    fill_in 'order[shipping_address_attributes][city]', with: "Dnipro"
+    fill_in 'order[shipping_address_attributes][zip]', with: "53001"
+    page.select 'Ukraine', :from => 'order[shipping_address_attributes][country]'
+    fill_in 'order[shipping_address_attributes][phone]', with: "+380504567895"
     click_button 'Save and Continue'
 
     expect(page).to have_content 'Delivery Method'
@@ -54,7 +54,7 @@ describe "checkout process", :type => :feature do
     expect(page).to have_content 'edit'
     click_link 'Place Order'
     expect(page).to have_content I18n.t('checkout.thanks')
-    expect(page).to have_content I18n.t('checkout.thanks2')
+    expect(page).to have_content I18n.t('checkout.thanks2', email: @user.email)
   end
 
   context 'with checkbox "Use billing address"', js: true do
@@ -66,13 +66,13 @@ describe "checkout process", :type => :feature do
 
     it 'should complete order' do
       expect(page).to have_content 'Billing Address'
-      fill_in 'user[billing_address_attributes][first_name]', with: "Eugene"
-      fill_in 'user[billing_address_attributes][last_name]', with: "Tester"
-      fill_in 'user[billing_address_attributes][address]', with: "Gagarina 18"
-      fill_in 'user[billing_address_attributes][city]', with: "Dnipro"
-      fill_in 'user[billing_address_attributes][zip]', with: "50001"
-      page.select 'Ukraine', :from => 'user[billing_address_attributes][country]'
-      fill_in 'user[billing_address_attributes][phone]', with: "+380504567895"
+      fill_in 'order[billing_address_attributes][first_name]', with: "Eugene"
+      fill_in 'order[billing_address_attributes][last_name]', with: "Tester"
+      fill_in 'order[billing_address_attributes][address]', with: "Gagarina 18"
+      fill_in 'order[billing_address_attributes][city]', with: "Dnipro"
+      fill_in 'order[billing_address_attributes][zip]', with: "50001"
+      page.select 'Ukraine', :from => 'order[billing_address_attributes][country]'
+      fill_in 'order[billing_address_attributes][phone]', with: "+380504567895"
 
       find('[name=use_billing] + span.checkbox-icon').click
       click_button 'Save and Continue'
@@ -96,19 +96,19 @@ describe "checkout process", :type => :feature do
       click_link 'Place Order'
 
       expect(page).to have_content I18n.t('checkout.thanks')
-      expect(page).to have_content I18n.t('checkout.thanks2')
+      expect(page).to have_content I18n.t('checkout.thanks2', email: @user.email)
     end
 
     context 'with editins in confirm step' do
       it 'should complete order' do
         expect(page).to have_content 'Billing Address'
-        fill_in 'user[billing_address_attributes][first_name]', with: "Eugene"
-        fill_in 'user[billing_address_attributes][last_name]', with: "Tester"
-        fill_in 'user[billing_address_attributes][address]', with: "Gagarina 18"
-        fill_in 'user[billing_address_attributes][city]', with: "Dnipro"
-        fill_in 'user[billing_address_attributes][zip]', with: "50001"
-        page.select 'Ukraine', :from => 'user[billing_address_attributes][country]'
-        fill_in 'user[billing_address_attributes][phone]', with: "+380504567895"
+        fill_in 'order[billing_address_attributes][first_name]', with: "Eugene"
+        fill_in 'order[billing_address_attributes][last_name]', with: "Tester"
+        fill_in 'order[billing_address_attributes][address]', with: "Gagarina 18"
+        fill_in 'order[billing_address_attributes][city]', with: "Dnipro"
+        fill_in 'order[billing_address_attributes][zip]', with: "50001"
+        page.select 'Ukraine', :from => 'order[billing_address_attributes][country]'
+        fill_in 'order[billing_address_attributes][phone]', with: "+380504567895"
 
         find('[name=use_billing] + span.checkbox-icon').click
         click_button 'Save and Continue'
@@ -128,7 +128,7 @@ describe "checkout process", :type => :feature do
         first('a.general-edit', text: 'edit').click
         expect(page).to have_content 'Billing Address'
         expect(page).to have_content 'all fields are required'
-        fill_in 'user[billing_address_attributes][first_name]', with: "Mike"
+        fill_in 'order[billing_address_attributes][first_name]', with: "Mike"
         find('[name=use_billing] + span.checkbox-icon').click
         click_button 'Save and Continue'
         expect(page).to have_content 'Shipping Address'
@@ -139,7 +139,7 @@ describe "checkout process", :type => :feature do
         click_link 'Place Order'
 
         expect(page).to have_content I18n.t('checkout.thanks')
-        expect(page).to have_content I18n.t('checkout.thanks2')
+        expect(page).to have_content I18n.t('checkout.thanks2', email: @user.email)
       end
     end
   end

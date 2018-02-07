@@ -1,7 +1,5 @@
-FactoryGirl.define do
-
+FactoryBot.define do
   factory :category do
-    name "Test category"
+    name { FFaker::Book.genre[0...20] }
   end
-
 end

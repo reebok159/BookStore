@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :coupon do
       name "Tester"
       min_sum_to_activate 0

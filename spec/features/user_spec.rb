@@ -1,6 +1,6 @@
 describe "Some user actions", :type => :feature do
   before :each do
-    FactoryGirl.create(:user, email: "tsets@ss.ss", password: "12345678q")
+    create(:user, email: "tsets@ss.ss", password: "12345678q")
     login("tsets@ss.ss", "12345678q")
   end
 

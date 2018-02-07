@@ -1,8 +1,8 @@
 describe "Admin panel", :type => :feature do
   before :each do
     allow_any_instance_of(User).to receive(:valid?).and_return(true)
-    FactoryGirl.create(:user, email: "user@t.t", password: "123")
-    FactoryGirl.create(:user, email: "admin@t.t", password: "123", is_admin: true)
+    create(:user, email: "user@t.t", password: "123")
+    create(:user, email: "admin@t.t", password: "123", is_admin: true)
   end
 
   context 'unlogged user' do

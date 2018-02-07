@@ -57,6 +57,8 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.include TransactionalCapybara::AjaxHelpers
+  config.include FactoryBot::Syntax::Methods
+
 
   config.use_transactional_fixtures = false
   config.before(:suite) do

@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe OrdersController, type: :controller do
   describe 'Orders controller' do
 
-    let(:user) { FactoryGirl.create(:user) }
-    let(:coupon) { FactoryGirl.create(:coupon, code: "testcoupon")}
+    let(:user) { create(:user) }
+    let(:coupon) { create(:coupon, code: "testcoupon")}
 
     context 'GET #index' do
       context 'without cart items' do
         before(:each) do
           sign_in user
-          @order = FactoryGirl.create(:order, user: user)
+          @order = create(:order, user: user)
           get :index
         end
 
@@ -32,7 +32,7 @@ RSpec.describe OrdersController, type: :controller do
 
         it 'check cart isn\'t empty' do
           cart = assigns(:cart)
-          order_item = FactoryGirl.create(:order_item, book: FactoryGirl.create(:book))
+          order_item = create(:order_item, book: create(:book))
           cart.order_items << order_item
           cart.save
           get :index
@@ -43,7 +43,7 @@ RSpec.describe OrdersController, type: :controller do
       context 'with cart items' do
         before(:each) do
           sign_in user
-          @order = FactoryGirl.create(:order, :with_books, user: user)
+          @order = create(:order, :with_books, user: user)
           get :index
         end
 
@@ -57,7 +57,7 @@ RSpec.describe OrdersController, type: :controller do
       context 'with empty cart' do
         before(:each) do
           sign_in user
-          @order = FactoryGirl.create(:order, user: user)
+          @order = create(:order, user: user)
         end
 
         it 'try to activate and something happening' do
@@ -74,7 +74,7 @@ RSpec.describe OrdersController, type: :controller do
       context 'with cart items' do
         before(:each) do
           sign_in user
-          @order = FactoryGirl.create(:order, :with_books, user: user)
+          @order = create(:order, :with_books, user: user)
         end
 
         it 'show activate success' do
@@ -89,13 +89,13 @@ RSpec.describe OrdersController, type: :controller do
         end
 
         it 'try activate expired coupon' do
-          expired_coupon = FactoryGirl.create(:coupon, code: "testcoupon2", expires: DateTime.now - 5.days)
+          expired_coupon = create(:coupon, code: "testcoupon2", expires: DateTime.now - 5.days)
           post :activate_coupon, params: { order: { coupon_id: expired_coupon.code } }
           expect(flash[:notice]).to eq I18n.t('coupon.termerror')
         end
 
         it 'show that order sum is not enough' do
-          coupon = FactoryGirl.create(:coupon, min_sum_to_activate: @order.subtotal + 1)
+          coupon = create(:coupon, min_sum_to_activate: @order.subtotal + 1)
           post :activate_coupon, params: { order: { coupon_id: coupon.code } }
           expect(flash[:notice]).to eq I18n.t('coupon.sumerror')
         end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe BooksController, type: :controller do
   describe 'GET request' do
     it 'assigns @books' do
-      book = FactoryGirl.create(:book)
+      book = create(:book)
       get :index
       expect(assigns(:books)).to eq([book])
     end
@@ -14,7 +14,7 @@ RSpec.describe BooksController, type: :controller do
     end
 
     it 'renders the show template' do
-      book = FactoryGirl.create(:book)
+      book = create(:book)
       get :show, params: { id: book.id }
       expect(response).to render_template('show')
     end
