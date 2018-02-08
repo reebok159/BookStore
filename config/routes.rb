@@ -3,12 +3,8 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :books, only: %i[show index]
-  get 'catalog', to: 'books#catalog'
-
   resources :reviews, only: [:create]
   resources :order_items, only: %i[create update destroy]
-
-  post 'to_cart/(:item_id)/(:quantity)', to: 'order_items#create', as: 'to_cart'
 
   get 'cart', to: 'orders#index', as: 'cart_page'
   post 'cart', to: 'orders#activate_coupon', as: 'activate_coupon'
@@ -18,10 +14,10 @@ Rails.application.routes.draw do
     collection do
       get 'settings', as: 'settings'
       patch 'update_password', to: 'users#update_password'
+      get 'orders'
     end
   end
 
-  get 'users/orders'
   get 'users/update_password', to: redirect('users/settings')
   get 'users/:id', to: redirect('users/settings')
 

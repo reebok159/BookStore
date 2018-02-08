@@ -9,7 +9,7 @@ describe "Actions with order", :type => :feature do
 
   context 'adding item to cart' do
     it 'show message' do
-      click_link 'Buy Now'
+      click_button 'Buy Now'
       expect(page).to have_content I18n.t('order_item.create_success')
     end
 
@@ -25,7 +25,7 @@ describe "Actions with order", :type => :feature do
 
       it 'add 3 items' do
         myval = '3'
-        find('form.egn_book_cart [name=quantity]').set(myval)
+        find("form.egn_book_cart [name='order_item[quantity]']").set(myval)
         click_button 'Add to Cart'
         expect(first('.container a.shop-link .shop-quantity').text).to eq myval
       end
@@ -34,7 +34,7 @@ describe "Actions with order", :type => :feature do
 
   describe 'cart' do
     before :each do
-      click_link 'Buy Now'
+      click_button 'Buy Now'
       create(:coupon, code: "testcoupon")
     end
 

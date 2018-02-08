@@ -18,16 +18,5 @@ RSpec.describe BooksController, type: :controller do
       get :show, params: { id: book.id }
       expect(response).to render_template('show')
     end
-
-    it 'redirect to books index' do
-      get :catalog
-      expect(response).to redirect_to(books_url)
-    end
-
-    it 'redirect to books index with message' do
-      get :catalog
-      expect(flash[:notice]).to match I18n.t('mainpage.welcome1')+' '+I18n.t('mainpage.welcome2')
-    end
-
   end
 end

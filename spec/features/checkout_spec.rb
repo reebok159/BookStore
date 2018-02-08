@@ -8,7 +8,7 @@ describe "checkout process", :type => :feature do
 
   it 'should complete order' do
     #login("tsets@ss.ss", "12345678q")
-    click_link 'Buy Now'
+    click_button 'Buy Now'
     visit cart_page_path
     click_link "Checkout", match: :first
 
@@ -59,7 +59,7 @@ describe "checkout process", :type => :feature do
 
   context 'with checkbox "Use billing address"', js: true do
     before :each do
-      click_link 'Buy Now'
+      click_button 'Buy Now'
       visit cart_page_path
       click_link "Checkout", match: :first
     end

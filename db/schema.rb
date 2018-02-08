@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204174928) do
+ActiveRecord::Schema.define(version: 20180208131016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20180204174928) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "addressable_type"
     t.string "billing_a_type"
     t.bigint "billing_a_id"
     t.index ["billing_a_type", "billing_a_id"], name: "index_billing_addresses_on_billing_a_type_and_billing_a_id"
@@ -156,7 +155,6 @@ ActiveRecord::Schema.define(version: 20180204174928) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "addressable_type"
     t.string "shipping_a_type"
     t.bigint "shipping_a_id"
     t.index ["shipping_a_type", "shipping_a_id"], name: "index_shipping_addresses_on_shipping_a_type_and_shipping_a_id"

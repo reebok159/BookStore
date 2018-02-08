@@ -22,15 +22,16 @@
               %span.in-grey-600= t('cart.itemlist.quantity')
             %td
               .input-group
-                - if order_item.quantity.to_i == 1
-                  %a{href:"javascript:void(0)", class: 'input-link'}
-                    %i.fa.fa-minus.line-heaght-40
-                - else
-                  = link_to order_item_path(id: order_item.id, quantity: order_item.quantity - 1), method: "patch", class: "input-link" do
-                    %i.fa.fa-minus.line-heaght-40
-                %input.form-control.quantity-input{type: "text", value: "#{order_item.quantity}", disabled: true}
-                = link_to order_item_path(id: order_item.id, quantity: order_item.quantity + 1), method: "patch", class: "input-link" do
-                  %i.fa.fa-plus.line-heaght-40
+                = simple_form_for order_item do |f|
+                  - if order_item.quantity.to_i == 1
+                    %a{href:"javascript:void(0)", class: 'input-link'}
+                      %i.fa.fa-minus.line-heaght-40
+                  - else
+                    = link_to order_item_path(order_item, order_item: { quantity: order_item.quantity - 1 } ), method: "patch", class: "input-link" do
+                      %i.fa.fa-minus.line-heaght-40
+                  = f.input_field :quantity, as: :string, value: order_item.quantity, label: false, class: "form-control quantity-input"
+                  = link_to order_item_path(order_item, order_item: { quantity: order_item.quantity + 1 } ), method: "patch", class: "input-link" do
+                    %i.fa.fa-plus.line-heaght-40
           %tr
             %td
               %span.in-grey-600= t('cart.itemlist.subtotal')
@@ -66,15 +67,16 @@
             %span.font-16.in-gold-500= number_to_currency(item.price, price_options)
           %td
             .input-group
-              - if order_item.quantity.to_i == 1
-                %a{href:"javascript:void(0)", class: 'input-link'}
-                  %i.fa.fa-minus.line-heaght-40
-              - else
-                = link_to order_item_path(id: order_item.id, quantity: order_item.quantity - 1), method: "patch", class: "input-link" do
-                  %i.fa.fa-minus.line-heaght-40
-              %input.form-control.quantity-input{type: "text", value: "#{order_item.quantity}", disabled: true}
-              = link_to order_item_path(id: order_item.id, quantity: order_item.quantity + 1), method: "patch", class: "input-link" do
-                %i.fa.fa-plus.line-heaght-40
+              = simple_form_for order_item do |f|
+                - if order_item.quantity.to_i == 1
+                  %a{href:"javascript:void(0)", class: 'input-link'}
+                    %i.fa.fa-minus.line-heaght-40
+                - else
+                  = link_to order_item_path(order_item, order_item: { quantity: order_item.quantity - 1 } ), method: "patch", class: "input-link" do
+                    %i.fa.fa-minus.line-heaght-40
+                = f.input_field :quantity, as: :string, value: order_item.quantity, label: false, class: "form-control quantity-input"
+                = link_to order_item_path(order_item, order_item: { quantity: order_item.quantity + 1 } ), method: "patch", class: "input-link" do
+                  %i.fa.fa-plus.line-heaght-40
           %td
             %span.font-16.in-gold-500= number_to_currency((order_item.quantity * item.price), price_options)
           %td

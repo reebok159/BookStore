@@ -1,7 +1,7 @@
 %main.container
   = link_to(url_for(:back), class: "general-back-link") do
     %i.fa.fa-long-arrow-left.mr-15
-    #{t('action.backtoresults')}
+    = t('action.backtoresults')
   .row
     .col-sm-6
       .product-gallery
@@ -16,19 +16,21 @@
       %h1.mt-res-0= @book.name
       %p.lead.small= @book.authors_list
       .row
-        = form_tag('/to_cart', method: 'post', class: "egn_book_cart") do
+        = simple_form_for :order_item, url: order_items_path, html: { class: "egn_book_cart" }  do |f|
           .col-xs-12.col-md-4
             %p.h1.in-gold-500.mt-10= "#{number_to_currency(@book.price, price_options)}"
           .col-xs-5.col-md-3
             .input-group.general-position
-              %a.input-link.item-change-quantity{href: "javascript:void(0)", data: { action: "minus" } }
+              %a.input-link.item-change-quantity{href: "javascript:void(0)", data: { action: "minus" }}
                 %i.fa.fa-minus.line-height-40
-              %input.form-control.quantity-input{type: "text", name: 'quantity', value: "1"}
-              %a.input-link.item-change-quantity{href: "javascript:void(0)", data: { action: "plus" } }
+              = f.input_field :quantity, as: :string, label: false, value: "1", class: "form-control quantity-input"
+              %a.input-link.item-change-quantity{href: "javascript:void(0)", data: { action: "plus" }}
                 %i.fa.fa-plus.line-height-40
           .col-xs-7.col-md-5
-            %input{type: "hidden", name: "item_id", value: "#{@book.id}"}
-            %button.btn.btn-default.pull-right.general-position{type: 'submit'} #{t('action.addtocart')}
+            = f.input_field :item_id, as: :hidden, value: "#{@book.id}"
+            = button_tag(type: 'submit', class: 'btn btn-default pull-right general-position') do
+              = t('action.addtocart')
+
       .general-info-wrap.divider-lg
         %p #{t('books.description')}
         %p.lead.small.line-height-2

@@ -1,8 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
-  def index; end
-
   def create
     review = current_user.reviews.new(review_params).save
     if review

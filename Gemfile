@@ -37,6 +37,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'ffaker'
+gem "font-awesome-rails"
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'

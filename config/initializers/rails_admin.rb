@@ -1,8 +1,4 @@
 RailsAdmin.config do |config|
-
-  ### Popular gems integration
-
-  ## == Devise ==
   config.authenticate_with do
     warden.authenticate! scope: :user
   end
@@ -17,38 +13,13 @@ RailsAdmin.config do |config|
     exclude_fields :book
   end
 
-  config.model 'InfoBook' do
-    visible false
-  end
+  hidden_models = %w[InfoBook Image OrderItem CreditCard BillingAddress ShippingAddress]
 
-  config.model 'Image' do
-    visible false
+  hidden_models.each do |model_name|
+    config.model "#{model_name}" do
+      visible false
+    end
   end
-
-  config.model 'OrderItem' do
-    visible false
-  end
-
-  config.model 'CreditCard' do
-    visible false
-  end
-
-  config.model 'BillingAddress' do
-    visible false
-  end
-
-  config.model 'BillingAddress' do
-    visible false
-  end
-
-  config.model 'OrderAddress' do
-    visible false
-  end
-
-  config.model 'ShippingAddress' do
-    visible false
-  end
-
 
   config.actions do
     dashboard                     # mandatory

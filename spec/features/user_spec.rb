@@ -8,11 +8,4 @@ describe "Some user actions", :type => :feature do
     expect(page).to have_content I18n.t('devise.sessions.signed_in')
     expect(page).to have_link I18n.t('pages.myaccount')
   end
-
-  context 'get started' do
-    it "show message" do
-      click_link "Get Started"
-      expect(page).to have_content I18n.t('mainpage.welcome1')
-    end
-  end
 end

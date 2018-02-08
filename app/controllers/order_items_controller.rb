@@ -1,7 +1,7 @@
 class OrderItemsController < ApplicationController
   def create
-    if item = last_order.order_items.find_by(item_id: params[:item_id])
-      item.increment(:quantity, quantity_param(params[:quantity]))
+    if item = last_order.order_items.find_by(item_id: filtered_params[:item_id])
+      item.increment(:quantity, filtered_params[:quantity])
     else
       item = last_order.order_items.build(filtered_params)
     end
@@ -38,7 +38,6 @@ class OrderItemsController < ApplicationController
   end
 
   def order_item_params
-    params.permit(:item_id, :quantity)
+    params.require(:order_item).permit(:id, :item_id, :quantity)
   end
-
 end

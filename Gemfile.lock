@@ -500,6 +500,7 @@ DEPENDENCIES
   ffaker
   fog-aws (~> 1.4, >= 1.4.1)
   fog-google
+  font-awesome-rails
   google-api-client (> 0.8.5, < 0.9)
   haml-rails (~> 1.0)
   i18n (~> 0.8.6)

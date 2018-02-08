@@ -14,9 +14,4 @@ class BooksController < ApplicationController
     @review = Review.new
     @reviews = @book.reviews.accepted.decorate
   end
-
-  def catalog
-    message = "#{t('mainpage.welcome1')} #{t('mainpage.welcome2')}"
-    redirect_to books_url, notice: message
-  end
 end

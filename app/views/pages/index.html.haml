@@ -16,7 +16,9 @@
                 %p.lead= book.short_desc
                 %p.lead.small= book.authors_list
                 .general-align
-                  = link_to t('action.buynow'), to_cart_path(book), class: "btn btn-primary", method: :post
+                  = form_for :order_item, url: order_items_path, method: :post do |f|
+                    = f.hidden_field :item_id, value: book.id
+                    = button_tag(t('action.buynow'), type: 'submit', class: 'btn btn-primary')
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
       %span.icon-prev{'aria-hidden': "true"}
       %span.sr-only Previous
@@ -28,7 +30,7 @@
     %h2.h1 #{t('mainpage.welcome1')}
     .mb-res-50
       %p #{t('mainpage.welcome2')}
-    = link_to "#{t('mainpage.getstarted')}", catalog_path, class: "btn btn-default"
+    = link_to "#{t('mainpage.getstarted')}", books_path, class: "btn btn-default"
   .mb-35
     %h3 #{t('mainpage.bestsellers')}
     .row
@@ -41,8 +43,10 @@
                 .general-thumb-link-wrap
                   = link_to book_path(item), class: "thumb-hover-link" do
                     %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  = link_to to_cart_path(item), class: "thumb-hover-link", method: :post do
-                    %i.fa.fa-shopping-cart.thumb-icon
+                  = form_for :order_item, url: order_items_path, method: :post do |f|
+                    = f.hidden_field :item_id, value: item.id
+                    = button_tag(type: 'submit', class: 'thumb-hover-link ico-cart') do
+                      %i.fa.fa-shopping-cart.thumb-icon
           .mb-35
             .clearfix
               %p.pull-right.font-16.in-gold-500= "#{number_to_currency(item.price, price_options)}"
