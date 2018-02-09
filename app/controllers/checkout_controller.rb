@@ -23,7 +23,7 @@ class CheckoutController < ApplicationController
 
   def next_stage
     status = @service.next_stage(@state_layout)
-    @service.return_to_confirm?(status)
+    @service.return_to_confirm_if_need(status)
     if status == :success
       save_order_for_last_step if @state_layout == 'confirm'
       return redirect_to :checkout

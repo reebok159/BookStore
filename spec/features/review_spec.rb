@@ -1,4 +1,6 @@
 describe "reviews", :type => :feature do
+  let(:review) { attributes_for(:review)}
+
   before :each do
     @book = create(:book)
   end
@@ -22,9 +24,9 @@ describe "reviews", :type => :feature do
     end
 
     it 'post a review' do
-      fill_in 'review[title]', with: 'MyTest'
-      fill_in 'review[text]', with: 'Lorem ipsum dolor sit amet'
-      page.select '5', :from => 'review[rating]'
+      fill_in 'review[title]', with: review[:title]
+      fill_in 'review[text]', with: review[:text]
+      page.select review[:rating], from: 'review[rating]'
       find('input[name=commit][value=Post]').click
       expect(page).to have_content I18n.t('reviews.createsuccess')
     end

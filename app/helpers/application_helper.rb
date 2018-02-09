@@ -4,11 +4,8 @@ module ApplicationHelper
   end
 
   def categories_list
-    cats = Category.all
-    cats_list = []
-    cats.each do |item|
-      cats_list << { path: books_path(category: item), name: item.name }
+    Category.select(:id, :name).map do |category|
+      { id: category.id, name: category.name, count_books: category.books.size }
     end
-    cats_list
   end
 end

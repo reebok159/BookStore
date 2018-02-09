@@ -90,6 +90,7 @@ en:
     ordersumm: 'Order Summary'
     backtostore: 'Back to Store'
     placeorder: 'Place Order'
+    isinvalid: 'is invalid'
     order: 'Order'
     itemlist:
       book: 'Book'
@@ -126,6 +127,7 @@ en:
     confirm:
       shipments: 'Shipments'
       paymentinfo: 'Payment Information'
+      edit: 'edit'
   orders:
     title: 'My Orders'
     sortby: 'Sort By'

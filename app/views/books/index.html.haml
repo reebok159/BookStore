@@ -11,18 +11,25 @@
             %li
               = link_to t("books.#{item}"), books_url({sort: item, category: params[:category]})
     %ul.list-inline.pt-10.mb-25.mr-240
-      - categories_list_with_count.each do |item|
+      %li.mr-35
+        = link_to(books_path, class: "filter-link") do
+          = I18n.t('books.all')
+          %span.badge.general-badge= total_books
+      - categories_list.each do |category|
         %li.mr-35
-          = link_to(item[:path], class: "filter-link") do
-            = item[:name]
-            %span.badge.general-badge= item[:total_books]
+          = link_to(books_path(category: category[:id]), class: "filter-link") do
+            = category[:name]
+            %span.badge.general-badge= category[:count_books]
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10 #{t('books.filterbycategory')}
     %ul
-      - categories_list_with_count.each do |item|
+      %li
+        = link_to(books_path, class: "filter-link") do
+          = I18n.t('books.all')
+      - categories_list.each do |category|
         %li
-          = link_to(item[:path], class: "filter-link") do
-            = item[:name]
+          = link_to(books_path(category: category[:id]), class: "filter-link") do
+            = category[:name]
     %p.lead.small.mb-10 #{t('books.sortby')}
     .dropdown
       %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}

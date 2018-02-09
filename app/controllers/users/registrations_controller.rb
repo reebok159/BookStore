@@ -1,6 +1,3 @@
 class RegistrationsController < Devise::RegistrationsController
-
-  def update
-  end
-
+  def update; end
 end

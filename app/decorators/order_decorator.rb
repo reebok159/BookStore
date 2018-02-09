@@ -10,12 +10,10 @@ class OrderDecorator < Draper::Decorator
   end
 
   def format_mdate
-    return '-' if object.completed_at.nil?
-    object.completed_at.strftime("%Y-%m-%d")
+    object.completed_at&.strftime("%Y-%m-%d") || '-'
   end
 
   def format_status
-    status = object.status
-    I18n.t("orders.status.#{status}")
+    I18n.t("orders.status.#{object.status}")
   end
 end

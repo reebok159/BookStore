@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def orders
-    @orders = OrderDecorator.decorate_collection(current_user.orders.completed)
+    @orders = current_user.orders.completed.decorate
   end
 
   private

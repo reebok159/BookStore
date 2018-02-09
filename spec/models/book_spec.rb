@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
-  let(:category1) { create(:category) }
-  let(:category2) { create(:category) }
-  let!(:book1) { create(:book, price: 10, category: category1) }
-  let!(:book2) { create(:book, price: 2, category: category2) }
-  let!(:book3) { create(:book, price: 15, category: category2) }
-  let!(:book4) { create(:book, price: 4, category: category1) }
+  let(:category) { create_list(:category, 2) }
+  let!(:book1) { create(:book, price: 10, category: category[0]) }
+  let!(:book2) { create(:book, price: 2, category: category[1]) }
+  let!(:book3) { create(:book, price: 15, category: category[1]) }
+  let!(:book4) { create(:book, price: 4, category: category[0]) }
 
   describe 'ActiveRecord associations' do
     it { is_expected.to have_many(:order_items).with_foreign_key('item_id') }
@@ -52,7 +51,7 @@ RSpec.describe Book, type: :model do
 
     context 'select_category' do
       it 'selects needed category' do
-        expect([book1, book4]).to match_array(Book.select_category(category1))
+        expect([book1, book4]).to match_array(Book.select_category(category[0]))
       end
     end
   end

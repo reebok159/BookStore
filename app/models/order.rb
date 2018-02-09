@@ -60,7 +60,6 @@ class Order < ApplicationRecord
   end
 
   def delivery_price
-    return 0 if delivery_method.nil?
-    delivery_method.cost
+    delivery_method&.cost || 0
   end
 end

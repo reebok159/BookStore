@@ -1,16 +1,13 @@
 class OrdersController < ApplicationController
   def index
     @cart = last_order
-    @items = @cart.nil? ? [] : @cart.order_items.order(:id).decorate
-    @coupon = @cart.coupon_discount
+    @items = @cart.order_items.decorate
   end
 
   def activate_coupon
     service = OrderService.new(last_order)
-    msg = service.activate_coupon(coupon_params[:coupon_id])
-    msg = I18n.t('coupon.activatesuccess') if msg == :success
-    flash[:notice] = msg
-    redirect_to cart_page_url
+    msg = service.save_coupon_with_message(coupon_params[:coupon_id])
+    redirect_to cart_page_url, flash: { notice: msg }
   end
 
   private

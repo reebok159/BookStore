@@ -25,7 +25,7 @@
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
               - categories_list.each do |cat|
                 %li
-                  = link_to cat[:name], cat[:path], class: "collapse-link"
+                  = link_to cat[:name], books_path(category: cat[:id]), class: "collapse-link"
               %li.divider{role: "separator"}
                 %li
                   = link_to t('pages.allcats'), books_path
@@ -54,7 +54,7 @@
             %ul.dropdown-menu
               - categories_list.each do |cat|
                 %li
-                  = link_to cat[:name], cat[:path], class: "collapse-link"
+                  = link_to cat[:name], books_path(category: cat[:id]), class: "collapse-link"
               %li.divider{role: "separator"}
                 %li
                   = link_to "#{t('pages.allcats')}", books_path

@@ -1,8 +1,8 @@
 FactoryBot.define do
-    factory :review do
-        book
-        text 'My some test text'
-        title 'Mike'
-        rating 5
-    end
+  factory :review do
+    book
+    text { FFaker::Lorem.sentence(4) }
+    title { FFaker::Name.name }
+    rating { rand(1..5) }
+  end
 end
