@@ -6,7 +6,12 @@ class OrdersController < ApplicationController
 
   def activate_coupon
     service = OrderService.new(last_order)
-    msg = service.save_coupon_with_message(coupon_params[:coupon_id])
+    coupon = service.get_coupon(coupon_params[:coupon_id])
+    msg = service.check_coupon_errors(coupon)
+    if msg.nil?
+      service.activate_coupon(coupon)
+      msg = I18n.t('coupon.activatesuccess')
+    end
     redirect_to cart_page_url, flash: { notice: msg }
   end
 
