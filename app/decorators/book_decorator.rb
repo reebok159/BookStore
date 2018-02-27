@@ -29,7 +29,7 @@ class BookDecorator < Draper::Decorator
 
   def have_more_desc?
     return false if object.full_desc.nil?
-    object.full_desc.length.to_i > Book::MAX_FULL_DESC_SHOW
+    object.full_desc.length > Book::MAX_FULL_DESC_SHOW
   end
 
   def other_cutted_desc

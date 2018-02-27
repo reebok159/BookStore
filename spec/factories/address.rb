@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :billing_address, aliases: [:shipping_address] do
     first_name { FFaker::Name.first_name }
-    last_name { FFaker::Name.last_name }
-    address { FFaker::Address.street_name }
+    last_name { FFaker::Name.html_safe_last_name }
+    address { FFaker::Address.street_name.gsub(/[\W_]/, '') }
     city { FFaker::Address.city }
-    zip "55343"
+    zip { FFaker::AddressUS.zip_code }
     country "Ukraine"
-    phone "+380666666666"
+    phone { "#{FFaker::PhoneNumber.phone_calling_code}#{rand(10..99)}#{rand(1000..99999)}" }
   end
 end

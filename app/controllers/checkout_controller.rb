@@ -49,13 +49,14 @@ class CheckoutController < ApplicationController
   end
 
   def select_order
-    last_completed_order_id = flash[:last_completed_order_id]
+    last_completed_order_id = cookies[:last_completed_order_id]
     return last_order if last_completed_order_id.nil?
+    cookies.delete(:last_completed_order_id)
     @user.orders.find_by(id: last_completed_order_id)
   end
 
   def save_order_for_last_step
-    flash[:last_completed_order_id] = @order.id
+    cookies[:last_completed_order_id] = @order.id
   end
 
   def start_save_cart_if_no_auth

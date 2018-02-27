@@ -25,5 +25,11 @@ RSpec.describe ReviewsController, type: :controller do
       post :create, params: { review: attributes_for(:review, book_id: invalid_id) }
       expect(flash[:alert]).to match I18n.t('reviews.createfail')
     end
+
+    it 'show error message after trying to save with invalid text' do
+      invalid_text = "0/asdf"
+      post :create, params: { review: attributes_for(:review, text: invalid_text) }
+      expect(flash[:alert]).to match I18n.t('reviews.createfail')
+    end
   end
 end

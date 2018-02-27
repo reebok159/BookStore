@@ -266,6 +266,10 @@ en:
       new:
         resend_unlock_instructions: "Resend unlock instructions"
   activerecord:
+    credit_card:
+      validation:
+        expires_invalid: "expires date is inalid"
+        expired: "card is expired"
     models:
       user: "User"
     attributes:

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def last_order
     return create_order if current_user.nil?
-    current_user.orders.where(status: :in_progress).first_or_create
+    current_user.orders.in_progress.first_or_create
   end
 
   def create_order
@@ -30,11 +30,5 @@ class ApplicationController < ActionController::Base
   def clear_guest_cookies
     cookies.delete(:save_cart)
     cookies.delete(:order_id)
-  end
-
-  private
-
-  def current_ability
-    @current_ability ||= Ability.new(current_user)
   end
 end

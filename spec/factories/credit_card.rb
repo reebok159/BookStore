@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :credit_card do
-    number "1111222233334444"
+    number { rand(10**15..10**16) }
     name { FFaker::Name.name }
-    expires '01/19'
-    cvv '123'
+    expires '01/25'
+    cvv { rand(100..999) }
   end
 end

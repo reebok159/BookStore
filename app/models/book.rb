@@ -8,6 +8,7 @@ class Book < ApplicationRecord
 
   MAX_FULL_DESC_SHOW = 300
   BOOKS_PER_PAGE = 12
+  paginates_per BOOKS_PER_PAGE
 
   SORT_PARAMS = {
     "newest" => { created_at: :desc },

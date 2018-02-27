@@ -15,8 +15,12 @@ RSpec.describe CreditCard, type: :model do
 
     it { is_expected.to validate_presence_of(:expires) }
     context 'with invalid attributes' do
+      let(:year) { Time.now.year.to_s.split(//).last(2).join.to_i }
       it do
-        is_expected.to allow_values("12/12", '01/17', '12/18', '08/25').for(:expires)
+        is_expected.to allow_values('12/' << (year + 1).to_s,
+                                    '01/' << (year + 5).to_s,
+                                    '12/' << (year + 3).to_s,
+                                    '08/' << (year + 1).to_s).for(:expires)
       end
 
       it do

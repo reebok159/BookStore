@@ -1,7 +1,5 @@
 FactoryBot.define do
-
   factory :author do
-    name "Devin Casper"
+    name { FFaker::Book.author }
   end
-
 end

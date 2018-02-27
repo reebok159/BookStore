@@ -6,5 +6,16 @@ AllCops:
     - db/**
     - config/**
     - script/**
-  Documentation:
-    Enabled: false
+Documentation:
+  Enabled: false
+FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+  SupportedStyles:
+    - single_quotes
+    - double_quotes
+Metrics/LineLength:
+  Max: 130
+Style/Documentation:
+  Enabled: false

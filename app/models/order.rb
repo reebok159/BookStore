@@ -37,6 +37,8 @@ class Order < ApplicationRecord
   enum status: %i[in_progress in_queue in_delivery delivered canceled]
 
   scope :completed, -> { where.not(status: :in_progress) }
+  scope :in_progress, -> { where(status: :in_progress) }
+
 
   def total_quantity
     order_items.pluck(:quantity).sum

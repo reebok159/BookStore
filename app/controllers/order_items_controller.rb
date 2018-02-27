@@ -27,8 +27,7 @@ class OrderItemsController < ApplicationController
   private
 
   def quantity_param(quantity)
-    return 1 if quantity.to_i <= 0
-    quantity.to_i
+    quantity.to_i <= 0 ? 1 : quantity.to_i
   end
 
   def filtered_params

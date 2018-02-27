@@ -1,4 +1,6 @@
 class CreditCard < ApplicationRecord
+  include ActiveModel::Validations
+  validates_with CreditCardValidator
   validates :number, :name, :expires, :cvv, presence: true
   validates :number, length: { is: 16 }, numericality: { only_integer: true }
   validates :name, length: { in: 2..49 }, format: { with: /\A[a-zA-Z\s]+\z/ }

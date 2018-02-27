@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :book do
-    name "Test book"
-    price 150.5
+    name { FFaker::Book.title }
+    price { rand(1.0..150.0) }
   end
 end

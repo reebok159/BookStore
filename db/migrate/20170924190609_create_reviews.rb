@@ -7,7 +7,7 @@ class CreateReviews < ActiveRecord::Migration[5.1]
       t.integer :user_id
       t.integer :book_id
       t.string :status
-      t.boolean :verified, :default => false
+      t.boolean :verified, default: false
       t.timestamps
     end
   end

@@ -7,7 +7,7 @@ $(document).on "turbolinks:load", ->
   $("a[data-remote]").on("ajax:success", (e, data, status, xhr) ->
     console.log('loaded')
     ).on "ajax:error", (e, xhr, status, error) ->
-     alert('ERROR')
+     console.log('ERROR')
 
   $(".egn_book_cart .item-change-quantity").click (event) ->
     action = $(this).data('action')
@@ -15,11 +15,7 @@ $(document).on "turbolinks:load", ->
     if action != null
       current_quantity = parseInt($(".egn_book_cart .quantity-input").val())
 
-      if isNaN(current_quantity)
-        $(".egn_book_cart .quantity-input").val("1")
-        return
-
-      if current_quantity < 1
+      if isNaN(current_quantity) || current_quantity < 1
         $(".egn_book_cart .quantity-input").val("1")
         return
 
