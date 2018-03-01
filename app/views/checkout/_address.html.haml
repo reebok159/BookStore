@@ -18,7 +18,7 @@
   %li.step
     %span.step-number 5
     %span.step-text.hidden-xs= t('checkout.steps.complete')
-= simple_form_for @order, method: :put, url: "#{checkout_next_path}", html: {novalidate: false}, class: "res-mb-100" do |f|
+= simple_form_for @order, method: :put, url: checkout_next_path, html: { novalidate: false }, class: "res-mb-100" do |f|
   .hidden-xs.hidden-sm
     .row
       .col-md-5
@@ -48,4 +48,4 @@
     %p.in-gold-500.font-18= t('checkout.ordersumm')
     %table.general-summary-table
       = render partial: "cost", object: @order
-  = f.button :submit, "#{t('checkout.saveandcontinue')}", class: "btn btn-default center-block mb-20"
+  = f.button :submit, t('checkout.saveandcontinue'), class: "btn btn-default center-block mb-20"

@@ -1,5 +1,5 @@
 %main.container
-  %h1.general-title-margin #{t('pages.catalog')}
+  %h1.general-title-margin= t('pages.catalog')
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
@@ -21,7 +21,7 @@
             = category[:name]
             %span.badge.general-badge= category[:count_books]
   .dropdowns.mb-25.visible-xs
-    %p.lead.small.mb-10 #{t('books.filterbycategory')}
+    %p.lead.small.mb-10= t('books.filterbycategory')
     %ul
       %li
         = link_to(books_path, class: "filter-link") do
@@ -30,7 +30,7 @@
         %li
           = link_to(books_path(category: category[:id]), class: "filter-link") do
             = category[:name]
-    %p.lead.small.mb-10 #{t('books.sortby')}
+    %p.lead.small.mb-10= t('books.sortby')
     .dropdown
       %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
         = get_selected_sort

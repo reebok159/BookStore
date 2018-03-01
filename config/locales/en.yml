@@ -64,6 +64,7 @@ en:
     createsuccess: 'Thanks for Review. It will be published as soon as Admin will approve it.'
     createfail: 'Cannot create review'
     writereview: 'Write a review:'
+    post: 'Post'
   users:
     updatesuccess: 'User was updated'
     updatefail: 'Data cannot be saved'

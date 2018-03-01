@@ -6,11 +6,11 @@ class OrderDecorator < Draper::Decorator
   end
 
   def number
-    object.id + 10000000
+    object.id + 10_000_000
   end
 
   def format_mdate
-    object.completed_at&.strftime("%Y-%m-%d") || '-'
+    object.completed_at&.strftime('%Y-%m-%d') || '-'
   end
 
   def format_status

@@ -22,10 +22,10 @@ $(document).on "turbolinks:load", ->
       if action == "minus"
         return if current_quantity == 1
         current_quantity--
-        $(".egn_book_cart .quantity-input").val(current_quantity)
       else
         current_quantity++
-        $(".egn_book_cart .quantity-input").val(current_quantity)
+
+      $(".egn_book_cart .quantity-input").val(current_quantity)
 
     event.preventDefault()
 

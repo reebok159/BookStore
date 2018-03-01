@@ -20,7 +20,7 @@
     %span.step-number 5
     %span.step-text.hidden-xs= t('checkout.steps.complete')
 %h3.general-subtitle= t('.dmethod')
-= simple_form_for @order, method: :put, url: "#{checkout_next_path}", html: {novalidate: false} do |f|
+= simple_form_for @order, method: :put, url: checkout_next_path, html: { novalidate: false } do |f|
   .visible-xs
     - @form.delivery_methods.each do |item|
       .general-cart-item.divider-lg-bottom
@@ -31,7 +31,7 @@
             %td.col-half
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
-                  = f.input :delivery_method_id, :input_html => {hidden: true, class: "radio-input", type: "radio", value: "#{item.id}"}, wrapper: false, label: false
+                  = f.input :delivery_method_id, input_html: {hidden: true, class: "radio-input", type: "radio", value: "#{item.id}"}, wrapper: false, label: false
                   %span.radio-icon
                   %span.radio-text= item.name
           %tr
@@ -60,7 +60,7 @@
             %td
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
-                  = f.input :delivery_method_id, :input_html => {hidden: true, class: "radio-input", type: "radio", value: "#{item.id}", checked: (true if index.zero? || item.id == @order.delivery_method_id)}, wrapper: false, label: false
+                  = f.input :delivery_method_id, input_html: {hidden: true, class: "radio-input", type: "radio", value: "#{item.id}", checked: (true if index.zero? || item.id == @order.delivery_method_id)}, wrapper: false, label: false
                   %span.radio-icon
                   %span.radio-text= item.name
             %td

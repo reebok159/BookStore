@@ -5,7 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 gem 'i18n', '~> 0.8.6'
 gem 'devise', '~> 4.3'
 gem 'cancancan', '~> 2.0'

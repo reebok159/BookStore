@@ -9,7 +9,7 @@
         %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
           %span{'aria-hidden': "true"} &times;
         .general-img-wrap-table
-          = image_tag(item.cover(:thumb), class: 'cart-img-shadow', alt: "#{item.name}")
+          = image_tag(item.cover(:thumb), class: 'cart-img-shadow', alt: item.name)
         %p.title= item.name
         %table.table
           %tr
@@ -85,13 +85,13 @@
   .general-order-wrap
     .row
       .col-sm-4
-        = simple_form_for @cart, method: :post, url: "#{activate_coupon_path}", html: {novalidate: false} do |f|
+        = simple_form_for @cart, method: :post, url: activate_coupon_path, html: { novalidate: false } do |f|
           .input-group.general-input-group
             %label.input-label= t('cart.coupon.enteryourcode')
-            = f.input :coupon_id, :input_html => {placeholder: "#{t('cart.coupon.enteryourcode')}", class: "form-control mb-30", type: "text", value: ""}, required: true, label: false
+            = f.input :coupon_id, input_html: {placeholder: "#{t('cart.coupon.enteryourcode')}", class: "form-control mb-30", type: "text", value: ""}, required: true, label: false
             %div
-              = f.button :submit, "#{t('cart.coupon.apply')}", class: "btn btn-primary mr-5 mb-15 visible-xs-inline-block"
-              = f.button :submit, "#{t('cart.coupon.updcart')}", class: "btn btn-primary mb-15 res-block"
+              = f.button :submit, t('cart.coupon.apply'), class: "btn btn-primary mr-5 mb-15 visible-xs-inline-block"
+              = f.button :submit, t('cart.coupon.updcart'), class: "btn btn-primary mb-15 res-block"
       .col-sm-8
         .res-mr-200.text-center.general-text-right
           %p.in-gold-500.font-18= t('cart.total.ordersumm')
@@ -100,17 +100,17 @@
               %td
                 %p.font-16= "#{t('cart.total.ordersumm')}:"
               %td
-                %p.font-16= "#{number_to_currency(@cart.subtotal, price_options)}"
+                %p.font-16= number_to_currency(@cart.subtotal, price_options)
             %tr
               %td
                 %p.font-16= "#{t('cart.total.coupon')}:"
               %td
-                %p.font-16= "#{number_to_currency(@cart.coupon_discount, price_options)}"
+                %p.font-16= number_to_currency(@cart.coupon_discount, price_options)
             %tr
               %td
                 %strong.font-18= "#{t('cart.total.ordertotal')}:"
               %td
-                %strong.font-18= "#{number_to_currency(@cart.total_items, price_options)}"
-          %a.btn.btn-default.mb-20.visible-xs-inline-block{href: "#{checkout_path}"}= t('cart.checkout')
+                %strong.font-18= number_to_currency(@cart.total_items, price_options)
+          = link_to t('cart.checkout'), checkout_path, class: "btn btn-default mb-20 visible-xs-inline-block"
   .text-center
-    %a.btn.btn-default.mb-20.hidden-xs{href: "#{checkout_start_path}"}= t('cart.checkout')
+    = link_to t('cart.checkout'), checkout_start_path, class: "btn btn-default mb-20 hidden-xs"

@@ -18,7 +18,7 @@
       .row
         = simple_form_for :order_item, url: order_items_path, html: { class: "egn_book_cart" }  do |f|
           .col-xs-12.col-md-4
-            %p.h1.in-gold-500.mt-10= "#{number_to_currency(@book.price, price_options)}"
+            %p.h1.in-gold-500.mt-10= number_to_currency(@book.price, price_options)
           .col-xs-5.col-md-3
             .input-group.general-position
               %a.input-link.item-change-quantity{href: "javascript:void(0)", data: { action: "minus" }}
@@ -30,9 +30,8 @@
             = f.input_field :item_id, as: :hidden, value: "#{@book.id}"
             = button_tag(type: 'submit', class: 'btn btn-default pull-right general-position') do
               = t('action.addtocart')
-
       .general-info-wrap.divider-lg
-        %p #{t('books.description')}
+        %p= t('books.description')
         %p.lead.small.line-height-2
           %div<
             = @book.start_cutted_desc
@@ -44,15 +43,15 @@
                 = @book.other_cutted_desc
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left #{t('books.published')}
+          %p.pull-left= t('books.published')
           %p.lead.small.pull-right= @book.published
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left #{t('books.dimensions')}
+          %p.pull-left= t('books.dimensions')
           %p.lead.small.pull-right= @book.sizes
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left #{t('books.materials')}
+          %p.pull-left= t('books.materials')
           %p.lead.small.pull-right= @book.materials
   .mb-80
     = render partial: "reviews", object: @book

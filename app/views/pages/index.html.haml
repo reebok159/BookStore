@@ -2,14 +2,14 @@
   #slider.carousel.slide{'data-ride': "carousel"}
     %ol.carousel-indicators
       - @latest.each_with_index do |book, i|
-        %li{:class => ("active" if i.zero?), 'data-target': "#slider", 'data-slide-to': i}
+        %li{ class: ("active" if i.zero?), 'data-target': "#slider", 'data-slide-to': i }
     .carousel-inner{role: "listbox"}
       - @latest.each_with_index do |book, i|
         .item{:class => ("active" if i.zero?)}
           .row
             .col-sm-5
               .general-img-wrap
-                = image_tag(book.cover(:book_image), class: 'img-shadow general-thumbnail-img', alt: "#{book.name}")
+                = image_tag(book.cover(:book_image), class: 'img-shadow general-thumbnail-img', alt: book.name)
             .col-sm-7
               .mb-60
                 %h1= book.name
@@ -30,15 +30,15 @@
     %h2.h1 #{t('mainpage.welcome1')}
     .mb-res-50
       %p #{t('mainpage.welcome2')}
-    = link_to "#{t('mainpage.getstarted')}", books_path, class: "btn btn-default"
+    = link_to t('mainpage.getstarted'), books_path, class: "btn btn-default"
   .mb-35
-    %h3 #{t('mainpage.bestsellers')}
+    %h3= t('mainpage.bestsellers')
     .row
       - @bestsellers.each do |item|
         .col-sm-6.col-md-3
           .general-thumb-wrap
             .thumbnail.general-thumbnail
-              = image_tag(item.cover(:thumb), class: 'img-shadow general-thumbnail-img', alt: "#{item.name}")
+              = image_tag(item.cover(:thumb), class: 'img-shadow general-thumbnail-img', alt: item.name)
               .thumb-hover
                 .general-thumb-link-wrap
                   = link_to book_path(item), class: "thumb-hover-link" do
@@ -49,7 +49,7 @@
                       %i.fa.fa-shopping-cart.thumb-icon
           .mb-35
             .clearfix
-              %p.pull-right.font-16.in-gold-500= "#{number_to_currency(item.price, price_options)}"
+              %p.pull-right.font-16.in-gold-500= number_to_currency(item.price, price_options)
               %p.title.mr-55= item.name
             %span.divider-sm
             %p.lead.small= item.authors_list

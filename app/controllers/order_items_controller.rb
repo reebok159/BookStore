@@ -11,12 +11,9 @@ class OrderItemsController < ApplicationController
 
   def update
     item = last_order.order_items.find_by(id: params[:id])
-    unless item&.update_attributes(filtered_params)
-      flash[:alert] = t('order_item.update_fail')
-    end
+    flash[:alert] = t('order_item.update_fail') unless item&.update_attributes(filtered_params)
     redirect_back(fallback_location: root_path)
   end
-
 
   def destroy
     cart = last_order.order_items
@@ -31,9 +28,7 @@ class OrderItemsController < ApplicationController
   end
 
   def filtered_params
-    filtered = order_item_params
-    filtered[:quantity] = quantity_param(filtered[:quantity])
-    filtered
+    order_item_params.merge(quantity: quantity_param(order_item_params[:quantity]))
   end
 
   def order_item_params

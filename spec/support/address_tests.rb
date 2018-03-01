@@ -47,7 +47,7 @@ RSpec.shared_examples "address_tests" do
       end
 
       it do
-        is_expected.not_to allow_values("_Tdas", ".1qwer",  'a' * 60, '"dfasd')
+        is_expected.not_to allow_values("_Tdas", ".1qwer", 'a' * 60, '"dfasd')
                   .for(:address)
       end
     end

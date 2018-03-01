@@ -26,38 +26,38 @@
     %h3.general-subtitle= t('checkout.address.shaddress')
     %p.general-address
       = "#{@order.shipping_address.first_name} #{@order.shipping_address.last_name}"
-      = link_to t('.edit'), checkout_edit_path(:type => :address), method: "put", :class=>"general-edit"
+      = link_to t('.edit'), checkout_edit_path(type: :address), method: "put", class: "general-edit"
       %br
-      = "#{@order.shipping_address.address}"
+      = @order.shipping_address.address
       %br
       = "#{@order.shipping_address.city} #{@order.shipping_address.zip}"
       %br
-      = "#{@order.shipping_address.country}"
+      = @order.shipping_address.country
       %br
       = "Phone #{@order.shipping_address.phone}"
   .col-sm-3
     %h3.general-subtitle= t('checkout.address.billaddress')
     %p.general-address
       = "#{@order.billing_address.last_name} #{@order.billing_address.last_name}"
-      = link_to t('.edit'), checkout_edit_path(:type => :address), method: "put", :class=>"general-edit"
+      = link_to t('.edit'), checkout_edit_path(type: :address), method: "put", class: "general-edit"
       %br
-      = "#{@order.billing_address.address}"
+      = @order.billing_address.address
       %br
       = "#{@order.billing_address.city} #{@order.billing_address.zip}"
       %br
-      = "#{@order.billing_address.country}"
+      = @order.billing_address.country
       %br
       = "Phone #{@order.billing_address.phone}"
   .col-sm-3
     %h3.general-subtitle= t('.shipments')
     %p.general-address
       = @order.delivery_method.try(:name)
-      = link_to t('.edit'), checkout_edit_path(:type => :delivery), method: "put", :class=>"general-edit"
+      = link_to t('.edit'), checkout_edit_path(type: :delivery), method: "put", class: "general-edit"
   .col-sm-3
     %h3.general-subtitle= t('.paymentinfo')
     %p.general-address
       = @order.short_card_number
-      = link_to t('.edit'), checkout_edit_path(:type => :payment), method: "put", :class=>"general-edit"
+      = link_to t('.edit'), checkout_edit_path(type: :payment), method: "put", class: "general-edit"
       %br
       = @order.credit_card.expires
 .visible-xs
@@ -103,7 +103,7 @@
         %tr
           %td
             .general-img-wrap-table
-              = image_tag(item.cover(:thumb), class: 'cart-img-shadow pull-left', alt: "#{item.name}")
+              = image_tag(item.cover(:thumb), class: 'cart-img-shadow pull-left', alt: item.name)
           %td
             %p.title= item.name
             %p.in-grey-600.fw-300= item.short_desc
@@ -118,4 +118,4 @@
   %table.general-summary-table.general-summary-table-right.general-text-right
     = render partial: "cost", object: @order
   .text-center
-    = link_to "#{t('checkout.placeorder')}", checkout_next_path, method: :put, class: "btn btn-default mb-20"
+    = link_to t('checkout.placeorder'), checkout_next_path, method: :put, class: "btn btn-default mb-20"

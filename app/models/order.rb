@@ -1,10 +1,9 @@
 class Order < ApplicationRecord
+  include AASM
   belongs_to :user, optional: true
 
-  include AASM
-
   aasm column: 'checkout_state' do
-    state :address, :initial => true
+    state :address, initial: true
     state :delivery
     state :payment
     state :confirm
@@ -45,8 +44,7 @@ class Order < ApplicationRecord
   end
 
   def coupon_discount
-    return 0 if coupon.nil?
-    coupon.discount
+    coupon.nil? ? 0 : coupon.discount
   end
 
   def subtotal

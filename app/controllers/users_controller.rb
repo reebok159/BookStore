@@ -37,8 +37,8 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:id, :email,
-                          billing_address_attributes: %i[first_name last_name address city zip country phone],
-                          shipping_address_attributes: %i[first_name last_name address city zip country phone])
+                                 billing_address_attributes: %i[first_name last_name address city zip country phone],
+                                 shipping_address_attributes: %i[first_name last_name address city zip country phone])
   end
 
   def password_params

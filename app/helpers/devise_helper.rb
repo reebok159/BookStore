@@ -8,8 +8,7 @@ module DeviseHelper
     return '' if resource.errors.empty? && flash_alerts.nil?
     errs = resource.errors.empty? ? flash_alerts : resource.errors.full_messages
     messages = errs.map { |msg| content_tag(:li, msg) }.join
-    sentence = I18n.t(error_key, count:    errs.count,
-                                 authentication_keys: resource.class.model_name.human.downcase)
+    sentence = I18n.t(error_key, count: errs.count, authentication_keys: resource.class.model_name.human.downcase)
     html_with_errors(sentence, messages).html_safe
   end
 

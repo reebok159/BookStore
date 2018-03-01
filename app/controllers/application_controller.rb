@@ -14,10 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def create_order
-    if cookies[:order_id]
-      order = guest_order
-      return order if order
-    end
+    return guest_order if cookies[:order_id] && guest_order.present?
     order = Order.create
     cookies.signed[:order_id] = order.id
     order
