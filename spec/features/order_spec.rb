@@ -1,9 +1,8 @@
-describe "Actions with order", :type => :feature do
-
+describe 'Actions with order', type: :feature do
   before :each do
     @book = create(:book)
-    create(:user, email: "tsets@ss.ss", password: "12345678q")
-    login("tsets@ss.ss", "12345678q")
+    create(:user, email: 'tsets@ss.ss', password: '12345678q')
+    login('tsets@ss.ss', '12345678q')
     visit root_path
   end
 
@@ -35,7 +34,7 @@ describe "Actions with order", :type => :feature do
   describe 'cart' do
     before :each do
       click_button I18n.t('action.buynow')
-      create(:coupon, code: "testcoupon")
+      create(:coupon, code: 'testcoupon')
     end
 
     it 'change item quantity' do
@@ -45,7 +44,7 @@ describe "Actions with order", :type => :feature do
     end
 
     context 'coupon' do
-      it "activate" do
+      it 'activate' do
         visit cart_page_path
         fill_in 'order[coupon_id]', with: 'testcoupon'
         click_button I18n.t('cart.coupon.updcart')

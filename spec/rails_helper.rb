@@ -5,20 +5,18 @@ start_simpleCov = false
 if start_simpleCov
   require 'simplecov'
   SimpleCov.start 'rails'
-  puts "required simplecov"
+  puts 'required simplecov'
 end
 
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/rails'
 require 'transactional_capybara/rspec'
-  Capybara::Webkit.configure do |config|
-    config.block_unknown_urls
-  end
+Capybara::Webkit.configure(&:block_unknown_urls)
 
 Capybara.javascript_driver = :webkit
 
@@ -44,14 +42,14 @@ end
 # require only the support files necessary.
 #
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-#Dir[Rails.root.join('spec/support/*.rb')].each { |f| require f }
+# Dir[Rails.root.join('spec/support/*.rb')].each { |f| require f }
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  #config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include FeatureHelper, type: :feature
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -60,12 +58,11 @@ RSpec.configure do |config|
   config.include TransactionalCapybara::AjaxHelpers
   config.include FactoryBot::Syntax::Methods
 
-
   config.use_transactional_fixtures = false
   config.before(:suite) do
     # This says that before the entire test suite runs, clear the test database out completely.
     # This gets rid of any garbage left over from interrupted or poorly-written tests - a common source of surprising test behavior.
-  DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.clean_with(:truncation)
 
     # This part sets the default database cleaning strategy to be transactions.
     # Transactions are very fast, and for all the tests where they do work - that is, any test where the entire test runs in the RSpec process - they are preferable.
@@ -85,7 +82,6 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

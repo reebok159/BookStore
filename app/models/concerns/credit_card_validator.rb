@@ -14,7 +14,7 @@ class CreditCardValidator < ActiveModel::Validator
   def safe_date(expires, default = nil)
     splitted = expires&.split('/')
     Time.new('20' << splitted[1], splitted[0])
-  rescue
+  rescue StandardError
     default
   end
 end

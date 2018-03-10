@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  has_many :order_items, foreign_key: "item_id", dependent: :destroy
+  has_many :order_items, foreign_key: 'item_id', dependent: :destroy
   has_many :orders, through: :order_items
   has_many :reviews, dependent: :destroy
   has_many :images, as: :imageable, dependent: :destroy
@@ -11,11 +11,11 @@ class Book < ApplicationRecord
   paginates_per BOOKS_PER_PAGE
 
   SORT_PARAMS = {
-    "newest" => { created_at: :desc },
-    "popular" => { created_at: :asc },
-    "lowprice" => { price: :asc },
-    "highprice" => { price: :desc }
-  }
+    'newest' => { created_at: :desc },
+    'popular' => { created_at: :asc },
+    'lowprice' => { price: :asc },
+    'highprice' => { price: :desc }
+  }.freeze
 
   validates :name, :price, presence: true
 

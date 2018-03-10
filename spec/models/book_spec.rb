@@ -34,19 +34,19 @@ RSpec.describe Book, type: :model do
     end
     context 'select_sort scope' do
       it 'sorts by newest' do
-        expect([book4, book3, book2, book1]).to eq(Book.select_sort("newest"))
+        expect([book4, book3, book2, book1]).to eq(Book.select_sort('newest'))
       end
 
       it 'sorts by popular' do
-        expect([book1, book2, book3, book4]).to eq(Book.select_sort("popular"))
+        expect([book1, book2, book3, book4]).to eq(Book.select_sort('popular'))
       end
 
       it 'sorts by lowprice' do
-        expect([book2, book4, book1, book3]).to eq(Book.select_sort("lowprice"))
+        expect([book2, book4, book1, book3]).to eq(Book.select_sort('lowprice'))
       end
 
       it 'sorts by highprice' do
-        expect([book3, book1, book4, book2]).to eq(Book.select_sort("highprice"))
+        expect([book3, book1, book4, book2]).to eq(Book.select_sort('highprice'))
       end
     end
 

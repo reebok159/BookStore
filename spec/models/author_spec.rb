@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Author, type: :model do
-
   describe 'ActiveRecord associations' do
     it { is_expected.to have_and_belong_to_many(:book) }
   end

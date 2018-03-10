@@ -23,11 +23,11 @@ class BookDecorator < Draper::Decorator
   end
 
   def start_cutted_desc
-    return object.full_desc unless have_more_desc?
+    return object.full_desc unless more_desc?
     object.full_desc.truncate(Book::MAX_FULL_DESC_SHOW, omission: '')
   end
 
-  def have_more_desc?
+  def more_desc?
     return false if object.full_desc.nil?
     object.full_desc.length > Book::MAX_FULL_DESC_SHOW
   end

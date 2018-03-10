@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
   describe 'Orders controller' do
-
     let(:user) { create(:user) }
-    let(:coupon) { create(:coupon, code: "testcoupon")}
+    let(:coupon) { create(:coupon, code: 'testcoupon') }
 
     context 'GET #index' do
       context 'without cart items' do
@@ -89,7 +88,7 @@ RSpec.describe OrdersController, type: :controller do
         end
 
         it 'try activate expired coupon' do
-          expired_coupon = create(:coupon, code: "testcoupon2", expires: DateTime.now - 5.days)
+          expired_coupon = create(:coupon, code: 'testcoupon2', expires: DateTime.now - 5.days)
           post :activate_coupon, params: { order: { coupon_id: expired_coupon.code } }
           expect(flash[:notice]).to eq I18n.t('coupon.termerror')
         end
@@ -101,7 +100,7 @@ RSpec.describe OrdersController, type: :controller do
         end
 
         it 'show that coupon is not exist' do
-          some_rand_value = "----nasdfjan213sd"
+          some_rand_value = '----nasdfjan213sd'
           post :activate_coupon, params: { order: { coupon_id: some_rand_value } }
           expect(flash[:notice]).to eq I18n.t('coupon.noexist')
         end

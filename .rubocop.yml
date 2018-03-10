@@ -1,15 +1,13 @@
 AllCops:
-  Includes:
+  Exclude:
     - Rakefile
-    - config.ru
-  Excludes:
-    - db/**
-    - config/**
-    - script/**
-Documentation:
-  Enabled: false
-FrozenStringLiteralComment:
-  Enabled: false
+    - bin/**/*
+    - db/**/*
+    - config/**/*
+    - spec/**/*
+    - tmp/**/*
+    - app/controllers/users/**
+    - app/helpers/devise_helper.rb
 Style/StringLiterals:
   EnforcedStyle: single_quotes
   SupportedStyles:
@@ -18,4 +16,8 @@ Style/StringLiterals:
 Metrics/LineLength:
   Max: 130
 Style/Documentation:
+  Enabled: false
+Documentation:
+  Enabled: false
+FrozenStringLiteralComment:
   Enabled: false

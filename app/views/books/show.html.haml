@@ -35,7 +35,7 @@
         %p.lead.small.line-height-2
           %div<
             = @book.start_cutted_desc
-            - if @book.have_more_desc?
+            - if @book.more_desc?
               %span.full_txt_dots> ...
               %a.in-gold-500.ml-10.egn-read-more{ href: "javascript:void(0)" }<>
                 = I18n.t('action.readmore')

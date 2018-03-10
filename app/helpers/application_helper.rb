@@ -1,6 +1,6 @@
 module ApplicationHelper
   def price_options
-    { unit: '$', format: "%n%u" }
+    { unit: '$', format: '%n%u' }
   end
 
   def categories_list

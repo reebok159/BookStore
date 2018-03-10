@@ -37,7 +37,7 @@ RSpec.describe OrderItemsController, type: :controller do
 
       it 'should not add item to order' do
         _quantity = 1
-        rand_id = "-1232352"
+        rand_id = '-1232352'
         post :create, params: { order_item: { item_id: rand_id, quantity: _quantity } }
         expect(flash[:notice]).to match I18n.t('order_item.create_fail')
         order.reload
@@ -61,7 +61,7 @@ RSpec.describe OrderItemsController, type: :controller do
       end
 
       it 'should not change quantity' do
-        rand_id = "-1232352"
+        rand_id = '-1232352'
         patch :update, params: { id: rand_id, order_item: { quantity: 1 } }
         expect(flash[:alert]).to match I18n.t('order_item.update_fail')
       end

@@ -26,22 +26,22 @@ class CheckoutService
 
   def processing_address
     addresses = prepare_addresses
-    @order.next_state! and return :success if @order.update(addresses)
+    @order.next_state! && (return :success) if @order.update(addresses)
   end
 
   def processing_delivery
-    @order.next_state! and return :success if @order.update(delivery_params)
+    @order.next_state! && (return :success) if @order.update(delivery_params)
   end
 
   def processing_payment
-    @order.next_state! and return :success if @order.update(payment_params)
+    @order.next_state! && (return :success) if @order.update(payment_params)
   end
 
   def processing_confirm
-    @order.completed_at = DateTime.now
+    @order.completed_at = Time.now
     @order.total_price = @order.pre_total_price
     @order.status = :in_queue
-    @order.next_state! and return :success if @order.save
+    @order.next_state! && (return :success) if @order.save
   end
 
   def items
@@ -52,9 +52,7 @@ class CheckoutService
 
   def prepare_addresses
     addresses = order_params
-    if params[:use_billing] == 'on'
-      addresses[:shipping_address_attributes] = addresses[:billing_address_attributes]
-    end
+    addresses[:shipping_address_attributes] = addresses[:billing_address_attributes] if params[:use_billing] == 'on'
     addresses
   end
 

@@ -1,5 +1,5 @@
 module BooksHelper
-  def get_selected_sort
+  def selected_sort
     selected = params[:sort].to_s
     return I18n.t("books.#{selected}") if Book::SORT_PARAMS.key?(selected)
     I18n.t('books.newest')

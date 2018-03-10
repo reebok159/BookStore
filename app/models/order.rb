@@ -38,7 +38,6 @@ class Order < ApplicationRecord
   scope :completed, -> { where.not(status: :in_progress) }
   scope :in_progress, -> { where(status: :in_progress) }
 
-
   def total_quantity
     order_items.pluck(:quantity).sum
   end

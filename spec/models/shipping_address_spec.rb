@@ -5,5 +5,5 @@ RSpec.describe ShippingAddress, type: :model do
     it { is_expected.to belong_to(:shipping_a) }
   end
 
-  include_examples "address_tests"
+  include_examples 'address_tests'
 end

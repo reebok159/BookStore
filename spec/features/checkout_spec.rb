@@ -1,13 +1,13 @@
-describe "checkout process", type: :feature do
+describe 'checkout process', type: :feature do
   let(:billing_address) { attributes_for(:billing_address) }
   let(:shipping_address) { attributes_for(:shipping_address) }
   let(:credit_card) { attributes_for(:credit_card) }
 
   before :each do
     @book = create(:book)
-    @user = create(:user, email: "tsets@ss.ss", password: "12345678q")
+    @user = create(:user, email: 'tsets@ss.ss', password: '12345678q')
     create(:delivery_method)
-    login("tsets@ss.ss", "12345678q")
+    login('tsets@ss.ss', '12345678q')
   end
 
   it 'should complete order' do
@@ -26,7 +26,7 @@ describe "checkout process", type: :feature do
 
     check_content_card_step
     invalid_card = { number: '111', expires: '111', name: '111', cvv: '111' }
-    fill_card_form(invalid_card) #check invalid
+    fill_card_form(invalid_card) # check invalid
     click_button I18n.t('checkout.saveandcontinue')
 
     expect(page).to have_content I18n.t('checkout.isinvalid')
@@ -42,7 +42,7 @@ describe "checkout process", type: :feature do
     before :each do
       click_button I18n.t('action.buynow')
       visit cart_page_path
-      click_link "Checkout", match: :first
+      click_link 'Checkout', match: :first
     end
 
     it 'should complete order' do
@@ -84,7 +84,7 @@ describe "checkout process", type: :feature do
         first('a.general-edit', text: 'edit').click
         expect(page).to have_content I18n.t('checkout.address.billaddress')
         expect(page).to have_content 'all fields are required'
-        fill_in 'order[billing_address_attributes][first_name]', with: "Mike"
+        fill_in 'order[billing_address_attributes][first_name]', with: 'Mike'
         find('[name=use_billing] + span.checkbox-icon').click
         click_button I18n.t('checkout.saveandcontinue')
         check_content_confirm_step

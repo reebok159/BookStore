@@ -14,7 +14,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'must show error (passwords is not the same)' do
-      patch :update_password, params: { user: {current_password: '12345678', password: '55555555', password_confirmation: '5554' } }
+      patch :update_password, params: { user: { current_password: '12345678', password: '55555555', password_confirmation: '5554' } }
       expect(flash[:notice]).to match I18n.t('users.updpassfail')
     end
   end

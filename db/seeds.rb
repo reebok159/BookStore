@@ -52,7 +52,7 @@ def create_coupon(name = "Test", code = "test-coupon")
     min_sum_to_activate: 0,
     discount: rand(1...5),
     code: code,
-    expires: DateTime.now + 365.days
+    expires: Time.now + 365.days
   )
 end
 

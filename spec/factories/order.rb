@@ -4,9 +4,9 @@ FactoryBot.define do
       book nil
     end
 
-      user nil
-      status :in_progress
-      checkout_state 'address'
+    user nil
+    status :in_progress
+    checkout_state 'address'
 
     trait :with_books do
       after(:create) do |order|

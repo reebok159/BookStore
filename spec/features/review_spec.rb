@@ -1,5 +1,5 @@
-describe "reviews", :type => :feature do
-  let(:review) { attributes_for(:review)}
+describe 'reviews', type: :feature do
+  let(:review) { attributes_for(:review) }
 
   before :each do
     @book = create(:book)
@@ -14,8 +14,8 @@ describe "reviews", :type => :feature do
 
   context 'logged in user' do
     before :each do
-      create(:user, email: "tsets@ss.ss", password: "12345678q")
-      login("tsets@ss.ss", "12345678q")
+      create(:user, email: 'tsets@ss.ss', password: '12345678q')
+      login('tsets@ss.ss', '12345678q')
       visit book_path(@book)
     end
 
@@ -31,5 +31,4 @@ describe "reviews", :type => :feature do
       expect(page).to have_content I18n.t('reviews.createsuccess')
     end
   end
-
 end

@@ -1,7 +1,7 @@
 SimpleForm.setup do |config|
-  config.label_text = proc { |label, required| "#{label}" }
+  config.label_text = proc { |label, _required| label.to_s }
   config.wrappers :custom, class: 'form-group',
-                  error_class: 'has-error' do |b|
+                           error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :pattern

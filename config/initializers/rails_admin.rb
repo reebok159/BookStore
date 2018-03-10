@@ -16,7 +16,7 @@ RailsAdmin.config do |config|
   hidden_models = %w[InfoBook Image OrderItem CreditCard BillingAddress ShippingAddress]
 
   hidden_models.each do |model_name|
-    config.model "#{model_name}" do
+    config.model model_name.to_s do
       visible false
     end
   end

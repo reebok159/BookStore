@@ -1,6 +1,5 @@
 class FixColumnsInAddresses < ActiveRecord::Migration[5.1]
   def change
-
     change_table :shipping_addresses do |t|
       t.change :first_name, :string
       t.change :last_name, :string
@@ -20,7 +19,5 @@ class FixColumnsInAddresses < ActiveRecord::Migration[5.1]
       t.change :country, :string
       t.change :phone, :string
     end
-
-
   end
 end
