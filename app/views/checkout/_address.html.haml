@@ -34,13 +34,14 @@
       = f.simple_fields_for :billing_address, @form.billing_address, wrapper: :custom do |bia|
         = render partial: "users/address", locals: { adr: bia }
     .col-md-5.col-md-offset-1.mb-60
-      .visible-xs.visible-sm
-        %h3.general-subtitle= t('.shaddress')
-      = f.simple_fields_for :shipping_address, @form.shipping_address, wrapper: :custom do |sh|
-        = render partial: "users/address", locals: { adr: sh }
+      .egn-shipping-block{style: ('display: none;' unless @order.use_billing.nil?)}
+        .visible-xs.visible-sm
+          %h3.general-subtitle= t('.shaddress')
+        = f.simple_fields_for :shipping_address, @form.shipping_address, wrapper: :custom do |sh|
+          = render partial: "users/address", locals: { adr: sh }
       .form-group.checkbox
         %label.checkbox-label
-          %input.checkbox-input{type: "checkbox", hidden: "true", name: "use_billing"}
+          %input.checkbox-input.egn-use_billing{type: "checkbox", hidden: "true", name: "use_billing", checked: (true unless @order.use_billing.nil?)}
           %span.checkbox-icon
             %i.fa.fa-check
           %span.checkbox-text= t('.usebilladdress')

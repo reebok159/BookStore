@@ -52,7 +52,12 @@ class CheckoutService
 
   def prepare_addresses
     addresses = order_params
-    addresses[:shipping_address_attributes] = addresses[:billing_address_attributes] if params[:use_billing] == 'on'
+    if params.key? :use_billing
+      addresses[:shipping_address_attributes] = addresses[:billing_address_attributes]
+      addresses[:use_billing] = true
+    else
+      addresses[:use_billing] = nil
+    end
     addresses
   end
 
