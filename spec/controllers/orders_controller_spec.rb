@@ -5,10 +5,28 @@ RSpec.describe OrdersController, type: :controller do
     let(:user) { create(:user) }
     let(:coupon) { create(:coupon, code: 'testcoupon') }
 
-    context 'GET #cart' do
+    before(:each) do
+      sign_in user
+    end
+
+    describe 'GET #index' do
+      it 'open page with orders' do
+        get :index
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    describe 'GET #show' do
+      it 'open page with order' do
+        order = create(:order, user: user, status: :in_queue)
+        get :show, params: { id: order.id }
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    describe 'GET #cart' do
       context 'without cart items' do
         before(:each) do
-          sign_in user
           @order = create(:order, user: user)
           get :cart
         end
@@ -41,7 +59,6 @@ RSpec.describe OrdersController, type: :controller do
 
       context 'with cart items' do
         before(:each) do
-          sign_in user
           @order = create(:order, :with_books, user: user)
           get :cart
         end
@@ -52,10 +69,9 @@ RSpec.describe OrdersController, type: :controller do
       end
     end
 
-    context 'POST #activate_coupon' do
+    describe 'POST #activate_coupon' do
       context 'with empty cart' do
         before(:each) do
-          sign_in user
           @order = create(:order, user: user)
         end
 
@@ -72,7 +88,6 @@ RSpec.describe OrdersController, type: :controller do
 
       context 'with cart items' do
         before(:each) do
-          sign_in user
           @order = create(:order, :with_books, user: user)
         end
 
