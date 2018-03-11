@@ -131,9 +131,10 @@ en:
       edit: 'edit'
   orders:
     title: 'My Orders'
-    sortby: 'Sort By'
+    filterby: 'Filter'
     donthaveorders: "You don't have any orders"
     filter:
+      all: 'All'
       waitforproc: 'Waiting for processing'
       newest: 'Newest first'
       popular: 'Popular first'

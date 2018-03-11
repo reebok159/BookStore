@@ -4,16 +4,6 @@
     = render partial: 'layouts/partials/header'
   %body
     = render partial: 'layouts/partials/top'
-    %p.notice
-    %p.alert
-    %div.container
-      - unless flash[:notice].nil?
-        %div.alert.alert-info.alert-dismissable
-          = flash[:notice]
-          %button.close{ data: { dismiss: "alert" }} &times;
-      - unless flash[:alert].nil?
-        %div.alert.alert-warning.alert-dismissable
-          = flash[:alert]
-          %button.close{ data: { dismiss: "alert" }} &times;
+    = render partial: 'layouts/partials/flash'
     = yield
     = render partial: 'layouts/partials/footer'

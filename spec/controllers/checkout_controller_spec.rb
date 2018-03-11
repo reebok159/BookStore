@@ -59,15 +59,6 @@ RSpec.describe CheckoutController, type: :controller do
         expect(order.user_id).to eq user.id
         expect(assigns(:order).id).to eq order.id
       end
-
-      context 'from comfirm step' do
-        xit 'return to confirm page after address editing' do
-          cookies[:return_to_confirm] = true
-          allow(controller).to receive(:processing_address).and_return(:success)
-          get :next_stage
-          expect(assigns(:order).checkout_state).to eq 'confirm'
-        end
-      end
     end
   end
 end

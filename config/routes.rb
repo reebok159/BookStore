@@ -4,9 +4,10 @@ Rails.application.routes.draw do
 
   resources :books, only: %i[show index]
   resources :reviews, only: [:create]
+  resources :orders, only: %i[index show]
   resources :order_items, only: %i[create update destroy]
 
-  get 'cart', to: 'orders#index', as: 'cart_page'
+  get 'cart', to: 'orders#cart', as: 'cart_page'
   post 'cart', to: 'orders#activate_coupon', as: 'activate_coupon'
 
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
@@ -14,7 +15,6 @@ Rails.application.routes.draw do
     collection do
       get 'settings', as: 'settings'
       patch 'update_password', to: 'users#update_password'
-      get 'orders'
     end
   end
 

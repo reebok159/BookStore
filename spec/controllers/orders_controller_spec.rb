@@ -5,16 +5,16 @@ RSpec.describe OrdersController, type: :controller do
     let(:user) { create(:user) }
     let(:coupon) { create(:coupon, code: 'testcoupon') }
 
-    context 'GET #index' do
+    context 'GET #cart' do
       context 'without cart items' do
         before(:each) do
           sign_in user
           @order = create(:order, user: user)
-          get :index
+          get :cart
         end
 
         it 'select necessary order' do
-          expect(assigns(:cart)).to eq(@order)
+          expect(assigns(:order)).to eq(@order)
         end
 
         it 'open cart' do
@@ -22,20 +22,20 @@ RSpec.describe OrdersController, type: :controller do
         end
 
         it 'render cart page' do
-          expect(response).to render_template('index')
+          expect(response).to render_template('cart')
         end
 
         it 'check cart is empty' do
-          expect(assigns(:cart).order_items.count).to eq 0
+          expect(assigns(:order).order_items.count).to eq 0
         end
 
         it 'check cart isn\'t empty' do
-          cart = assigns(:cart)
+          cart = assigns(:order)
           order_item = create(:order_item, book: create(:book))
           cart.order_items << order_item
           cart.save
-          get :index
-          expect(assigns(:cart).order_items.count).not_to eq 0
+          get :cart
+          expect(assigns(:order).order_items.count).not_to eq 0
         end
       end
 
@@ -43,11 +43,11 @@ RSpec.describe OrdersController, type: :controller do
         before(:each) do
           sign_in user
           @order = create(:order, :with_books, user: user)
-          get :index
+          get :cart
         end
 
         it 'check cart isn\'t empty' do
-          expect(assigns(:cart).order_items.count).not_to eq 0
+          expect(assigns(:order).order_items.count).not_to eq 0
         end
       end
     end
@@ -83,8 +83,8 @@ RSpec.describe OrdersController, type: :controller do
 
         it 'check that coupon have effect to order sum' do
           post :activate_coupon, params: { order: { coupon_id: coupon.code } }
-          get :index
-          expect(assigns(:cart).coupon_discount).to eq coupon.discount
+          get :cart
+          expect(assigns(:order).coupon_discount).to eq coupon.discount
         end
 
         it 'try activate expired coupon' do

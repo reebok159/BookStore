@@ -1,5 +1,5 @@
 class OrderService
-  attr_reader :params, :user, :order
+  attr_reader :order
 
   def initialize(order)
     @order = order
@@ -9,9 +9,13 @@ class OrderService
     Coupon.find_by(code: coupon_code)
   end
 
-  def activate_coupon(coupon)
+  def activate_coupon_with_message(coupon)
+    coupon = get_coupon(coupon)
+    msg = check_coupon_errors(coupon)
+    return msg unless msg.nil?
     @order.coupon = coupon
     @order.save
+    I18n.t('coupon.activatesuccess')
   end
 
   def check_coupon_errors(coupon)

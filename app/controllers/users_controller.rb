@@ -29,10 +29,6 @@ class UsersController < ApplicationController
     @shipping_address = @user.shipping_address || @user.build_shipping_address
   end
 
-  def orders
-    @orders = current_user.orders.completed.decorate
-  end
-
   private
 
   def user_params

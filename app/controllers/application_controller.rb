@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :last_order
-  before_action :set_locale, :current_ability
+  before_action :last_order, :set_locale, :current_ability
   helper_method :last_order
 
   def set_locale

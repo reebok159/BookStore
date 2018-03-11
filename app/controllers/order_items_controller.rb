@@ -33,7 +33,8 @@ class OrderItemsController < ApplicationController
   end
 
   def filtered_params
-    order_item_params.merge(quantity: quantity_param(order_item_params[:quantity]))
+    filtered_quantity = quantity_param(order_item_params[:quantity])
+    order_item_params.merge(quantity: filtered_quantity)
   end
 
   def order_item_params

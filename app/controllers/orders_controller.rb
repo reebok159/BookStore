@@ -1,17 +1,23 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: %i[index show]
+
   def index
-    @cart = last_order
-    @items = @cart.order_items.decorate
+    @orders = current_user.orders.completed
+                          .select_status(params[:status])
+                          .decorate
+  end
+
+  def show
+    @order = current_user.orders.completed.find(params[:id]).decorate
+  end
+
+  def cart
+    @order = last_order.decorate
   end
 
   def activate_coupon
     service = OrderService.new(last_order)
-    coupon = service.get_coupon(coupon_params[:coupon_id])
-    msg = service.check_coupon_errors(coupon)
-    if msg.nil?
-      service.activate_coupon(coupon)
-      msg = I18n.t('coupon.activatesuccess')
-    end
+    msg = service.activate_coupon_with_message(coupon_params[:coupon_id])
     redirect_to cart_page_url, flash: { notice: msg }
   end
 

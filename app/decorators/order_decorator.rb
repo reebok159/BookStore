@@ -16,4 +16,8 @@ class OrderDecorator < Draper::Decorator
   def format_status
     I18n.t("orders.status.#{object.status}")
   end
+
+  def items
+    object.order_items.decorate
+  end
 end

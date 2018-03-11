@@ -84,12 +84,6 @@ RSpec.describe OrderItemsController, type: :controller do
         order.save
       end
 
-      xit 'clear cart' do
-        delete :destroy, params: { id: 'all' }
-        order.reload
-        expect(order.order_items.size).to be_zero
-      end
-
       it 'remove item' do
         delete :destroy, params: { id: @order_item.id }
         order.reload
