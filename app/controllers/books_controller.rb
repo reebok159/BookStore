@@ -9,7 +9,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    #binding.pry
     @book = @book.decorate
     @reviews = @book.reviews.accepted.decorate
   end
