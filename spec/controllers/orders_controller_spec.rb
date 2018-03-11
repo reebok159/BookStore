@@ -14,13 +14,29 @@ RSpec.describe OrdersController, type: :controller do
         get :index
         expect(response).to have_http_status(:ok)
       end
+
+      context 'with no auth user' do
+        it 'open page with orders' do
+          sign_out user
+          get :index
+          expect(response).not_to have_http_status(:ok)
+        end
+      end
     end
 
     describe 'GET #show' do
+      let(:order) { create(:order, user: user, status: :in_queue) }
       it 'open page with order' do
-        order = create(:order, user: user, status: :in_queue)
         get :show, params: { id: order.id }
         expect(response).to have_http_status(:ok)
+      end
+
+      context 'with no auth user' do
+        it 'open page with orders' do
+          sign_out user
+          get :show, params: { id: order.id }
+          expect(response).not_to have_http_status(:ok)
+        end
       end
     end
 

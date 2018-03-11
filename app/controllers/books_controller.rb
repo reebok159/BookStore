@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  load_resource
+  load_and_authorize_resource
 
   def index
     @books = Book.select_category(params[:category])
@@ -9,8 +9,8 @@ class BooksController < ApplicationController
   end
 
   def show
+    #binding.pry
     @book = @book.decorate
-    @review = Review.new
     @reviews = @book.reviews.accepted.decorate
   end
 end

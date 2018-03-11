@@ -1,4 +1,6 @@
 class OrderItemsController < ApplicationController
+  authorize_resource
+
   def create
     item = find_order_item
     if item
@@ -28,12 +30,12 @@ class OrderItemsController < ApplicationController
     last_order.order_items.find_by(item_id: filtered_params[:item_id])
   end
 
-  def quantity_param(quantity)
-    quantity.to_i <= 0 ? 1 : quantity.to_i
+  def quantity_param
+    order_item_params[:quantity].to_i <= 0 ? 1 : order_item_params[:quantity].to_i
   end
 
   def filtered_params
-    filtered_quantity = quantity_param(order_item_params[:quantity])
+    filtered_quantity = quantity_param
     order_item_params.merge(quantity: filtered_quantity)
   end
 

@@ -16,8 +16,8 @@ RSpec.describe OrderItemsController, type: :controller do
         post :create, params: { order_item: { item_id: book.id, quantity: _quantity } }
         expect(flash[:notice]).to match I18n.t('order_item.create_success')
         order.reload
-        expect(order.order_items[0].item_id).to eq book.id
-        expect(order.order_items[0].quantity).to eq _quantity
+        expect(order.order_items.first.item_id).to eq book.id
+        expect(order.order_items.first.quantity).to eq _quantity
       end
 
       it 'found the same item and only change count' do
@@ -26,13 +26,13 @@ RSpec.describe OrderItemsController, type: :controller do
         post :create, params: { order_item: { item_id: book.id, quantity: _quantity } }
         order.reload
 
-        expect(order.order_items[0].item_id).to eq book.id
-        expect(order.order_items[0].quantity).to eq _quantity
+        expect(order.order_items.first.item_id).to eq book.id
+        expect(order.order_items.first.quantity).to eq _quantity
 
         post :create, params: { order_item: { item_id: book.id, quantity: _added_val } }
         order.reload
-        expect(order.order_items[0].item_id).to eq book.id
-        expect(order.order_items[0].quantity).to eq (_quantity + _added_val)
+        expect(order.order_items.first.item_id).to eq book.id
+        expect(order.order_items.first.quantity).to eq (_quantity + _added_val)
       end
 
       it 'should not add item to order' do
@@ -57,7 +57,7 @@ RSpec.describe OrderItemsController, type: :controller do
         _new_quantity = @order_item.quantity + 5
         patch :update, params: { id: @order_item.id, order_item: { quantity: _new_quantity } }
         order.reload
-        expect(order.order_items[0].quantity).to eq(_new_quantity)
+        expect(order.order_items.first.quantity).to eq(_new_quantity)
       end
 
       it 'should not change quantity' do
@@ -70,7 +70,7 @@ RSpec.describe OrderItemsController, type: :controller do
         invalid_value = -7
         patch :update, params: { id: @order_item.id, order_item: { quantity: invalid_value } }
         order.reload
-        expect(order.order_items[0].quantity).to eq 1
+        expect(order.order_items.first.quantity).to eq 1
       end
     end
 
