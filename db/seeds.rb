@@ -43,7 +43,9 @@ def add_authors_to_book(book)
 end
 
 def create_admin_user
-  User.create!(email: "admin@loc.loc", is_admin: true, password: "123456q")
+  user = User.new(email: "admin@loc.loc", is_admin: true, password: "123456q")
+  user.skip_confirmation!
+  user.save!
 end
 
 def create_coupon(name = "Test", code = "test-coupon")
