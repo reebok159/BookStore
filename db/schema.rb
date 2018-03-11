@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 20180311111401) do
     t.string "billing_a_type"
     t.bigint "billing_a_id"
     t.index ["billing_a_type", "billing_a_id"], name: "index_billing_addresses_on_billing_a_type_and_billing_a_id"
-    t.index ["user_id"], name: "index_billing_addresses_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -51,7 +50,7 @@ ActiveRecord::Schema.define(version: 20180311111401) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "short_desc"
-    t.integer "category_id"
+    t.bigint "category_id"
     t.text "full_desc"
     t.integer "width"
     t.integer "height"
@@ -82,9 +81,9 @@ ActiveRecord::Schema.define(version: 20180311111401) do
     t.string "name"
     t.string "expires"
     t.string "cvv"
-    t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "order_id"
     t.index ["order_id"], name: "index_credit_cards_on_order_id"
   end
 
@@ -106,25 +105,26 @@ ActiveRecord::Schema.define(version: 20180311111401) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer "order_id"
     t.integer "item_id"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_order_items_on_item_id"
+    t.bigint "order_id"
+    t.bigint "book_id"
+    t.index ["book_id"], name: "index_order_items_on_book_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
     t.string "checkout_state"
-    t.integer "delivery_method_id"
-    t.integer "coupon_id"
     t.decimal "total_price", precision: 11, scale: 2, default: "0.0"
     t.datetime "completed_at"
+    t.bigint "user_id"
+    t.bigint "delivery_method_id"
+    t.bigint "coupon_id"
     t.boolean "use_billing"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["delivery_method_id"], name: "index_orders_on_delivery_method_id"
@@ -135,11 +135,11 @@ ActiveRecord::Schema.define(version: 20180311111401) do
     t.string "title"
     t.string "text"
     t.integer "rating"
-    t.integer "user_id"
-    t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "accepted", default: false
+    t.bigint "user_id"
+    t.bigint "book_id"
     t.index ["book_id"], name: "index_reviews_on_book_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -158,7 +158,6 @@ ActiveRecord::Schema.define(version: 20180311111401) do
     t.string "shipping_a_type"
     t.bigint "shipping_a_id"
     t.index ["shipping_a_type", "shipping_a_id"], name: "index_shipping_addresses_on_shipping_a_type_and_shipping_a_id"
-    t.index ["user_id"], name: "index_shipping_addresses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -187,15 +186,13 @@ ActiveRecord::Schema.define(version: 20180311111401) do
 
   add_foreign_key "authors_books", "authors"
   add_foreign_key "authors_books", "books"
-  add_foreign_key "billing_addresses", "users"
   add_foreign_key "books", "categories"
   add_foreign_key "credit_cards", "orders"
-  add_foreign_key "order_items", "books", column: "item_id"
+  add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "delivery_methods"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
-  add_foreign_key "shipping_addresses", "users"
 end
