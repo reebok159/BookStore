@@ -37,6 +37,8 @@ en:
     popular: "Popular first"
     lowprice: "Price: Low to high"
     highprice: "Price: High to low"
+    title-az: "Title: A-Z"
+    title-za: "Title: Z-A"
   auth:
     login:
       title_login: "Log In"

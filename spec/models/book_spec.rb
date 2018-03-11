@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe Book, type: :model do
   let(:category1) { create(:category) }
   let(:category2) { create(:category, name: "#{category1.name}-2") }
-  let!(:book1) { create(:book, price: 10, category: category1) }
-  let!(:book2) { create(:book, price: 2, category: category2) }
-  let!(:book3) { create(:book, price: 15, category: category2) }
-  let!(:book4) { create(:book, price: 4, category: category1) }
+  let!(:book1) { create(:book, price: 10, category: category1, name: "aab") }
+  let!(:book2) { create(:book, price: 2, category: category2, name: "ccb") }
+  let!(:book3) { create(:book, price: 15, category: category2, name: "zza") }
+  let!(:book4) { create(:book, price: 4, category: category1, name: "xaz") }
 
   describe 'ActiveRecord associations' do
     it { is_expected.to have_many(:order_items).with_foreign_key('item_id') }
@@ -47,6 +47,14 @@ RSpec.describe Book, type: :model do
 
       it 'sorts by highprice' do
         expect([book3, book1, book4, book2]).to eq(Book.select_sort('highprice'))
+      end
+
+      it 'sorts by title a-z' do
+        expect([book1, book2, book4, book3]).to eq(Book.select_sort('title-az'))
+      end
+
+      it 'sorts by title z-a' do
+        expect([book3, book4, book2, book1]).to eq(Book.select_sort('title-za'))
       end
     end
 

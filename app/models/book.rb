@@ -14,7 +14,9 @@ class Book < ApplicationRecord
     'newest' => { created_at: :desc },
     'popular' => { created_at: :asc },
     'lowprice' => { price: :asc },
-    'highprice' => { price: :desc }
+    'highprice' => { price: :desc },
+    'title-az' => { name: :asc },
+    'title-za' => { name: :desc }
   }.freeze
 
   validates :name, :price, presence: true
