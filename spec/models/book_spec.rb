@@ -9,7 +9,7 @@ RSpec.describe Book, type: :model do
   let!(:book4) { create(:book, price: 4, category: category1, name: "xaz") }
 
   describe 'ActiveRecord associations' do
-    it { is_expected.to have_many(:order_items).with_foreign_key('item_id') }
+    it { is_expected.to have_many(:order_items) }
     it { is_expected.to have_many(:orders).through(:order_items) }
     it { is_expected.to have_many(:reviews) }
     it { is_expected.to belong_to(:category) }

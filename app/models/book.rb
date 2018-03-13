@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  has_many :order_items, foreign_key: 'item_id', dependent: :destroy
+  has_many :order_items, dependent: :destroy
   has_many :orders, through: :order_items
   has_many :reviews, dependent: :destroy
   has_many :images, as: :imageable, dependent: :destroy
@@ -26,9 +26,9 @@ class Book < ApplicationRecord
       .from('order_items')
       .joins(
         'INNER JOIN orders ON orders.id = order_items.order_id AND orders.status != 0' \
-        'RIGHT OUTER JOIN books ON books.id = order_items.item_id'
+        'RIGHT OUTER JOIN books ON books.id = order_items.book_id'
       ).group('books.id')
-      .order('COUNT(order_items.item_id) DESC')
+      .order('COUNT(order_items.book_id) DESC')
       .limit(num)
   end
 

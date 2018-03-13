@@ -27,7 +27,7 @@
               %a.input-link.item-change-quantity{href: "javascript:void(0)", data: { action: "plus" }}
                 %i.fa.fa-plus.line-height-40
           .col-xs-7.col-md-5
-            = f.input_field :item_id, as: :hidden, value: "#{@book.id}"
+            = f.input_field :book_id, as: :hidden, value: "#{@book.id}"
             = button_tag(type: 'submit', class: 'btn btn-default pull-right general-position') do
               = t('action.addtocart')
       .general-info-wrap.divider-lg

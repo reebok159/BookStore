@@ -13,32 +13,32 @@ RSpec.describe OrderItemsController, type: :controller do
 
       it 'add item to order' do
         _quantity = 1
-        post :create, params: { order_item: { item_id: book.id, quantity: _quantity } }
+        post :create, params: { order_item: { book_id: book.id, quantity: _quantity } }
         expect(flash[:notice]).to match I18n.t('order_item.create_success')
         order.reload
-        expect(order.order_items.first.item_id).to eq book.id
+        expect(order.order_items.first.book_id).to eq book.id
         expect(order.order_items.first.quantity).to eq _quantity
       end
 
       it 'found the same item and only change count' do
         _quantity = 1
         _added_val = 3
-        post :create, params: { order_item: { item_id: book.id, quantity: _quantity } }
+        post :create, params: { order_item: { book_id: book.id, quantity: _quantity } }
         order.reload
 
-        expect(order.order_items.first.item_id).to eq book.id
+        expect(order.order_items.first.book_id).to eq book.id
         expect(order.order_items.first.quantity).to eq _quantity
 
-        post :create, params: { order_item: { item_id: book.id, quantity: _added_val } }
+        post :create, params: { order_item: { book_id: book.id, quantity: _added_val } }
         order.reload
-        expect(order.order_items.first.item_id).to eq book.id
+        expect(order.order_items.first.book_id).to eq book.id
         expect(order.order_items.first.quantity).to eq (_quantity + _added_val)
       end
 
       it 'should not add item to order' do
         _quantity = 1
         rand_id = '-1232352'
-        post :create, params: { order_item: { item_id: rand_id, quantity: _quantity } }
+        post :create, params: { order_item: { book_id: rand_id, quantity: _quantity } }
         expect(flash[:notice]).to match I18n.t('order_item.create_fail')
         order.reload
         expect(order.order_items.size).to be_zero

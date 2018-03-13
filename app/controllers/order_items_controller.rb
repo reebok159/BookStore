@@ -27,7 +27,7 @@ class OrderItemsController < ApplicationController
   private
 
   def find_order_item
-    last_order.order_items.find_by(item_id: filtered_params[:item_id])
+    last_order.order_items.find_by(book_id: filtered_params[:book_id])
   end
 
   def quantity_param
@@ -40,6 +40,6 @@ class OrderItemsController < ApplicationController
   end
 
   def order_item_params
-    params.require(:order_item).permit(:id, :item_id, :quantity)
+    params.require(:order_item).permit(:id, :book_id, :quantity)
   end
 end

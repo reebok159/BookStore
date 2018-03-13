@@ -7,7 +7,7 @@
           = link_to book_path(book), class: "thumb-hover-link" do
             %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
           = form_for :order_item, url: order_items_path, method: :post do |f|
-            = f.hidden_field :item_id, value: book.id
+            = f.hidden_field :book_id, value: book.id
             = button_tag(type: 'submit', class: 'thumb-hover-link ico-cart') do
               %i.fa.fa-shopping-cart.thumb-icon
   .general-thumb-info
