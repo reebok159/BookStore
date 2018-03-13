@@ -7,8 +7,7 @@ class ReviewDecorator < Draper::Decorator
 
   def verified?
     OrderItem.where(
-      order_id: object.user.orders.delivered.ids,
-      item_id: object.book.id
+      order_id: object.user.orders.delivered.ids
     ).exists?
   end
 end
