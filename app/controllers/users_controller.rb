@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, :set_user
+  before_action :authenticate_user!
+  helper_method :current_user
 
   def update
-    if @user.update(user_params)
+    if current_user.update(user_params)
       flash[:notice] = t('users.updatesuccess')
       redirect_back(fallback_location: root_path)
     else
@@ -12,8 +13,8 @@ class UsersController < ApplicationController
   end
 
   def update_password
-    if @user.update_with_password(password_params)
-      bypass_sign_in @user
+    if current_user.update_with_password(password_params)
+      bypass_sign_in current_user
       redirect_to settings_users_path, flash: { notice: t('users.updpasssuccess') }
     else
       flash[:notice] = t('users.updpassfail')
@@ -22,15 +23,11 @@ class UsersController < ApplicationController
   end
 
   def settings
-    @billing_address = @user.billing_address || @user.build_billing_address
-    @shipping_address = @user.shipping_address || @user.build_shipping_address
+    @billing_address = current_user.billing_address || current_user.build_billing_address
+    @shipping_address = current_user.shipping_address || current_user.build_shipping_address
   end
 
   private
-
-  def set_user
-    @user = current_user
-  end
 
   def user_params
     params.require(:user).permit(:id, :email,
