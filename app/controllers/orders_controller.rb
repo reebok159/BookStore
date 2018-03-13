@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: %i[index show]
+  authorize_resource :order, only: %i[index show]
 
   def index
     @orders = current_user.orders.completed

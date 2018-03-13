@@ -17,7 +17,7 @@ RSpec.describe ReviewsController, type: :controller do
     it 'check user is auth' do
       sign_out user
       post :create, params: { review: attributes_for(:review, book_id: book.id) }
-      expect(response).to redirect_to(new_user_session_path)
+      expect(response).to redirect_to(root_path)
     end
 
     it 'show error message after trying to save to invalid book' do

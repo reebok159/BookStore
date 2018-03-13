@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  authorize_resource
 
   def create
     review = current_user.reviews.new(review_params)

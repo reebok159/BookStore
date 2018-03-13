@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def categories_list
-    Category.select(:id, :name).map do |category|
+    Category.includes(:books).select(:id, :name).map do |category|
       { id: category.id, name: category.name, count_books: category.books.size }
     end
   end
