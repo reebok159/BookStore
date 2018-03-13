@@ -1,8 +1,6 @@
 class CheckoutController < ApplicationController
   before_action :authenticate_user!, except: [:start]
-  before_action :save_cart_after_login
-  before_action :init
-  before_action :check_order_not_empty
+  before_action :save_cart_after_login, :init, :check_order_not_empty
 
   def start
     start_save_cart_if_no_auth
