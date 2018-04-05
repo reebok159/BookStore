@@ -17,7 +17,7 @@ class CheckoutService
     end
   end
 
-  def return_to_confirm_if_need(status)
+  def return_to_confirm(status)
     return if @cookies[:return_to_confirm].blank? || status != :success
     @order.checkout_state = :confirm
     @order.save

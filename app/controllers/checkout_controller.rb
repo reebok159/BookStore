@@ -3,7 +3,7 @@ class CheckoutController < ApplicationController
   before_action :save_cart_after_login, :init, :check_order_not_empty
 
   def start
-    start_save_cart_if_no_auth
+    start_save_cart unless user_signed_in?
     cookies.delete(:return_to_confirm)
     redirect_to :checkout
   end
@@ -21,7 +21,7 @@ class CheckoutController < ApplicationController
 
   def next_stage
     status = @service.next_stage(@state_layout)
-    @service.return_to_confirm_if_need(status)
+    @service.return_to_confirm(status)
     if status == :success
       save_order_for_last_step if @state_layout == 'confirm'
       return redirect_to :checkout
@@ -40,7 +40,7 @@ class CheckoutController < ApplicationController
   end
 
   def check_order_not_empty
-    return unless @order.order_items.blank?
+    return if @order.order_items.present?
     @order.reset_state! unless @order.address?
     flash[:alert] = t('checkout.emptycart')
     redirect_to cart_page_url
@@ -57,15 +57,13 @@ class CheckoutController < ApplicationController
     cookies[:last_completed_order_id] = @order.id
   end
 
-  def start_save_cart_if_no_auth
-    return if user_signed_in?
-    cookies[:save_cart] = true unless last_order.order_items.blank?
+  def start_save_cart
+    cookies[:save_cart] = true if last_order.order_items.present?
   end
 
   def save_cart_after_login
-    return unless cookies[:save_cart]
+    return if !cookies[:save_cart] || !guest_order
     order = guest_order
-    return unless order
     last_order.destroy
     order.update_attributes(user: current_user)
     clear_guest_cookies
