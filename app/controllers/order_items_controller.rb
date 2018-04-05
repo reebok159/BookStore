@@ -2,7 +2,7 @@ class OrderItemsController < ApplicationController
   authorize_resource
 
   def create
-    item = find_order_item
+    item = last_order.order_items.find_by(book_id: filtered_params[:book_id])
     if item
       item.increment(:quantity, filtered_params[:quantity])
     else
@@ -14,7 +14,7 @@ class OrderItemsController < ApplicationController
 
   def update
     item = last_order.order_items.find_by(id: params[:id])
-    flash[:alert] = t('order_item.update_fail') unless item&.update_attributes(filtered_params)
+    flash[:alert] = t('order_item.update_fail') unless item&.update(filtered_params)
     redirect_back(fallback_location: root_path)
   end
 
@@ -26,17 +26,12 @@ class OrderItemsController < ApplicationController
 
   private
 
-  def find_order_item
-    last_order.order_items.find_by(book_id: filtered_params[:book_id])
-  end
-
   def quantity_param
     order_item_params[:quantity].to_i <= 0 ? 1 : order_item_params[:quantity].to_i
   end
 
   def filtered_params
-    filtered_quantity = quantity_param
-    order_item_params.merge(quantity: filtered_quantity)
+    order_item_params.merge(quantity: quantity_param)
   end
 
   def order_item_params
