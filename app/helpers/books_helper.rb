@@ -1,8 +1,7 @@
 module BooksHelper
   def selected_sort
     selected = params[:sort].to_s
-    return I18n.t("books.#{selected}") if Book::SORT_PARAMS.key?(selected)
-    I18n.t('books.newest')
+    Book::SORT_PARAMS.key?(selected) ? I18n.t("books.#{selected}") : I18n.t("books.#{Book::DEFAULT_SORT}")
   end
 
   def sort_params
@@ -10,6 +9,6 @@ module BooksHelper
   end
 
   def total_books
-    Book.all.size
+    Book.count
   end
 end

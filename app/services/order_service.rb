@@ -5,12 +5,8 @@ class OrderService
     @order = order
   end
 
-  def get_coupon(coupon_code)
-    Coupon.find_by(code: coupon_code)
-  end
-
   def activate_coupon_with_message(coupon)
-    coupon = get_coupon(coupon)
+    coupon = Coupon.find_by(code: coupon)
     msg = check_coupon_errors(coupon)
     return msg unless msg.nil?
     @order.coupon = coupon

@@ -10,6 +10,9 @@ class Ability
     return unless user.persisted?
     can :read, Order, user_id: user.id
     can :create, Review
+    can %i[create update], ShippingAddress
+    can %i[create update], CreditCard
+    can %i[create update], BillingAddress
 
     can :manage, :all if user.is_admin?
   end

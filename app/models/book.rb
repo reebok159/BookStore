@@ -19,6 +19,8 @@ class Book < ApplicationRecord
     'title-za' => { name: :desc }
   }.freeze
 
+  DEFAULT_SORT = 'newest'.freeze
+
   validates :name, :price, presence: true
 
   scope :bestsellers, ->(num = 4) do
@@ -33,6 +35,6 @@ class Book < ApplicationRecord
   end
 
   scope :latest, ->(num = 2) { last(num) }
-  scope :select_category, ->(cat) { where(category: cat) unless cat.nil? }
+  scope :select_category, ->(cat) { where(category: cat) if cat.present? }
   scope :select_sort, ->(val) { order(SORT_PARAMS[val]) if SORT_PARAMS.key?(val) }
 end
