@@ -2,7 +2,7 @@
   %td
     %p.font-16= "#{t('checkout.cost_p.subtotal')}:"
   %td
-    %p.font-16= number_to_currency(@order.total_items, price_options)
+    %p.font-16= number_to_currency(@order.subtotal, price_options)
 %tr
   %td
     %p.font-16= "#{t('checkout.cost_p.coupon')}:"
