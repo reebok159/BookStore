@@ -37,12 +37,7 @@ module RailsAdmin
         register_instance_option :controller do
           Proc.new do
             status = 'rejected'
-            if params['status'] == 'approve'
-              status = 'approved'
-              coupon = Coupon.generate_review_coupon
-              ReviewMailer.with(review: @object, coupon: coupon).approve_email.deliver_now
-            end
-
+            status = 'approved' if params['status'] == 'approve'
             @object.update_attribute(:status, status)
             flash[:notice] = "You have #{status.capitalize} the review \"#{@object.title}\""
             redirect_to index_path(model_name: 'review')
