@@ -23,7 +23,7 @@ class Book < ApplicationRecord
 
   validates :name, :price, presence: true
 
-  scope :bestsellers, ->(num = 4) do
+  def self.bestsellers(num = 4)
     select('books.*')
       .from('order_items')
       .joins(
