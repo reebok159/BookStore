@@ -4,15 +4,15 @@ class Ability
   def initialize(user)
     user ||= User.new
     can :read, Book
-    can :manage, OrderItem
-    can %i[create update cart], Order
+    can :read, Review
+    can %i[create update cart], Order, user_id: user.id
+    can %i[create update destroy], OrderItem, order: { user_id: user.id }
 
     return unless user.persisted?
     can :read, Order, user_id: user.id
     can :create, Review
-    can %i[create update], ShippingAddress
-    can %i[create update], CreditCard
-    can %i[create update], BillingAddress
+    can %i[read create update], ShippingAddress, shipping_a_type: 'User', shipping_a_id: user.id
+    can %i[create update], BillingAddress, billing_a_type: 'User', billing_a_id: user.id
 
     can :manage, :all if user.is_admin?
   end
