@@ -1,0 +1,123 @@
+%main.container
+  = render partial: "head"
+  %ul.steps.list-inline
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs= t('checkout.steps.address')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs= t('checkout.steps.delivery')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs= t('checkout.steps.payment')
+    %li.step-divider
+    %li.step.active
+      %span.step-number 4
+      %span.step-text.hidden-xs= t('checkout.steps.confirm')
+    %li.step-divider
+    %li.step
+      %span.step-number 5
+      %span.step-text.hidden-xs= t('checkout.steps.complete')
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle= t('checkout.address.shaddress')
+      %p.general-address
+        = "#{@form.order.shipping_address.first_name} #{@form.order.shipping_address.last_name}"
+        = link_to t('.edit'), wizard_path(:address, edit: true), class: "general-edit"
+        %br
+        = @form.order.shipping_address.address
+        %br
+        = "#{@form.order.shipping_address.city} #{@form.order.shipping_address.zip}"
+        %br
+        = @form.order.shipping_address.country
+        %br
+        = "Phone #{@form.order.shipping_address.phone}"
+    .col-sm-3
+      %h3.general-subtitle= t('checkout.address.billaddress')
+      %p.general-address
+        = "#{@form.order.billing_address.first_name} #{@form.order.billing_address.last_name}"
+        = link_to t('.edit'), wizard_path(:address, edit: true), class: "general-edit"
+        %br
+        = @form.order.billing_address.address
+        %br
+        = "#{@form.order.billing_address.city} #{@form.order.billing_address.zip}"
+        %br
+        = @form.order.billing_address.country
+        %br
+        = "Phone #{@form.order.billing_address.phone}"
+    .col-sm-3
+      %h3.general-subtitle= t('.shipments')
+      %p.general-address
+        = @form.order.delivery_method.try(:name)
+        = link_to t('.edit'), wizard_path(:delivery, edit: true), class: "general-edit"
+    .col-sm-3
+      %h3.general-subtitle= t('.paymentinfo')
+      %p.general-address
+        = @form.order.short_card_number
+        = link_to t('.edit'), wizard_path(:payment, edit: true), class: "general-edit"
+        %br
+        = @form.order.credit_card.expires
+  .visible-xs
+    - @form.order.items.each do |order_item|
+      - item = order_item.book
+      .general-cart-item.divider-lg
+        .general-img-wrap-table
+          = image_tag(item.cover(:thumb), class: 'cart-img-shadow', alt: "#{item.name}")
+        %p.title= item.name
+        %P.in-grey-600.fw-300= item.short_desc
+        %table.table
+          %tr
+            %td
+              %span.in-grey-600= t('checkout.itemlist.price')
+            %td
+              %span.font-16.in-gold-500= number_to_currency(item.price, price_options)
+          %tr
+            %td.vertical-middle
+              %span.in-grey-600= t('checkout.itemlist.quantity')
+            %td
+              %span= order_item.quantity
+          %tr
+            %td
+              %span.in-grey-600= t('checkout.itemlist.subtotal')
+            %td
+              %span.font-16.in-gold-500= number_to_currency((order_item.quantity * item.price), price_options)
+  .hidden-xs.divider-lg.pt-20
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600= t('checkout.itemlist.book')
+          %th.col-method
+          %th
+            %span.in-grey-600= t('checkout.itemlist.price')
+          %th
+            %span.in-grey-600= t('checkout.itemlist.quantity')
+          %th
+            %span.in-grey-600= t('checkout.itemlist.total')
+      %tbody
+        - @form.order.items.each do |order_item|
+          - item = order_item.book
+          %tr
+            %td
+              .general-img-wrap-table
+                = image_tag(item.cover(:thumb), class: 'cart-img-shadow pull-left', alt: item.name)
+            %td
+              %p.title= item.name
+              %p.in-grey-600.fw-300= item.short_desc
+            %td
+              %span.font-16.in-gold-500= number_to_currency(item.price, price_options)
+            %td
+              %span.ml-30= order_item.quantity
+            %td
+              %span.font-16.in-gold-500= number_to_currency((order_item.quantity * item.price), price_options)
+  .text-center.general-text-right
+    %p.in-gold-500.font-18= t('checkout.ordersumm')
+    %table.general-summary-table.general-summary-table-right.general-text-right
+      = render partial: "cost", object: @form.order, as: 'order'
+    .text-center
+      = link_to t('checkout.placeorder'), wizard_path, method: :patch, class: "btn btn-default mb-20"

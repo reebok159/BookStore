@@ -8,20 +8,20 @@ module FeatureHelper
   end
 
   def fill_address_form(type, data)
-    fill_in "order[#{type}_address_attributes][first_name]", with: data[:first_name]
-    fill_in "order[#{type}_address_attributes][last_name]", with: data[:last_name]
-    fill_in "order[#{type}_address_attributes][address]", with: data[:address]
-    fill_in "order[#{type}_address_attributes][city]", with: data[:city]
-    fill_in "order[#{type}_address_attributes][zip]", with: data[:zip]
-    page.select data[:country], from: "order[#{type}_address_attributes][country]"
-    fill_in "order[#{type}_address_attributes][phone]", with: data[:phone]
+    fill_in "order[#{type}_address][first_name]", with: data[:first_name]
+    fill_in "order[#{type}_address][last_name]", with: data[:last_name]
+    fill_in "order[#{type}_address][address]", with: data[:address]
+    fill_in "order[#{type}_address][city]", with: data[:city]
+    fill_in "order[#{type}_address][zip]", with: data[:zip]
+    page.select data[:country], from: "order[#{type}_address][country]"
+    fill_in "order[#{type}_address][phone]", with: data[:phone]
   end
 
   def fill_card_form(data)
-    fill_in 'order[credit_card_attributes][number]', with: data[:number]
-    fill_in 'order[credit_card_attributes][expires]', with: data[:expires]
-    fill_in 'order[credit_card_attributes][name]', with: data[:name]
-    fill_in 'order[credit_card_attributes][cvv]', with: data[:cvv]
+    fill_in 'order[credit_card][number]', with: data[:number]
+    fill_in 'order[credit_card][expires]', with: data[:expires]
+    fill_in 'order[credit_card][name]', with: data[:name]
+    fill_in 'order[credit_card][cvv]', with: data[:cvv]
   end
 
   def check_content_address_step

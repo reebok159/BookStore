@@ -1,0 +1,56 @@
+%main.container
+  = render partial: "head"
+  %ul.steps.list-inline
+    %li.step.active
+      %span.step-number 1
+      %span.step-text.hidden-xs= t('checkout.steps.address')
+    %li.step-divider
+    %li.step
+      %span.step-number 2
+      %span.step-text.hidden-xs= t('checkout.steps.delivery')
+    %li.step-divider
+    %li.step
+      %span.step-number 3
+      %span.step-text.hidden-xs= t('checkout.steps.payment')
+    %li.step-divider
+    %li.step
+      %span.step-number 4
+      %span.step-text.hidden-xs= t('checkout.steps.confirm')
+    %li.step-divider
+    %li.step
+      %span.step-number 5
+      %span.step-text.hidden-xs= t('checkout.steps.complete')
+  = simple_form_for @form.order, url: wizard_path, method: :patch, html: { novalidate: false }, class: "res-mb-100" do |f|
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle= t('.billaddress')
+          %p.general-info-text= t('checkout.allrequired')
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle= t('.shaddress')
+    .row
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle= t('.billaddress')
+          %p.general-info-text= t('checkout.allrequired')
+        = f.simple_fields_for :billing_address, @form.billing_address_form, wrapper: :custom do |bia|
+          = render partial: "users/address", locals: { adr: bia }
+      .col-md-5.col-md-offset-1.mb-60
+        .egn-shipping-block{style: ('display: none;' unless @form.order.use_billing.nil?)}
+          .visible-xs.visible-sm
+            %h3.general-subtitle= t('.shaddress')
+          = f.simple_fields_for :shipping_address, @form.shipping_address_form, wrapper: :custom do |sh|
+            = render partial: "users/address", locals: { adr: sh }
+        .form-group.checkbox
+          %label.checkbox-label
+            %input.checkbox-input.egn-use_billing{type: "checkbox", hidden: "true", name: "order[use_billing]", checked: (true unless last_order.use_billing.nil?)}
+            %span.checkbox-icon
+              %i.fa.fa-check
+            %span.checkbox-text= t('.usebilladdress')
+    .general-text-align.mb-60
+      %p.in-gold-500.font-18= t('checkout.ordersumm')
+      %table.general-summary-table
+        = render partial: "cost", object: @form.order, as: 'order'
+    - if params.key? :edit
+      = hidden_field nil, "edit"
+    = f.button :submit, t('checkout.saveandcontinue'), class: "btn btn-default center-block mb-20"

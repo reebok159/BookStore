@@ -1,80 +1,63 @@
 class CheckoutController < ApplicationController
-  before_action :authenticate_user!, except: [:start]
-  before_action :save_cart_after_login, :init, :check_order_not_empty
+  include Wicked::Wizard
+  before_action :authenticate_user!, only: %i[show update]
+  before_action :redirect_if_empty, :init
 
-  def start
-    start_save_cart unless user_signed_in?
-    cookies.delete(:return_to_confirm)
-    redirect_to :checkout
+  steps :address, :delivery, :payment, :confirm, :complete
+
+  def show
+    goto_active_step
+    cookies.delete(:last_completed_order_id) if step == :complete
+    render_wizard
   end
 
-  def index
-    @form = CheckoutForm.new(@order)
-    return if cookies[:last_completed_order_id].nil?
-    cookies.delete(:last_completed_order_id)
-    OrderMailer.with(user: @user, order: @order).complete_email.deliver_now
-    return if @order.coupon.nil?
-    coupon = @order.coupon
-    coupon.update(activated: true) if coupon.coupon_type == 'one_time'
-  end
-
-  def edit_data
-    @order.checkout_state = state_params[:type]
-    return unless @order.save
-    cookies[:return_to_confirm] = true
-    redirect_to :checkout
-  end
-
-  def next_stage
-    status = @service.next_stage(@state_layout)
-    @service.return_to_confirm(status)
-    if status == :success
-      save_order_for_last_step if @state_layout == 'confirm'
-      return redirect_to :checkout
+  def update
+    if @form.update(order_params, step)
+      if params.key?(:edit) && @form.filled?
+        @form.order.update(checkout_state: :confirm)
+      else
+        @form.order.next_state!
+        save_order_for_last_step if step == :confirm
+      end
     end
-    @form = CheckoutForm.new(@order)
-    render 'index'
+    render_wizard @form.order
   end
 
   private
 
   def init
-    @user = current_user
-    @order = select_order.decorate
-    @state_layout = @order.checkout_state
-    @service = CheckoutService.new(params, cookies, @user, @order)
+    order = active_order.decorate
+    @form ||= CheckoutForm.new(order)
   end
 
-  def check_order_not_empty
-    return if @order.order_items.present?
-    @order.reset_state! unless @order.address?
-    flash[:alert] = t('checkout.emptycart')
-    redirect_to cart_page_url
+  def redirect_if_empty
+    redirect_to cart_page_path, flash: { alert: t('checkout.emptycart') } unless active_order.order_items.present?
   end
 
-  def select_order
-    last_completed_order_id = cookies[:last_completed_order_id]
+  def goto_active_step
+    @form.order.update(checkout_state: step) if params.key?(:edit)
+    jump_to(@form.order.checkout_state) unless step.to_s == @form.order.checkout_state
+  end
+
+  def active_order
+    last_completed_order_id = cookies.signed[:last_completed_order_id]
     return last_order if last_completed_order_id.nil?
-    @user.orders.find_by(id: last_completed_order_id)
+    current_user.orders.find_by(id: last_completed_order_id)
   end
 
   def save_order_for_last_step
-    cookies[:last_completed_order_id] = @order.id
+    cookies.signed[:last_completed_order_id] = @form.order.id
   end
 
-  def start_save_cart
-    cookies[:save_cart] = true if last_order.order_items.present?
-  end
-
-  def save_cart_after_login
-    return if !cookies[:save_cart] || !guest_order
-    order = guest_order
-    last_order.destroy
-    order.update_attributes(user: current_user)
-    clear_guest_cookies
-  end
-
-  def state_params
-    params.permit(:type)
+  def order_params
+    params.fetch(:order, {}).permit(
+      :use_billing,
+      :delivery_method,
+      credit_card: %i[number name cvv expires],
+      billing_address:
+            %i[first_name last_name address city zip country phone],
+      shipping_address:
+            %i[first_name last_name address city zip country phone]
+    )
   end
 end

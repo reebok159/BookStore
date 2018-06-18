@@ -39,6 +39,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'simple_form', '~> 3.5'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+gem 'wicked', '~> 1.3', '>= 1.3.2'
 
 group :development, :test do
   gem 'brakeman'

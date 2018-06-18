@@ -48,7 +48,7 @@ describe 'checkout process', type: :feature do
     it 'should complete order' do
       check_content_address_step
       fill_address_form('billing', billing_address)
-      find('[name=use_billing] + span.checkbox-icon').click
+      find('[name=order\\[use_billing\\]] + span.checkbox-icon').click
       click_button I18n.t('checkout.saveandcontinue')
 
       check_content_delivery_step
@@ -61,7 +61,6 @@ describe 'checkout process', type: :feature do
 
       check_content_confirm_step
       click_link 'Place Order'
-
       check_content_complete_thanks(@user.email)
     end
 
@@ -69,7 +68,7 @@ describe 'checkout process', type: :feature do
       it 'should complete order' do
         check_content_address_step
         fill_address_form('billing', billing_address)
-        find('[name=use_billing] + span.checkbox-icon').click
+        find('[name=order\\[use_billing\\]] + span.checkbox-icon').click
         click_button I18n.t('checkout.saveandcontinue')
 
         check_content_delivery_step
@@ -84,8 +83,8 @@ describe 'checkout process', type: :feature do
         first('a.general-edit', text: 'edit').click
         expect(page).to have_content I18n.t('checkout.address.billaddress')
         expect(page).to have_content 'all fields are required'
-        fill_in 'order[billing_address_attributes][first_name]', with: 'Mike'
-        find('[name=use_billing] + span.checkbox-icon').click
+        fill_in 'order[billing_address][first_name]', with: 'Mike'
+        find('[name=order\\[use_billing\\]] + span.checkbox-icon').click
         click_button I18n.t('checkout.saveandcontinue')
         check_content_confirm_step
         click_link 'Place Order'

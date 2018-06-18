@@ -25,13 +25,13 @@ class Order < ApplicationRecord
   belongs_to :coupon, optional: true
   has_one :billing_address, as: :billing_a, dependent: :destroy
   has_one :shipping_address, as: :shipping_a, dependent: :destroy
-  accepts_nested_attributes_for :billing_address, allow_destroy: true
-  accepts_nested_attributes_for :shipping_address, allow_destroy: true
+  validates_associated :billing_address
+  validates_associated :shipping_address
+  validates_associated :credit_card
+
   has_many :order_items, dependent: :destroy
   has_many :books, through: :order_items
-
   has_one :credit_card, dependent: :destroy
-  accepts_nested_attributes_for :credit_card
 
   enum status: %i[in_progress in_queue in_delivery delivered canceled]
 
