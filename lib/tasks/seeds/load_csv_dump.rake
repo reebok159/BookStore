@@ -1,10 +1,5 @@
 require 'csv'
 
-#:encoding => 'ISO-8859-1'
-
-#<Book id: nil, name: nil, price: nil, created_at: nil, updated_at: nil, short_desc: nil, category_id: nil, full_desc: nil, width: nil, height: nil, depth: nil, published: nil, materials: nil>
-#<Category id: 6, name: "lol", created_at: "2018-05-13 11:11:34", updated_at: "2018-05-13 11:11:34">
-#<Author id: nil, created_at: nil, updated_at: nil, name: nil>
 
 task :load_csv_dump => [ :environment ] do
 

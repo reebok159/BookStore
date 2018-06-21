@@ -1,3 +1,3 @@
 # **BookStore**
-http://egndiploma.herokuapp.com
+http://egnbookstore.herokuapp.com
 
