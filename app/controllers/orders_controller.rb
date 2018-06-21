@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  authorize_resource :order, only: %i[index show]
+  load_and_authorize_resource :order, only: %i[index show]
 
   def index
     @orders = current_user.orders.completed

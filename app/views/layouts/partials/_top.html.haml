@@ -41,7 +41,7 @@
                 %li
                   = link_to t('pages.orders'), orders_path
                 %li
-                  = link_to t('pages.settings'), settings_users_path
+                  = link_to t('pages.settings'), edit_user_registration_path
                 %li.divider{role: "separator"}
                 %li
                   = link_to t('action.logout'), destroy_user_session_path, method: :delete
@@ -78,7 +78,7 @@
                 %li
                   = link_to t('pages.orders'), orders_path
                 %li
-                  = link_to t('pages.settings'), settings_users_path
+                  = link_to t('pages.settings'), edit_user_registration_path
                 %li.divider{role: "separator"}
                 %li
                   = link_to t('action.logout'), destroy_user_session_path, method: :delete

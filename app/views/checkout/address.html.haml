@@ -34,13 +34,13 @@
           %h3.general-subtitle= t('.billaddress')
           %p.general-info-text= t('checkout.allrequired')
         = f.simple_fields_for :billing_address, @form.billing_address_form, wrapper: :custom do |bia|
-          = render partial: "users/address", locals: { adr: bia }
+          = render partial: "devise/registrations/address", locals: { adr: bia }
       .col-md-5.col-md-offset-1.mb-60
         .egn-shipping-block{style: ('display: none;' unless @form.order.use_billing.nil?)}
           .visible-xs.visible-sm
             %h3.general-subtitle= t('.shaddress')
           = f.simple_fields_for :shipping_address, @form.shipping_address_form, wrapper: :custom do |sh|
-            = render partial: "users/address", locals: { adr: sh }
+            = render partial: "devise/registrations/address", locals: { adr: sh }
         .form-group.checkbox
           %label.checkbox-label
             %input.checkbox-input.egn-use_billing{type: "checkbox", hidden: "true", name: "order[use_billing]", checked: (true unless last_order.use_billing.nil?)}

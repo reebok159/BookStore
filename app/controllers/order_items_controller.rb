@@ -1,20 +1,15 @@
 class OrderItemsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource find_by: :id
 
   def create
-    item = last_order.order_items.find_by(book_id: filtered_params[:book_id])
-    if item
-      item.increment(:quantity, filtered_params[:quantity])
-    else
-      item = last_order.order_items.build(filtered_params)
-    end
+    item = last_order.order_items.find_or_initialize_by(book_id: filtered_params[:book_id])
+    item.increment(:quantity, filtered_params[:quantity])
     flash[:notice] = item.save ? t('order_item.create_success') : t('order_item.create_fail')
     redirect_back(fallback_location: root_path)
   end
 
   def update
-    item = last_order.order_items.find_by(id: params[:id])
-    flash[:alert] = t('order_item.update_fail') unless item&.update(filtered_params)
+    flash[:alert] = t('order_item.update_fail') unless @order_item&.update(filtered_params)
     redirect_back(fallback_location: root_path)
   end
 

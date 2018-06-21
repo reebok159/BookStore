@@ -1,12 +1,12 @@
 class ReviewsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
 
   def create
-    review = current_user.reviews.new(review_params)
-    if review.save
+    if @review.save
       flash[:notice] = t('reviews.createsuccess')
     else
-      flash[:alert] = t('reviews.createfail')
+      flash[:alert] = "#{t('reviews.createfail')}. "
+      flash[:alert] << @review.errors.full_messages.join(', ')
     end
     redirect_back(fallback_location: root_path)
   end

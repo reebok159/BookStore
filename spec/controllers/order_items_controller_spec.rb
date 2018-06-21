@@ -63,7 +63,7 @@ RSpec.describe OrderItemsController, type: :controller do
       it 'should not change quantity' do
         rand_id = '-1232352'
         patch :update, params: { id: rand_id, order_item: { quantity: 1 } }
-        expect(flash[:alert]).to match I18n.t('order_item.update_fail')
+        expect(flash[:alert]).to match "Couldn't find OrderItem"
       end
 
       it 'set quantity to 1 if new value is not valid' do

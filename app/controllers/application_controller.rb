@@ -3,8 +3,10 @@ class ApplicationController < ActionController::Base
   before_action :last_order, :set_locale, :current_ability
   helper_method :last_order
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to main_app.root_url, alert: exception.message
+  [CanCan::AccessDenied, ActiveRecord::RecordNotFound].each do |item|
+    rescue_from item do |exception|
+      redirect_to main_app.root_url, alert: exception.message
+    end
   end
 
   def set_locale
@@ -28,7 +30,10 @@ class ApplicationController < ActionController::Base
   end
 
   def clear_guest_cookies
-    cookies.delete(:save_cart)
     cookies.delete(:order_id)
+  end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, last_order)
   end
 end
