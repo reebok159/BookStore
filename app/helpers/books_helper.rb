@@ -11,6 +11,6 @@ module BooksHelper
   end
 
   def total_books
-    Book.count
+    Book.all.size
   end
 end

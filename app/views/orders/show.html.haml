@@ -50,7 +50,7 @@
             %td
               %span.in-grey-600= t('checkout.itemlist.price')
             %td
-              %span.font-16.in-gold-500= number_to_currency(item.price, price_options)
+              %span.font-16.in-gold-500= number_to_currency(order_item.price, price_options)
           %tr
             %td.vertical-middle
               %span.in-grey-600= t('checkout.itemlist.quantity')
@@ -60,7 +60,7 @@
             %td
               %span.in-grey-600= t('checkout.itemlist.subtotal')
             %td
-              %span.font-16.in-gold-500= number_to_currency((order_item.quantity * item.price), price_options)
+              %span.font-16.in-gold-500= number_to_currency((order_item.quantity * order_item.price), price_options)
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
       %thead
@@ -85,13 +85,13 @@
               %p.title= item.name
               %p.in-grey-600.fw-300= item.short_desc
             %td
-              %span.font-16.in-gold-500= number_to_currency(item.price, price_options)
+              %span.font-16.in-gold-500= number_to_currency(order_item.price, price_options)
             %td
               %span.ml-30= order_item.quantity
             %td
-              %span.font-16.in-gold-500= number_to_currency((order_item.quantity * item.price), price_options)
+              %span.font-16.in-gold-500= number_to_currency((order_item.quantity * order_item.price), price_options)
   .text-center.general-text-right
     %p.in-gold-500.font-18= t('checkout.ordersumm')
     %table.general-summary-table.general-summary-table-right.general-text-right
-      = render partial: "checkout/cost", object: @order
+      = render partial: "cost", object: @order, as: 'order'
 

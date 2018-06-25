@@ -3,7 +3,7 @@
 class OrderMailer < ApplicationMailer
   def complete_email
     @order = params[:order]
-    @user = params[:user]
+    @user = @order.user
     mail(to: @user.email, subject: I18n.t('mailer.order.subject'))
   end
 end

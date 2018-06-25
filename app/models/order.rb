@@ -40,6 +40,10 @@ class Order < ApplicationRecord
     end
   end
 
+  def save_price_items
+    order_items.collect { |item| item.update(price: item.book.price) }
+  end
+
   def total_quantity
     order_items.pluck(:quantity).sum
   end

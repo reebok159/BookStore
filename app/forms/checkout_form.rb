@@ -16,7 +16,10 @@ class CheckoutForm
     when :delivery then
       @order.delivery_method = DeliveryMethod.find_by(id: @params[:delivery_method])
     when :payment then @order.build_credit_card(@params[:credit_card])
-    when :confirm then processing_confirm
+    when :confirm
+      processing_confirm
+      deactivate_coupon
+      OrderMailer.with(order: @order).complete_email.deliver_now
     end
     @order.save
   end
@@ -60,6 +63,13 @@ class CheckoutForm
     @order.completed_at = Time.current
     @order.total_price = @order.pre_total_price
     @order.status = :in_queue
+    @order.save_price_items
     @order.save
+  end
+
+  def deactivate_coupon
+    return if @order.coupon.nil?
+    coupon = @order.coupon
+    coupon.update(activated: true) if coupon.coupon_type == 'one_time'
   end
 end

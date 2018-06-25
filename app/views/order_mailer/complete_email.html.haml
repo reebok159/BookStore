@@ -19,7 +19,7 @@
       %td= item.name
       %td= number_to_currency(item.price, price_options)
       %td= order_item.quantity
-      %td= number_to_currency((order_item.quantity * item.price), price_options)
+      %td= number_to_currency((order_item.quantity * order_item.price), price_options)
 - unless @order.coupon.nil?
   %br
   %br= "#{I18n.t('cart.total.coupon')}:"
