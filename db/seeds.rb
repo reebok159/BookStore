@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ffaker'
 
 def generate_category
@@ -28,7 +30,7 @@ end
 
 def add_image_to_book(book, add = false)
   return if !Rails.env.production? && !add
-  book.images << Image.new(remote_image_url: FFaker::Book.cover(nil, "328x506"))
+  book.images << Image.new(remote_image_url: FFaker::Book.cover(nil, '328x506'))
 end
 
 def add_authors_to_book(book)
@@ -43,12 +45,12 @@ def add_authors_to_book(book)
 end
 
 def create_admin_user
-  user = User.new(email: "admin@loc.loc", is_admin: true, password: "123456q")
+  user = User.new(email: 'admin@loc.loc', is_admin: true, password: '123456q')
   user.skip_confirmation!
   user.save!
 end
 
-def create_coupon(name = "Test", code = "test-coupon")
+def create_coupon(name = 'Test', code = 'test-coupon')
   Coupon.create(
     name: name,
     min_sum_to_activate: 0,
@@ -75,5 +77,5 @@ if ENV['generate_books']
 end
 
 create_admin_user
-create_coupon("New year coupon", "zzafg-8")
+create_coupon('New year coupon', 'zzafg-8')
 create_delivery_methods

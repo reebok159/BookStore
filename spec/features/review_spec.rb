@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'reviews', type: :feature do
   let(:review) { attributes_for(:review) }
 

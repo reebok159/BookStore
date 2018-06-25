@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'address_tests' do
   describe 'validations' do
     it { is_expected.to validate_presence_of(:phone) }

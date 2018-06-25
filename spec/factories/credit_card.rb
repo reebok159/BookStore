@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :credit_card do
     number { rand(10**15..10**16) }

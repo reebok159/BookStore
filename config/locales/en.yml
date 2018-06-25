@@ -287,3 +287,10 @@ en:
         password_confirmation: "Password confirmation"
         current_password: "Current password"
         remember_me: "Remember me"
+  mailer:
+    order:
+      subject: '[BookStore] Order Information'
+      number: "Order number: R%{number}!"
+      message: 'Thank you for Your order!'
+      ordinfo: 'Order information'
+      items: 'Items'

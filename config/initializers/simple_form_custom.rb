@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 SimpleForm.setup do |config|
   config.label_text = proc { |label, _required| label.to_s }
   config.wrappers :custom, class: 'form-group',

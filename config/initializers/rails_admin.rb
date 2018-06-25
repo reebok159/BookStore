@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require Rails.root.join('lib', 'rails_admin', 'moderation_review.rb')
 require Rails.root.join('lib', 'rails_admin', 'order_methods.rb')
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FeatureHelper
   def login(email, password)
     visit root_path

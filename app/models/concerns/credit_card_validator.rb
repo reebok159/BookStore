@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreditCardValidator < ActiveModel::Validator
   def validate(record)
     expire_time = safe_date(record.expires)
@@ -13,7 +15,7 @@ class CreditCardValidator < ActiveModel::Validator
 
   def safe_date(expires, default = nil)
     splitted = expires&.split('/')
-    Time.new('20' << splitted[1], splitted[0])
+    Time.new("20#{splitted[1]}", splitted[0])
   rescue StandardError
     default
   end

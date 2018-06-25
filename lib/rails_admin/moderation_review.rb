@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_admin/config/actions'
 require 'rails_admin/config/actions/base'
 
@@ -35,7 +37,7 @@ module RailsAdmin
         end
 
         register_instance_option :controller do
-          Proc.new do
+          proc do
             status = 'rejected'
             status = 'approved' if params['status'] == 'approve'
             @object.update_attribute(:status, status)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddressForm
   include ActiveModel::Model
 
@@ -24,7 +26,7 @@ class AddressForm
     @params.keys.find { |item| types.include? item }
   end
 
-  def address(type)
+  def get_address(type)
     return @address if type == @type
     @current_user.send("#{type}_address") || @current_user.send("build_#{type}_address")
   end

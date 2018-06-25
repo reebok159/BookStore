@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Admin panel', type: :feature do
   before :each do
     allow_any_instance_of(User).to receive(:valid?).and_return(true)

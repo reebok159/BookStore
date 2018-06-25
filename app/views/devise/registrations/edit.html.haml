@@ -16,14 +16,14 @@
             .col-md-5.col-md-offset-1
               %h3.general-subtitle.mt-0= t('settings.shaddress')
         .row
-          = simple_form_for @addr_form.address('billing'), url: update_address_path, html: { method: :put }, wrapper: :custom do |f|
+          = simple_form_for @addr_form.get_address('billing'), url: update_address_path, html: { method: :put }, wrapper: :custom do |f|
             .col-md-5.mb-40
               .visible-xs.visible-sm
                 %h3.general-subtitle.mt-0= t('settings.billaddress')
               = render partial: "address", locals: { adr: f }
               .text-center.general-text-align
                 = f.button :submit, t('action.save'), class: "btn btn-default mb-20"
-          = simple_form_for @addr_form.address('shipping'), url: update_address_path, html: { method: :put }, wrapper: :custom do |f|
+          = simple_form_for @addr_form.get_address('shipping'), url: update_address_path, html: { method: :put }, wrapper: :custom do |f|
             .col-md-5.col-md-offset-1.mb-25
               .visible-xs.visible-sm
                 %h3.general-subtitle.mt-0= t('settings.shaddress')

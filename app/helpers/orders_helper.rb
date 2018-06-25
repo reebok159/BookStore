@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OrdersHelper
   def order_filters
     Order.statuses.select { |_, val| val.positive? }

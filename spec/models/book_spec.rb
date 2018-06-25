@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
   let(:category1) { create(:category) }
   let(:category2) { create(:category, name: "#{category1.name}-2") }
-  let!(:book1) { create(:book, price: 10, category: category1, name: "aab") }
-  let!(:book2) { create(:book, price: 2, category: category2, name: "ccb") }
-  let!(:book3) { create(:book, price: 15, category: category2, name: "zza") }
-  let!(:book4) { create(:book, price: 4, category: category1, name: "xaz") }
+  let!(:book1) { create(:book, price: 10, category: category1, name: 'aab') }
+  let!(:book2) { create(:book, price: 2, category: category2, name: 'ccb') }
+  let!(:book3) { create(:book, price: 15, category: category2, name: 'zza') }
+  let!(:book4) { create(:book, price: 4, category: category1, name: 'xaz') }
 
   describe 'ActiveRecord associations' do
     it { is_expected.to have_many(:order_items) }

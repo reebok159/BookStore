@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Actions with order', type: :feature do
   before :each do
     @book = create(:book)

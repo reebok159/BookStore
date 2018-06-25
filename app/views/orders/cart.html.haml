@@ -110,7 +110,7 @@
               %td
                 %strong.font-18= "#{t('cart.total.ordertotal')}:"
               %td
-                %strong.font-18= number_to_currency(@order.total_items, price_options)
+                %strong.font-18= number_to_currency(@order.pre_total_price, price_options)
           = link_to t('cart.checkout'), checkout_index_path(:address), class: "btn btn-default mb-20 visible-xs-inline-block"
   .text-center
     = link_to t('cart.checkout'), checkout_index_path(:address), class: "btn btn-default mb-20 hidden-xs"

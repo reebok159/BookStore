@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDeliveryMethods < ActiveRecord::Migration[5.1]
   def change
     create_table :delivery_methods do |t|

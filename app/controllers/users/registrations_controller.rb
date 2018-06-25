@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Users
   class RegistrationsController < Devise::RegistrationsController
-    before_action :init, only: %i[edit update_address]
+    before_action :init, only: %i[edit update update_address]
 
     def update_address
       self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)

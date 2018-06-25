@@ -1,6 +1,8 @@
-class Image < ApplicationRecord
-  belongs_to :imageable, polymorphic: true, optional: true
-  mount_uploader :image, ImageUploader
+# frozen_string_literal: true
 
-  NOIMAGE_IMG = 'noimage.png'.freeze
+class Image < ApplicationRecord
+  mount_uploader :image, ImageUploader
+  NOIMAGE_IMG = 'noimage.png'
+
+  belongs_to :imageable, polymorphic: true, optional: true
 end

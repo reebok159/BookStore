@@ -1,17 +1,17 @@
 - price_options = { unit: '$', format: '%n%u' }
-%h3= "Order number: R#{@order.number}"
-Thank you for Your order!
-%br Order information:
+%h3= I18n.t('mailer.order.number', number: @order.number)
+= I18n.t('mailer.order.message')
+%br= "#{I18n.t('mailer.order.ordinfo')}:"
 %br
 %br
-%b Items:
+%b= "#{I18n.t('mailer.order.items')}:"
 %table{ border: "1px", style: "border-collapse: collapse; border:1px #b4b4b4 solid", cellpadding: "5" }
   %tr
     %td #
-    %td Product
-    %td Price
-    %td Quantity
-    %td Subtotal
+    %td= I18n.t('cart.itemlist.product')
+    %td= I18n.t('cart.itemlist.price')
+    %td= I18n.t('cart.itemlist.quantity')
+    %td= I18n.t('cart.itemlist.subtotal')
   - @order.items.each_with_index do |order_item, i|
     - item = order_item.book
     %tr
@@ -22,14 +22,14 @@ Thank you for Your order!
       %td= number_to_currency((order_item.quantity * item.price), price_options)
 - unless @order.coupon.nil?
   %br
-  %br Coupon:
+  %br= "#{I18n.t('cart.total.coupon')}:"
   = number_to_currency(@order.coupon_discount, price_options)
 %br
-  %b SubTotal:
+  %b= "#{I18n.t('cart.itemlist.subtotal')}:"
 = number_to_currency(@order.subtotal, price_options)
 %br
-  %b Delivery:
+  %b= "#{I18n.t('checkout.steps.delivery')}:"
 = number_to_currency(@order.delivery_price, price_options)
 %br
-  %b Total:
+  %b= "#{I18n.t('checkout.itemlist.total')}:"
 = number_to_currency(@order.pre_total_price, price_options)

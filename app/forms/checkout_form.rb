@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CheckoutForm
   include ActiveModel::Model
 
@@ -37,7 +39,7 @@ class CheckoutForm
 
   def filled?
     return false unless @order.credit_card&.valid? && @order.delivery_method&.valid? &&
-    @order.billing_address&.valid? && @order.shipping_address&.valid?
+                        @order.billing_address&.valid? && @order.shipping_address&.valid?
     true
   end
 
@@ -55,7 +57,7 @@ class CheckoutForm
   end
 
   def processing_confirm
-    @order.completed_at = Time.now
+    @order.completed_at = Time.current
     @order.total_price = @order.pre_total_price
     @order.status = :in_queue
     @order.save

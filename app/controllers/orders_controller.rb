@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   load_and_authorize_resource :order, only: %i[index show]
 

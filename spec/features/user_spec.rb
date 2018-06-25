@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'User test', type: :feature do
   let!(:user) { create(:user, email: 'tsets@ss.ss', password: '12345678q') }
 

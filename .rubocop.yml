@@ -6,8 +6,6 @@ AllCops:
     - config/**/*
     - spec/**/*
     - tmp/**/*
-    - app/controllers/users/**
-    - app/helpers/devise_helper.rb
 Style/StringLiterals:
   EnforcedStyle: single_quotes
   SupportedStyles:
@@ -18,6 +16,4 @@ Metrics/LineLength:
 Style/Documentation:
   Enabled: false
 Documentation:
-  Enabled: false
-FrozenStringLiteralComment:
   Enabled: false

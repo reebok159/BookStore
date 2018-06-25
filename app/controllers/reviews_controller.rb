@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   load_and_authorize_resource
 
@@ -5,8 +7,7 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:notice] = t('reviews.createsuccess')
     else
-      flash[:alert] = "#{t('reviews.createfail')}. "
-      flash[:alert] << @review.errors.full_messages.join(', ')
+      flash[:alert] = "#{t('reviews.createfail')}. #{@review.errors.full_messages.join(', ')}"
     end
     redirect_back(fallback_location: root_path)
   end

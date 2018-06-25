@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BooksHelper
   def selected_sort
     selected = params[:sort].to_s

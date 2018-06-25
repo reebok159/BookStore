@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActiveRecord::Base
   def dump_fixture
     fixture_file = "#{Rails.root}/test/fixtures/#{self.class.table_name}.yml"

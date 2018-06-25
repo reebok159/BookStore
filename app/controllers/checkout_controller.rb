@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CheckoutController < ApplicationController
   include Wicked::Wizard
   before_action :authenticate_user!, only: %i[show update]
@@ -26,8 +28,7 @@ class CheckoutController < ApplicationController
   private
 
   def init
-    order = active_order.decorate
-    @form ||= CheckoutForm.new(order)
+    @form ||= CheckoutForm.new(active_order.decorate)
   end
 
   def redirect_if_empty

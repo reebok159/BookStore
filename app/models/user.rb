@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -10,11 +12,9 @@ class User < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_one :billing_address, as: :billing_a, dependent: :destroy
   has_one :shipping_address, as: :shipping_a, dependent: :destroy
-  accepts_nested_attributes_for :billing_address, allow_destroy: true
-  accepts_nested_attributes_for :shipping_address, allow_destroy: true
 
   validates :email, presence: true, email: true, uniqueness: true
-  validates_confirmation_of :password
+  validates :password, confirmation: true
   validates :password, presence: true, unless: ->(u) { u.password.nil? }
 
   def self.from_omniauth(auth)
