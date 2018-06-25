@@ -7,6 +7,7 @@ module Users
 
       if @user.persisted?
         sign_in_and_redirect @user, event: :authentication
+        save_cart
         set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
       else
         session['devise.facebook_data'] = request.env['omniauth.auth']

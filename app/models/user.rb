@@ -18,11 +18,19 @@ class User < ApplicationRecord
   validates :password, presence: true, unless: ->(u) { u.password.nil? }
 
   def self.from_omniauth(auth)
+    registered = where(email: auth.info.email).first
+    return registered.add_omni(auth) if registered.present?
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.skip_confirmation!
       user.save!
     end
+  end
+
+  def add_omni(auth)
+    update_attributes(provider: auth.provider, uid: auth.uid)
+    confirm unless confirmed?
+    self
   end
 end
