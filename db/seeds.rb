@@ -74,8 +74,10 @@ if ENV['generate_books']
   5.times { generate_category }
   30.times { generate_author }
   50.times { generate_book }
+else
+  create_admin_user
+  create_coupon('New year coupon', 'zzafg-8')
+  create_delivery_methods
 end
 
-create_admin_user
-create_coupon('New year coupon', 'zzafg-8')
-create_delivery_methods
+
