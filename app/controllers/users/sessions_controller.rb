@@ -3,7 +3,7 @@
 module Users
   class SessionsController < Devise::SessionsController
     def create
-      save_cart unless current_user.nil?
+      save_cart if current_user
       super
     end
   end

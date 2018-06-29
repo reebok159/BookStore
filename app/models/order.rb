@@ -53,7 +53,7 @@ class Order < ApplicationRecord
   end
 
   def coupon_discount
-    coupon.nil? ? 0 : coupon.discount
+    coupon&.discount || 0
   end
 
   def delivery_price
@@ -65,6 +65,6 @@ class Order < ApplicationRecord
   end
 
   def check_need_coupon
-    update(coupon: nil) if total_quantity.zero? && !coupon.nil?
+    update(coupon: nil) if total_quantity.zero? && coupon
   end
 end

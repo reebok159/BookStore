@@ -2,7 +2,7 @@
   %h1.mt-0.mb-25= t('orders.title')
   %p.lead.small.mb-10.visible-xs= t('orders.filterby')
   .dropdowns.dropdown.general-order-dropdown
-    = render partial: 'filter'
+    = render 'filter'
   .visible-xs
     - if @orders.count.zero?
       = t('orders.donthaveorders')

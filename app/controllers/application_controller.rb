@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def last_order
-    return create_order if current_user.nil?
+    return create_order unless current_user
     current_user.orders.in_progress.first_or_create
   end
 
@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     user_items = last_order.order_items
     guest_items.find_each do |item|
       found_item = user_items.find_by(book_id: item.book_id)
-      user_items.push(item) && next if found_item.nil?
+      user_items.push(item) && next unless found_item
       found_item.increment!(:quantity, item.quantity)
     end
     remove_guest_data

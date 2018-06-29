@@ -1,2 +1,2 @@
-$("<%= escape_javascript(render partial: 'books', object: @books) %>").appendTo('main.container .books-container');
-$('.text-center.view_more').html("<%=j render partial: 'view_more', object: @books %>")
+$("<%= escape_javascript(render 'books', books: @books) %>").appendTo('main.container .books-container');
+$('.text-center.view_more').html("<%=j render 'view_more', books: @books %>")

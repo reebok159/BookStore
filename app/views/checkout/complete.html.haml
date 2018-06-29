@@ -1,5 +1,5 @@
 %main.container
-  = render partial: "head"
+  = render "head"
   %ul.steps.list-inline
     %li.step.done
       %span.step-number
@@ -32,16 +32,7 @@
       .visible-xs
         %p.general-order-number.mb-0= "#{t('checkout.order')} ##{@form.order.number}"
         %p.general-address.mb-30= @form.order.completed_at
-      %p.general-address
-        = "#{@form.order.billing_address.first_name} #{@form.order.billing_address.last_name}"
-        %br
-        = @form.order.billing_address.address
-        %br
-        = "#{@form.order.billing_address.city} #{@form.order.billing_address.zip}"
-        %br
-        = @form.order.billing_address.country
-        %br
-        = "#{t('users.addrform.phone')} #{@form.order.billing_address.phone}"
+      = render "orders/address", address: @form.order.billing_address
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0= "#{t('checkout.order')} ##{@form.order.number}"
       %p.general-address.mb-30= @form.order.completed_at
@@ -101,6 +92,6 @@
   .text-center.general-text-right
     %p.in-gold-500.font-18= t('checkout.ordersumm')
     %table.general-summary-table.general-summary-table-right.general-text-right
-      = render partial: "cost", object: @form.order, as: 'order'
+      = render "cost", order: @form.order
   .text-center
     = link_to(t('checkout.backtostore'), root_path, class: "btn btn-default mb-20")

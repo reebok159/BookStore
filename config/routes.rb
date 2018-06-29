@@ -22,5 +22,4 @@ Rails.application.routes.draw do
   resources :coupons, only: [:create]
 
   get 'cart', to: 'orders#cart', as: 'cart_page'
-  #put 'cart', to: 'orders#activate_coupon', as: 'activate_coupon'
 end

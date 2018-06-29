@@ -1,5 +1,5 @@
 %main.container
-  = render partial: "head"
+  = render "head"
   %ul.steps.list-inline
     %li.step.active
       %span.step-number 1
@@ -50,7 +50,7 @@
     .general-text-align.mb-60
       %p.in-gold-500.font-18= t('checkout.ordersumm')
       %table.general-summary-table
-        = render partial: "cost", object: @form.order, as: 'order'
+        = render "cost", order: @form.order
     - if params.key? :edit
       = hidden_field nil, "edit"
     = f.button :submit, t('checkout.saveandcontinue'), class: "btn btn-default center-block mb-20"

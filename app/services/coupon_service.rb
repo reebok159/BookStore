@@ -7,7 +7,7 @@ class CouponService
   end
 
   def check_coupon_errors
-    return I18n.t('coupon.noexist') if @coupon.nil?
+    return I18n.t('coupon.noexist') unless @coupon
     return I18n.t('coupon.cantactivate') if empty_order?
     return I18n.t('coupon.sumerror') if not_enough_sum?
     return I18n.t('coupon.termerror') if expired?
@@ -21,7 +21,8 @@ class CouponService
   end
 
   def expired?
-    !@coupon.expires.nil? && Time.current > @coupon.expires
+    expires = @coupon.expires
+    expires && Time.current > expires
   end
 
   def empty_order?

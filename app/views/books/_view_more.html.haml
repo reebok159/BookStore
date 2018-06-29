@@ -1,2 +1,2 @@
-- unless @books.last_page?
-  = link_to_next_page(@books, "#{t('action.view_more')}", remote: true, class: "btn btn-primary load-more-books-btn")
+- unless books.last_page?
+  = link_to_next_page(books, "#{t('action.view_more')}", remote: true, class: "btn btn-primary load-more-books-btn")

@@ -1,5 +1,5 @@
-%h3.in-gold-500.mb-25 #{t('books.reviews')} (#{@reviews.count})
-- @reviews.each do |item|
+%h3.in-gold-500.mb-25 #{t('books.reviews')} (#{reviews.count})
+- reviews.each do |item|
   .general-message-wrap.divider-lg
     .clearfix
       %span.img-circle.logo-size.inlide-block.pull-left.logo-empty= item.user_letter
@@ -18,6 +18,6 @@
         %p= item.text
 %h3= t('reviews.writereview')
 - if user_signed_in?
-  = render 'reviews/new', object: @book
+  = render 'reviews/new', book: book
 - else
   = t('users.mustlogin')

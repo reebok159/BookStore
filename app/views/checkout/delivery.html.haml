@@ -1,5 +1,5 @@
 %main.container
-  = render partial: "head"
+  = render "head"
   %ul.steps.list-inline
     %li.step.done
       %span.step-number
@@ -72,7 +72,7 @@
     .general-text-align
       %p.in-gold-500.font-18= t('checkout.ordersumm')
       %table.general-summary-table
-        = render partial: "cost", object: @form.order, as: 'order'
+        = render "cost", order: @form.order
     .text-center
       - if params.key? :edit
         = hidden_field nil, "edit"

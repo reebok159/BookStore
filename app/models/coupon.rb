@@ -7,4 +7,8 @@ class Coupon < ApplicationRecord
 
   validates :code, presence: true, uniqueness: true
   validates :discount, presence: true
+
+  def deactivate
+    update(activated: true) if coupon_type == 'one_time'
+  end
 end

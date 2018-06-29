@@ -69,8 +69,7 @@ class CheckoutForm
   end
 
   def deactivate_coupon
-    return if @order.coupon.nil?
-    coupon = @order.coupon
-    coupon.update(activated: true) if coupon.coupon_type == 'one_time'
+    return unless @order.coupon
+    @order.coupon.deactivate
   end
 end

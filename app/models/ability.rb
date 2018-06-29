@@ -6,7 +6,12 @@ class Ability
   def initialize(user, order = nil)
     user ||= User.new
 
-    can(:manage, :all) && return if user.is_admin?
+    if user.is_admin?
+      can :create, Review, user_id: user.id
+      can :manage, :all
+      return
+    end
+
     can :read, Book
     can :read, Review
     can :create, Coupon

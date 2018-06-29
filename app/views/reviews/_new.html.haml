@@ -4,7 +4,7 @@
   %b Rating:
   .rating_bar
   = rew.hidden_field :rating, value: 1
-  = rew.hidden_field :book_id, value: "#{@book.id}"
+  = rew.hidden_field :book_id, value: "#{book.id}"
   = rew.button :submit, t('reviews.post'), class: 'btn btn-default'
 
 

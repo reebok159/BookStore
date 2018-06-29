@@ -1,4 +1,4 @@
-- @books.each_slice(4) do |slice|
+- books.each_slice(4) do |slice|
   .row
     - slice.each do |book|
-      = render partial: 'book', object: book
+      = render 'book', book: book

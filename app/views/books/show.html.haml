@@ -54,4 +54,4 @@
           %p.pull-left= t('books.materials')
           %p.lead.small.pull-right= @book.materials_list
   .mb-80
-    = render partial: "reviews", object: @book
+    = render "reviews", reviews: @reviews, book: @book

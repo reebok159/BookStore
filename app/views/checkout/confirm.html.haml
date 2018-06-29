@@ -1,5 +1,5 @@
 %main.container
-  = render partial: "head"
+  = render "head"
   %ul.steps.list-inline
     %li.step.done
       %span.step-number
@@ -118,6 +118,6 @@
   .text-center.general-text-right
     %p.in-gold-500.font-18= t('checkout.ordersumm')
     %table.general-summary-table.general-summary-table-right.general-text-right
-      = render partial: "cost", object: @form.order, as: 'order'
+      = render "cost", order: @form.order
     .text-center
       = link_to t('checkout.placeorder'), wizard_path, method: :patch, class: "btn btn-default mb-20"

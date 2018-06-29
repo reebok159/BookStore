@@ -45,7 +45,7 @@
         - if @books.size.zero?
           = t('search.notfound', text: params[:search])
 
-      = render partial: 'books', object: @books
+      = render 'books', books: @books
     .text-center.view_more
-      = render partial: 'view_more', object: @books
+      = render 'view_more', books: @books
 
