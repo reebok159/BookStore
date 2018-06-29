@@ -8,7 +8,7 @@ module Users
       self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
       if @addr_form.update(address_params)
         flash[:notice] = t('users.updatesuccess')
-        return redirect_to edit_user_registration_path
+        redirect_to(edit_user_registration_path) && return
       end
       flash[:notice] = t('users.updatefail')
       render :edit

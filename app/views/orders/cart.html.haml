@@ -85,10 +85,10 @@
   .general-order-wrap
     .row
       .col-sm-4
-        = simple_form_for @order, method: :post, url: activate_coupon_path, html: { novalidate: false } do |f|
+        = simple_form_for :coupon, method: :post, url: coupons_path, html: { novalidate: false } do |f|
           .input-group.general-input-group
             %label.input-label= t('cart.coupon.enteryourcode')
-            = f.input :coupon_id, input_html: {placeholder: "#{t('cart.coupon.enteryourcode')}", class: "form-control mb-30", type: "text", value: ""}, required: true, label: false
+            = f.input :code, input_html: {placeholder: "#{t('cart.coupon.enteryourcode')}", class: "form-control mb-30", type: "text", value: ""}, required: true, label: false
             %div
               = f.button :submit, t('cart.coupon.apply'), class: "btn btn-primary mr-5 mb-15 visible-xs-inline-block"
               = f.button :submit, t('cart.coupon.updcart'), class: "btn btn-primary mb-15 res-block"

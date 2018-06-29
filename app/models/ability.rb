@@ -9,6 +9,7 @@ class Ability
     return can :manage, :all if user.is_admin?
     can :read, Book
     can :read, Review
+    can :create, Coupon
     return unless order
     can %i[create update destroy], OrderItem, order_id: order.id
 

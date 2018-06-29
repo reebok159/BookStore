@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   resources :checkout, only: %i[index show update]
   resources :orders, only: %i[index show]
   resources :order_items, only: %i[create update destroy]
+  resources :coupons, only: [:create]
 
   get 'cart', to: 'orders#cart', as: 'cart_page'
-  post 'cart', to: 'orders#activate_coupon', as: 'activate_coupon'
+  #put 'cart', to: 'orders#activate_coupon', as: 'activate_coupon'
 end

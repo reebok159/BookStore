@@ -48,7 +48,7 @@ describe 'Actions with order', type: :feature do
     context 'coupon' do
       it 'activate' do
         visit cart_page_path
-        fill_in 'order[coupon_id]', with: 'testcoupon'
+        fill_in 'coupon[code]', with: 'testcoupon'
         click_button I18n.t('cart.coupon.updcart')
         expect(page).to have_content I18n.t('coupon.activatesuccess')
       end

@@ -2,7 +2,7 @@
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 
-start_simpleCov = true
+start_simpleCov = false
 
 if start_simpleCov
   require 'simplecov'
