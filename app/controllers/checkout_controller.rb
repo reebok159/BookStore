@@ -28,7 +28,7 @@ class CheckoutController < ApplicationController
   private
 
   def init
-    @form ||= CheckoutForm.new(active_order.decorate)
+    @form = CheckoutForm.new(active_order.decorate)
   end
 
   def redirect_if_empty

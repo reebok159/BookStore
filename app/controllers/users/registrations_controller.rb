@@ -6,10 +6,7 @@ module Users
 
     def update_address
       self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
-      if @addr_form.update(address_params)
-        flash[:notice] = t('users.updatesuccess')
-        redirect_to(edit_user_registration_path) && return
-      end
+      redirect_to(edit_user_registration_path, notice: t('users.updatesuccess')) && return if @addr_form.update(address_params)
       flash[:notice] = t('users.updatefail')
       render :edit
     end

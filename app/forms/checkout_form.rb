@@ -41,9 +41,10 @@ class CheckoutForm
   end
 
   def filled?
-    return false unless @order.credit_card&.valid? && @order.delivery_method&.valid? &&
-                        @order.billing_address&.valid? && @order.shipping_address&.valid?
-    true
+    @order.credit_card&.valid? &&
+      @order.delivery_method&.valid? &&
+      @order.billing_address&.valid? &&
+      @order.shipping_address&.valid?
   end
 
   private
