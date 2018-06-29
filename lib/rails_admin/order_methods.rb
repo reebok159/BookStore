@@ -21,8 +21,9 @@ module RailsAdmin
           Order
         end
 
-        register_instance_option :member do
-          true
+        register_instance_option :visible? do
+          true if bindings[:abstract_model]&.model_name == 'Order' &&
+                  bindings[:object].status != 'in_progress'
         end
       end
     end

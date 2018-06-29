@@ -35,11 +35,15 @@
         .col-sm-5
           %p.in-gold-500.font-18.mb-25= t('settings.privacy.email')
           = simple_form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: :edit_email }, class: "general-form-md" do |f|
-            .form-group.mb-35
-              = f.label :email, t('settings.privacy.enteremail'), class: "control-label input-label"
-              = f.input :email, input_html: { class: "form-control"}, placeholder: "#{t('settings.privacy.enteremail')}", label: false
-            .general-text-align
-              = f.button "submit", t('action.save'), class: "btn btn-default mb-35"
+            - if current_user.provider.nil?
+              .form-group.mb-35
+                = f.label :email, t('settings.privacy.enteremail'), class: "control-label input-label"
+                = f.input :email, input_html: { class: "form-control"}, placeholder: "#{t('settings.privacy.enteremail')}", label: false
+              .general-text-align
+                = f.button "submit", t('action.save'), class: "btn btn-default mb-35"
+            - else
+              .form-group.mb-35
+                = f.input :email, input_html: { class: "form-control"}, placeholder: "#{t('settings.privacy.email')}", label: false, disabled: true
         - if current_user.provider.nil?
           .col-sm-5.col-sm-offset-1
             %p.in-gold-500.font-18.mb-25= t('settings.privacy.password')

@@ -38,7 +38,7 @@ class BookDecorator < Draper::Decorator
   end
 
   def more_desc?
-    return false if object.full_desc.nil?
+    return false unless object.full_desc
     object.full_desc.length > Book::MAX_FULL_DESC_SHOW
   end
 
