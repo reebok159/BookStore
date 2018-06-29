@@ -29,7 +29,7 @@ class User < ApplicationRecord
   end
 
   def add_omni(auth)
-    update_attributes(provider: auth.provider, uid: auth.uid)
+    update(provider: auth.provider, uid: auth.uid)
     confirm unless confirmed?
     self
   end
