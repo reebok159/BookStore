@@ -15,4 +15,5 @@
 //= require jquery
 //= require jquery-ui
 //= require bootstrap
+//= require star-rating-svg
 //= require_tree .
