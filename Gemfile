@@ -9,7 +9,7 @@ end
 
 gem 'aasm', '~> 4.12', '>= 4.12.2'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
-gem 'cancancan', '~> 2.1.0', '>= 2.1.3'
+gem 'cancancan', '~> 2.2'
 gem 'carrierwave', '~> 1.1'
 gem 'coffee-rails', '~> 4.2'
 gem 'compass-rails', '~> 3.0', '>= 3.0.2'
