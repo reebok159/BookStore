@@ -68,7 +68,7 @@ en:
     clear_cart_success: "Cart was cleared successfully"
   reviews:
     createsuccess: 'Thanks for Review. It will be published as soon as Admin will approve it.'
-    createfail: 'Cannot create review'
+    createfail: 'Cannot create review. %{errors}'
     writereview: 'Write a review:'
     post: 'Post'
   users:

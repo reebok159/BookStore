@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:notice] = t('reviews.createsuccess')
     else
-      flash[:alert] = "#{t('reviews.createfail')}. #{@review.errors.full_messages.join(', ')}"
+      flash[:alert] = t('reviews.createfail', errors: @review.errors.full_messages.join(', '))
     end
     redirect_back(fallback_location: root_path)
   end
