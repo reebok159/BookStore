@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class CouponsController < ApplicationController
-  authorize_resource
-
   def activate
     @coupon = Coupon.find_by(code: coupon_params[:code])
     errors = CouponService.new(last_order, @coupon).check_coupon_errors

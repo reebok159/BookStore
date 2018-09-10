@@ -20,12 +20,17 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     registered = where(email: auth.info.email).first
     return registered.add_omni(auth) if registered.present?
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.skip_confirmation!
-      user.save!
-    end
+
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize { |u| u.save_data_from_omni(auth) }
+  end
+
+  private
+
+  def save_data_from_omni(auth)
+    self.email = auth.info.email
+    self.password = Devise.friendly_token[0, 20]
+    skip_confirmation!
+    save!
   end
 
   def add_omni(auth)

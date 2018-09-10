@@ -13,13 +13,10 @@ class CheckoutForm
     @params = params
     case step
     when :address then processing_address
-    when :delivery then
+    when :delivery
       @order.delivery_method = DeliveryMethod.find_by(id: @params[:delivery_method])
     when :payment then @order.build_credit_card(@params[:credit_card])
-    when :confirm
-      processing_confirm
-      deactivate_coupon
-      OrderMailer.with(order: @order).complete_email.deliver_now
+    when :confirm then complete_confirm_step
     end
     @order.save
   end
@@ -49,6 +46,12 @@ class CheckoutForm
 
   private
 
+  def complete_confirm_step
+    processing_confirm
+    deactivate_coupon
+    OrderMailer.with(order: @order).complete_email.deliver_now
+  end
+
   def processing_address
     @order.build_billing_address(@params[:billing_address])
     if @params.key? :use_billing
@@ -70,6 +73,7 @@ class CheckoutForm
 
   def deactivate_coupon
     return unless @order.coupon
+
     @order.coupon.deactivate
   end
 end

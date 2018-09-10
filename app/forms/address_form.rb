@@ -18,6 +18,7 @@ class AddressForm
   def build_address
     @type = address_type
     return unless @type
+
     @current_user.send(:"build_#{@type}", @params[@type])
   end
 
@@ -28,6 +29,7 @@ class AddressForm
 
   def get_address(type)
     return @address if type == @type
+
     @current_user.public_send("#{type}_address") || @current_user.public_send("build_#{type}_address")
   end
 end

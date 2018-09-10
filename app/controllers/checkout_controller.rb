@@ -46,6 +46,7 @@ class CheckoutController < ApplicationController
   def active_order
     last_completed_order_id = cookies.signed[:last_completed_order_id]
     return last_order unless last_completed_order_id
+
     current_user.orders.find_by(id: last_completed_order_id)
   end
 

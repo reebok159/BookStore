@@ -14,8 +14,8 @@ class Ability
 
     can :read, Book
     can :read, Review
-    can :activate, Coupon
     return unless order
+
     can %i[create update destroy], OrderItem, order_id: order.id
 
     if user.persisted?

@@ -17,11 +17,13 @@ class ApplicationController < ActionController::Base
 
   def last_order
     return create_order unless current_user
+
     current_user.orders.in_progress.first_or_create
   end
 
   def create_order
     return guest_order if cookies[:order_id] && guest_order.present?
+
     order = Order.create
     cookies.signed[:order_id] = order.id
     order
