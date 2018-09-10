@@ -14,14 +14,7 @@ class CheckoutController < ApplicationController
   end
 
   def update
-    if @form.update(order_params, step)
-      if params.key?(:edit) && @form.filled?
-        @form.order.update(checkout_state: :confirm)
-      else
-        @form.order.next_state!
-        save_order_for_last_step if step == :confirm
-      end
-    end
+    change_state if @form.update(order_params, step)
     render_wizard @form.order
   end
 
@@ -29,6 +22,16 @@ class CheckoutController < ApplicationController
 
   def init
     @form = CheckoutForm.new(active_order.decorate)
+  end
+
+  def change_state
+    @form.order.update(checkout_state: :confirm) && return if return_to_confirm?
+    @form.order.next_state!
+    save_order_for_last_step if step == :confirm
+  end
+
+  def return_to_confirm?
+    return true if params.key?(:edit) && @form.filled?
   end
 
   def redirect_if_empty
