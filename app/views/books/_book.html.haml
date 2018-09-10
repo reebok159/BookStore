@@ -11,7 +11,10 @@
             = button_tag(type: 'submit', class: 'thumb-hover-link ico-cart') do
               %i.fa.fa-shopping-cart.thumb-icon
   .general-thumb-info
-    %p.title= book.name
-    %p.font-16.in-gold-500= number_to_currency(book.price, price_options)
+    %p.title
+      = book.name
+    %p.font-16.in-gold-500
+      = number_to_currency(book.price, price_options)
     %span.divider-sm
-    %p.lead.small= book.authors_list
+    %p.lead.small
+      = book.authors_list

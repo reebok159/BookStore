@@ -1,22 +1,28 @@
-%h3.in-gold-500.mb-25 #{t('books.reviews')} (#{reviews.count})
+%h3.in-gold-500.mb-25
+  = "#{t('books.reviews')} (#{reviews.count})"
 - reviews.each do |item|
   .general-message-wrap.divider-lg
     .clearfix
-      %span.img-circle.logo-size.inlide-block.pull-left.logo-empty= item.user_letter
+      %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
+        = item.user_letter
       .ml-70
         %div
-          .general-message-date.hidden-xs= item.created_at
+          .general-message-date.hidden-xs
+            = item.created_at
           .max-240
             - if item.verified?
-              .general-message-verified #{t('books.verifyreview')}
-            .general-message-name= item.title
+              .general-message-verified
+                = t('books.verifyreview')
+            .general-message-name
+              = item.title
         .mb-15
           - (item.rating).times do
             %i.fa.fa-star.rate-star
-          - (5 - item.rating).times do
+          - (Review::MAX_RATING - item.rating).times do
             %i.fa.fa-star.rate-star.rate-empty
         %p= item.text
-%h3= t('reviews.writereview')
+%h3
+  = t('reviews.writereview')
 - if user_signed_in?
   = render 'reviews/new', book: book
 - else

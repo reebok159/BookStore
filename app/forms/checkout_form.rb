@@ -33,7 +33,7 @@ class CheckoutForm
   end
 
   def delivery_methods
-    DeliveryMethod.all
+    @delivery_methods ||= DeliveryMethod.all
   end
 
   def credit_cart_form

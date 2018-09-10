@@ -13,8 +13,10 @@
                 = link_to(item.image.url(:book_image), class: "img-link", target: "blank") do
                   = image_tag(item.image.url(:smallbook_image))
     .col-sm-6
-      %h1.mt-res-0= @book.name
-      %p.lead.small= @book.authors_list
+      %h1.mt-res-0
+        = @book.name
+      %p.lead.small
+        = @book.authors_list
       .row
         = simple_form_for :order_item, url: order_items_path, html: { class: "egn_book_cart" }  do |f|
           .col-xs-12.col-md-4
@@ -31,7 +33,8 @@
             = button_tag(type: 'submit', class: 'btn btn-default pull-right general-position') do
               = t('action.addtocart')
       .general-info-wrap.divider-lg
-        %p= t('books.description')
+        %p
+          = t('books.description')
         %p.lead.small.line-height-2
           %div<
             = @book.start_cutted_desc
@@ -43,15 +46,21 @@
                 = @book.other_cutted_desc
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left= t('books.published')
-          %p.lead.small.pull-right= @book.published_year
+          %p.pull-left
+            = t('books.published')
+          %p.lead.small.pull-right
+            = @book.published_year
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left= t('books.dimensions')
-          %p.lead.small.pull-right= @book.sizes
+          %p.pull-left
+            = t('books.dimensions')
+          %p.lead.small.pull-right
+            = @book.sizes
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left= t('books.materials')
-          %p.lead.small.pull-right= @book.materials_list
+          %p.pull-left
+            = t('books.materials')
+          %p.lead.small.pull-right
+            = @book.materials_list
   .mb-80
     = render "reviews", reviews: @reviews, book: @book

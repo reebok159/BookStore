@@ -1,7 +1,9 @@
 %main.container.general-main-wrap
   .text-center
-    %h1.mb-30= I18n.t('password.new.forgotpass')
-    %p.general-password-text= I18n.t('password.new.howtoresetphrase')
+    %h1.mb-30
+      = I18n.t('password.new.forgotpass')
+    %p.general-password-text
+      = I18n.t('password.new.howtoresetphrase')
   = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "general-form" }) do |f|
     .form-group.mb-25
       = f.input :email, required: true, autofocus: true, input_html: { class: "form-control"}, placeholder: I18n.t('password.new.entermail'), label: false

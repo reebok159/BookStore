@@ -4,24 +4,30 @@
     %li.step.done
       %span.step-number
         %i.fa.fa-check.step-icon
-      %span.step-text.hidden-xs= t('checkout.steps.address')
+      %span.step-text.hidden-xs
+        = t('checkout.steps.address')
     %li.step-divider
     %li.step.active
       %span.step-number 2
-      %span.step-text.hidden-xs= t('checkout.steps.delivery')
+      %span.step-text.hidden-xs
+        = t('checkout.steps.delivery')
     %li.step-divider
     %li.step
       %span.step-number 3
-      %span.step-text.hidden-xs= t('checkout.steps.payment')
+      %span.step-text.hidden-xs
+        = t('checkout.steps.payment')
     %li.step-divider
     %li.step
       %span.step-number 4
-      %span.step-text.hidden-xs= t('checkout.steps.confirm')
+      %span.step-text.hidden-xs
+        = t('checkout.steps.confirm')
     %li.step-divider
     %li.step
       %span.step-number 5
-      %span.step-text.hidden-xs= t('checkout.steps.complete')
-  %h3.general-subtitle= t('.dmethod')
+      %span.step-text.hidden-xs
+        = t('checkout.steps.complete')
+  %h3.general-subtitle
+    = t('.dmethod')
   = simple_form_for @form.order, url: wizard_path, method: :patch, html: { novalidate: false } do |f|
     .visible-xs
       - @form.delivery_methods.each do |item|
@@ -29,33 +35,42 @@
           %table.table
             %tr
               %td.col-half
-                %span.in-grey-600= t('.method')
+                %span.in-grey-600
+                  = t('.method')
               %td.col-half
                 .form-group.radio.mt-0.mb-0
                   %label.radio-label
                     = f.input :delivery_method, input_html: {hidden: true, class: "radio-input", type: "radio", value: "#{item.id}"}, wrapper: false, label: false
                     %span.radio-icon
-                    %span.radio-text= item.name
+                    %span.radio-text
+                      = item.name
             %tr
               %td
-                %span.in-grey-600= t('.days')
+                %span.in-grey-600
+                  = t('.days')
               %td
-                %span.font-16.fw-300= item.delay
+                %span.font-16.fw-300
+                  = item.delay
             %tr
               %td
-                %span.in-grey-600= t('.price')
+                %span.in-grey-600
+                  = t('.price')
               %td
-                %span.font-16.in-gold-500= number_to_currency(item.cost, price_options)
+                %span.font-16.in-gold-500
+                  = number_to_currency(item.cost, price_options)
     .hidden-xs.mb-res-50
       %table.table.table-hover
         %thead
           %tr
             %th.col-method
-              %span.in-grey-600.ml-40= t('.method')
+              %span.in-grey-600.ml-40
+                = t('.method')
             %th
-              %span.in-grey-600= t('.days')
+              %span.in-grey-600
+                = t('.days')
             %th
-              %span.in-grey-600= t('.price')
+              %span.in-grey-600
+                = t('.price')
         %tbody
           - @form.delivery_methods.each_with_index do |item, index|
             %tr
@@ -64,13 +79,17 @@
                   %label.radio-label
                     = f.input :delivery_method, input_html: {hidden: true, class: "radio-input", type: "radio", value: "#{item.id}", checked: (true if index.zero? || item.id == @form.order.delivery_method_id)}, wrapper: false, label: false
                     %span.radio-icon
-                    %span.radio-text= item.name
+                    %span.radio-text
+                      = item.name
               %td
-                %span= item.delay
+                %span
+                  = item.delay
               %td
-                %span.font-16.in-gold-500= number_to_currency(item.cost, price_options)
+                %span.font-16.in-gold-500
+                  = number_to_currency(item.cost, price_options)
     .general-text-align
-      %p.in-gold-500.font-18= t('checkout.ordersumm')
+      %p.in-gold-500.font-18
+        = t('checkout.ordersumm')
       %table.general-summary-table
         = render "cost", order: @form.order
     .text-center

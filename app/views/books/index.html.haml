@@ -1,5 +1,6 @@
 %main.container
-  %h1.general-title-margin= t('pages.catalog')
+  %h1.general-title-margin
+    = t('pages.catalog')
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
@@ -14,7 +15,8 @@
       %li.mr-35
         = link_to(books_path, class: "filter-link") do
           = I18n.t('books.all')
-          %span.badge.general-badge= total_books
+          %span.badge.general-badge
+            = total_books
       - categories_list.each do |category|
         %li.mr-35
           = link_to(books_path(category: category[:id], search: params[:search]), class: ["filter-link", ("active_cat" if category[:id] == params[:category].to_i)]) do
@@ -30,7 +32,8 @@
         %li
           = link_to(books_path(category: category[:id], search: params[:search]), class: "filter-link", style: ("color: #f34040 !important;" if category[:id] == params[:category])) do
             = category[:name]
-    %p.lead.small.mb-10= t('books.sortby')
+    %p.lead.small.mb-10
+      = t('books.sortby')
     .dropdown
       %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
         = selected_sort

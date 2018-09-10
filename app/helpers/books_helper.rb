@@ -11,6 +11,6 @@ module BooksHelper
   end
 
   def total_books
-    Book.all.size
+    @total_books ||= Book.all.size
   end
 end

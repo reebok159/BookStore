@@ -18,10 +18,10 @@ module Users
     end
 
     def address_params
-      params.permit(billing_address: %i[first_name last_name address city
-                                        zip country phone],
-                    shipping_address: %i[first_name last_name address
-                                         city zip country phone])
+      params.permit(
+        billing_address: %i[first_name last_name address city zip country phone],
+        shipping_address: %i[first_name last_name address city zip country phone]
+      )
     end
 
     protected

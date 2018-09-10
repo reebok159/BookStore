@@ -1,20 +1,28 @@
 %tr
   %td
-    %p.font-16= "#{t('checkout.cost_p.subtotal')}:"
+    %p.font-16
+      = "#{t('checkout.cost_p.subtotal')}:"
   %td
-    %p.font-16= number_to_currency(order.subtotal, price_options)
+    %p.font-16
+      = number_to_currency(order.subtotal, price_options)
 %tr
   %td
-    %p.font-16= "#{t('checkout.cost_p.coupon')}:"
+    %p.font-16
+      = "#{t('checkout.cost_p.coupon')}:"
   %td
-    %p.font-16= number_to_currency(order.coupon_discount, price_options)
+    %p.font-16
+      = number_to_currency(order.coupon_discount, price_options)
 %tr
   %td
-    %p.font-16= "#{t('checkout.cost_p.shipping')}:"
+    %p.font-16
+      = "#{t('checkout.cost_p.shipping')}:"
   %td
-    %p.font-16= number_to_currency(order.delivery_price, price_options)
+    %p.font-16
+      = number_to_currency(order.delivery_price, price_options)
 %tr
   %td
-    %p.font-16= "#{t('checkout.cost_p.total')}:"
+    %p.font-16
+      = "#{t('checkout.cost_p.total')}:"
   %td
-    %p.font-16= number_to_currency(order.pre_total_price, price_options)
+    %p.font-16
+      = number_to_currency(order.pre_total_price, price_options)

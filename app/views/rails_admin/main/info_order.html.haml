@@ -1,16 +1,20 @@
 %table.table.table-bordered.table-striped
   %tr
     %th Order id
-    %td= @object.id
+    %td
+      = @object.id
   %tr
     %th User id
-    %td= link_to "(#{@object.user_id}) #{@object.user.email}", show_path(@object.user, model_name: 'user'), target: "_blank"
+    %td
+      = link_to "(#{@object.user_id}) #{@object.user.email}", show_path(@object.user, model_name: 'user'), target: "_blank"
   %tr
     %th Status
-    %td= @object.status
+    %td
+      = @object.status
   %tr
     %th Completed at
-    %td= @object.completed_at
+    %td
+      = @object.completed_at
   %tr
     %th Addresses
     %td
@@ -69,13 +73,16 @@
     %td
       = "#{@object.delivery_method.name}"
       = link_to 'open', show_path(@object.delivery_method, model_name: 'delivery_method'), target: "_blank"
-      %br= "cost: #{@object.delivery_method.cost}"
+      %br
+      = "cost: #{@object.delivery_method.cost}"
   - unless @object.coupon.nil?
     %tr
       %th Coupon
-      %td= link_to "Discount: #{@object.coupon.discount}", show_path(@object.coupon, model_name: 'coupon'), target: "_blank"
+      %td
+        = link_to "Discount: #{@object.coupon.discount}", show_path(@object.coupon, model_name: 'coupon'), target: "_blank"
   %tr
     %th Total Price
-    %td= @object.total_price
+    %td
+      = @object.total_price
 
 

@@ -6,10 +6,4 @@ class ReviewDecorator < Draper::Decorator
   def user_letter
     object.user.email.first.capitalize
   end
-
-  def verified?
-    OrderItem.where(
-      order_id: object.user.orders.delivered.ids
-    ).exists?
-  end
 end

@@ -1,6 +1,7 @@
 %main.container.general-main-wrap
   .text-center
-    %h3.general-login-title= t('.sign_up')
+    %h3.general-login-title
+      = t('.sign_up')
     %a.general-login-icon{href: user_facebook_omniauth_authorize_path}
       %i.fa.fa-facebook-official
     %p.general-login-text or
@@ -16,7 +17,8 @@
       = f.label :password, t(".confirm_password"), class: "control-label input-label"
       = f.input :password_confirmation, required: false, placeholder: t(".confirm_password"), input_html: { class: "form-control", id: "password" }, label: false
     .text-center
-      %button.btn.btn-default.mb-20= t('action.signup')
+      %button.btn.btn-default.mb-20
+        = t('action.signup')
   %p.general-sign-text.text-center
     = t(".have_an_account")
     %a.in-gold-500{href: new_user_session_path}

@@ -58,10 +58,8 @@ class CheckoutController < ApplicationController
       :use_billing,
       :delivery_method,
       credit_card: %i[number name cvv expires],
-      billing_address:
-            %i[first_name last_name address city zip country phone],
-      shipping_address:
-            %i[first_name last_name address city zip country phone]
+      billing_address: %i[first_name last_name address city zip country phone],
+      shipping_address: %i[first_name last_name address city zip country phone]
     )
   end
 end

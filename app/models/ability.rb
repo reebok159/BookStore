@@ -14,7 +14,7 @@ class Ability
 
     can :read, Book
     can :read, Review
-    can :create, Coupon
+    can :activate, Coupon
     return unless order
     can %i[create update destroy], OrderItem, order_id: order.id
 

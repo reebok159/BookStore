@@ -3,7 +3,7 @@
 class CouponsController < ApplicationController
   authorize_resource
 
-  def create
+  def activate
     @coupon = Coupon.find_by(code: coupon_params[:code])
     errors = CouponService.new(last_order, @coupon).check_coupon_errors
     redirect_to(cart_page_url, alert: errors) && return if errors

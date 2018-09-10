@@ -17,12 +17,12 @@ RSpec.describe CouponsController, type: :controller do
       end
 
       it 'try to activate and something happening' do
-        post :create, params: { coupon: { code: coupon.code } }
+        post :activate, params: { coupon: { code: coupon.code } }
         expect(flash[:alert]).not_to be nil
       end
 
       it 'check that I cannot use coupon to empty cart' do
-        post :create, params: { coupon: { code: coupon.code } }
+        post :activate, params: { coupon: { code: coupon.code } }
         expect(flash[:alert]).to eq I18n.t('coupon.cantactivate')
       end
     end
@@ -33,31 +33,31 @@ RSpec.describe CouponsController, type: :controller do
       end
 
       it 'show activate success' do
-        post :create, params: { coupon: { code: coupon.code } }
+        post :activate, params: { coupon: { code: coupon.code } }
         expect(flash[:notice]).to eq I18n.t('coupon.activatesuccess')
       end
 
       it 'check that coupon have effect to order sum' do
-        post :create, params: { coupon: { code: coupon.code } }
+        post :activate, params: { coupon: { code: coupon.code } }
         @order.reload
         expect(@order.coupon_discount).to eq coupon.discount
       end
 
       it 'try activate expired coupon' do
         expired_coupon = create(:coupon, code: 'testcoupon2', expires: DateTime.now - 5.days)
-        post :create, params: { coupon: { code: expired_coupon.code } }
+        post :activate, params: { coupon: { code: expired_coupon.code } }
         expect(flash[:alert]).to eq I18n.t('coupon.termerror')
       end
 
       it 'show that order sum is not enough' do
         coupon = create(:coupon, min_sum_to_activate: @order.subtotal + 1)
-        post :create, params: { coupon: { code: coupon.code } }
+        post :activate, params: { coupon: { code: coupon.code } }
         expect(flash[:alert]).to eq I18n.t('coupon.sumerror')
       end
 
       it 'show that coupon is not exist' do
         some_rand_value = '----nasdfjan213sd'
-        post :create, params: { coupon: { code: some_rand_value } }
+        post :activate, params: { coupon: { code: some_rand_value } }
         expect(flash[:alert]).to eq I18n.t('coupon.noexist')
       end
     end

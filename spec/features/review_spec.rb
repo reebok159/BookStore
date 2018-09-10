@@ -29,7 +29,7 @@ describe 'reviews', type: :feature do
       fill_in 'review[title]', with: review[:title]
       fill_in 'review[text]', with: ''
       find('input[name=commit][value=Post]').click
-      expect(page).to have_content I18n.t('reviews.createfail')
+      expect(page).to have_content I18n.t('reviews.createfail', errors: '')
     end
 
     it 'post a review' do

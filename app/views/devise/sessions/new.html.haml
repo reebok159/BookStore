@@ -1,9 +1,11 @@
 %main.container.general-main-wrap
   .text-center
-    %h3.general-login-title= t('auth.login.title_login')
+    %h3.general-login-title
+      = t('auth.login.title_login')
     %a.general-login-icon{href: user_facebook_omniauth_authorize_path}
       %i.fa.fa-facebook-official
-    %p.general-login-text= t('phrase.or')
+    %p.general-login-text
+      = t('phrase.or')
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }) do |f|
     .form-group.mb-30
       = f.label :email, t('auth.login.enteremail'), class: "control-label input-label"
@@ -18,7 +20,8 @@
         = f.input :remember_me, label: false, input_html: { class: "checkbox-input", hidden: true, type: "checkbox" }, wrapper: false if devise_mapping.rememberable?
         %span.checkbox-icon
           %i.fa.fa-check
-        %span.checkbox-text= t('auth.login.rememberme')
+        %span.checkbox-text
+          = t('auth.login.rememberme')
     .text-center
       = f.button :submit, t('action.login'), class: "btn btn-default mb-20"
   %p.general-sign-text.text-center
