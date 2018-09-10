@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OrderItemsController < ApplicationController
-  load_and_authorize_resource find_by: :id
+  load_and_authorize_resource
 
   def create
     item = last_order.order_items.find_or_initialize_by(book_id: filtered_params[:book_id])

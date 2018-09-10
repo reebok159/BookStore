@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  load_and_authorize_resource :order, only: %i[index show]
+  load_and_authorize_resource only: %i[index show]
 
   def index
-    @orders = current_user.orders.completed
-                          .select_status(params[:status])
-                          .decorate
+    @orders = @orders.select_status(params[:status]).decorate
   end
 
   def show
-    @order = current_user.orders.completed.find(params[:id]).decorate
+    @order = @order.decorate
   end
 
   def cart

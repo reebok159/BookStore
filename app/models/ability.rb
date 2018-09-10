@@ -20,7 +20,9 @@ class Ability
 
     if user.persisted?
       can :create, Review, user_id: user.id
-      can %i[read create], Order, user_id: user.id
+      can :read, Order, status: Order.statuses.keys - ['in_progress'], user_id: user.id
+      can :create, Order, user_id: user.id
+
       can :update, Order, id: order.id, user_id: user.id
       can %i[read create update], ShippingAddress, shipping_a_type: 'User', shipping_a_id: user.id
       can %i[read create update], BillingAddress, billing_a_type: 'User', billing_a_id: user.id
