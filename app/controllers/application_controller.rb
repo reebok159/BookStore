@@ -28,19 +28,11 @@ class ApplicationController < ActionController::Base
   end
 
   def guest_order
-    Order.find_by(id: cookies.signed[:order_id], status: :in_progress)
+    Order.in_progress.find_by(id: cookies.signed[:order_id])
   end
 
   def save_cart
-    return unless guest_order
-    guest_items = guest_order.order_items
-    return if guest_items.empty?
-    user_items = last_order.order_items
-    guest_items.find_each do |item|
-      found_item = user_items.find_by(book_id: item.book_id)
-      user_items.push(item) && next unless found_item
-      found_item.increment!(:quantity, item.quantity)
-    end
+    last_order.merge_order_items(guest_order)
     remove_guest_data
   end
 

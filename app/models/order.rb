@@ -67,4 +67,14 @@ class Order < ApplicationRecord
   def check_need_coupon
     update(coupon: nil) if total_quantity.zero? && coupon
   end
+
+  def merge_order_items(order2)
+    order_items2 = order2&.order_items.to_a
+    return if order_items2.empty?
+    order_items2.each do |item|
+      found_item = order_items.find_by(book_id: item.book_id)
+      found_item.increment!(:quantity, item.quantity) && next if found_item
+      order_items.push(item)
+    end
+  end
 end
