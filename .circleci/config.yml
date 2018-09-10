@@ -9,9 +9,8 @@ jobs:
       - image: circleci/postgres:9.5-alpine
         environment:
           RAILS_ENV: test
-          POSTGRES_USER: pgroot
+          POSTGRES_USER: postgres
           POSTGRES_DB: book_store-dip_test
-          POSTGRES_PASSWORD: root
     branches:
       only:
         - dev
