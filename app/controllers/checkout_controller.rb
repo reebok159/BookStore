@@ -35,7 +35,7 @@ class CheckoutController < ApplicationController
   end
 
   def redirect_if_empty
-    redirect_to cart_page_path, flash: { alert: t('checkout.emptycart') } unless active_order.order_items.present?
+    redirect_to cart_page_path, flash: { alert: t('checkout.emptycart') } if active_order.order_items.blank?
   end
 
   def goto_active_step

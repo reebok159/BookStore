@@ -18,7 +18,7 @@ class User < ApplicationRecord
   validates :password, presence: true, unless: ->(u) { u.password.nil? }
 
   def self.from_omniauth(auth)
-    registered = where(email: auth.info.email).first
+    registered = find_by(email: auth.info.email)
     return registered.add_omni(auth) if registered.present?
 
     where(provider: auth.provider, uid: auth.uid).first_or_initialize { |u| u.save_data_from_omni(auth) }

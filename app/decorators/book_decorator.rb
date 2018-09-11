@@ -9,6 +9,7 @@ class BookDecorator < Draper::Decorator
 
   def cover(type = :book_image)
     return Image::NOIMAGE_IMG if object.images.empty?
+
     object.images.first.image.url(type)
   end
 
@@ -34,11 +35,13 @@ class BookDecorator < Draper::Decorator
 
   def start_cutted_desc
     return object.full_desc.truncate(Book::MAX_FULL_DESC_SHOW, omission: '') if more_desc?
+
     object.full_desc
   end
 
   def more_desc?
     return unless object.full_desc
+
     object.full_desc.length > Book::MAX_FULL_DESC_SHOW
   end
 

@@ -18,7 +18,6 @@ class Order < ApplicationRecord
   validates_associated :shipping_address
   validates_associated :credit_card
 
-  scope :completed, -> { where.not(status: :in_progress) }
   scope :select_status, ->(val) { where(status: val) unless val.nil? }
 
   aasm column: 'checkout_state' do
@@ -69,8 +68,8 @@ class Order < ApplicationRecord
   end
 
   def merge_order_items(order2)
-    order_items2 = order2&.order_items.to_a
-    return if order_items2.empty?
+    order_items2 = order2&.order_items
+    return if order_items2.blank?
 
     order_items2.each do |item|
       found_item = order_items.find_by(book_id: item.book_id)

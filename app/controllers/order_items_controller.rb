@@ -24,7 +24,8 @@ class OrderItemsController < ApplicationController
   private
 
   def quantity_param
-    order_item_params[:quantity].to_i <= 0 ? 1 : order_item_params[:quantity].to_i
+    quantity = order_item_params[:quantity].to_i
+    quantity <= 0 ? 1 : quantity
   end
 
   def filtered_params
