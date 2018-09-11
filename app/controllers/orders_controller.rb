@@ -4,7 +4,9 @@ class OrdersController < ApplicationController
   load_and_authorize_resource only: %i[index show]
 
   def index
-    @orders = @orders.select_status(params[:status]).decorate
+    @orders = @orders.completed
+                     .select_status(params[:status])
+                     .decorate
   end
 
   def show

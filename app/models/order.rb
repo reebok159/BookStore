@@ -19,6 +19,7 @@ class Order < ApplicationRecord
   validates_associated :credit_card
 
   scope :select_status, ->(val) { where(status: val) unless val.nil? }
+  scope :completed, -> { where.not(status: :in_progress) }
 
   aasm column: 'checkout_state' do
     state :address, initial: true
