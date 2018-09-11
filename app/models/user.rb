@@ -24,8 +24,6 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_initialize { |u| u.save_data_from_omni(auth) }
   end
 
-  private
-
   def save_data_from_omni(auth)
     self.email = auth.info.email
     self.password = Devise.friendly_token[0, 20]
