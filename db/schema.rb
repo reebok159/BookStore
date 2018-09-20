@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625104458) do
+ActiveRecord::Schema.define(version: 20180920222532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "zip"
+    t.string "country"
+    t.string "phone"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "kind"
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
+  end
 
   create_table "authors", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -26,21 +42,6 @@ ActiveRecord::Schema.define(version: 20180625104458) do
     t.bigint "author_id"
     t.index ["author_id"], name: "index_authors_books_on_author_id"
     t.index ["book_id"], name: "index_authors_books_on_book_id"
-  end
-
-  create_table "billing_addresses", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.string "city"
-    t.string "zip"
-    t.string "country"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "billing_a_type"
-    t.bigint "billing_a_id"
-    t.index ["billing_a_type", "billing_a_id"], name: "index_billing_addresses_on_billing_a_type_and_billing_a_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -143,21 +144,6 @@ ActiveRecord::Schema.define(version: 20180625104458) do
     t.integer "status", default: 0, null: false
     t.index ["book_id"], name: "index_reviews_on_book_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
-  end
-
-  create_table "shipping_addresses", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.string "city"
-    t.string "zip"
-    t.string "country"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "shipping_a_type"
-    t.bigint "shipping_a_id"
-    t.index ["shipping_a_type", "shipping_a_id"], name: "index_shipping_addresses_on_shipping_a_type_and_shipping_a_id"
   end
 
   create_table "users", force: :cascade do |t|

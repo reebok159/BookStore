@@ -8,8 +8,8 @@ class Order < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :delivery_method, optional: true
   belongs_to :coupon, optional: true
-  has_one :billing_address, as: :billing_a, dependent: :destroy
-  has_one :shipping_address, as: :shipping_a, dependent: :destroy
+  has_one :billing_address, -> { billing }, as: :addressable, class_name: "Address", dependent: :destroy
+  has_one :shipping_address, -> { shipping }, as: :addressable, class_name: "Address", dependent: :destroy
   has_one :credit_card, dependent: :destroy
   has_many :order_items, dependent: :destroy
   has_many :books, through: :order_items

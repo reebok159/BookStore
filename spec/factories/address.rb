@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :billing_address, aliases: [:shipping_address] do
+  factory :address, aliases: %i[shipping_address billing_address] do
     first_name { FFaker::Name.first_name }
     last_name { FFaker::Name.html_safe_last_name }
     address { FFaker::Address.street_name.gsub(/[\W_]/, '') }

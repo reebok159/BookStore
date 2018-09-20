@@ -24,8 +24,7 @@ class Ability
       can :create, Order, user_id: user.id
 
       can :update, Order, id: order.id, user_id: user.id
-      can %i[read create update], ShippingAddress, shipping_a_type: 'User', shipping_a_id: user.id
-      can %i[read create update], BillingAddress, billing_a_type: 'User', billing_a_id: user.id
+      can %i[read create update], Address, addressable_type: 'User', addressable_id: user.id
     else
       can %i[create update], Order, id: order.id
     end
