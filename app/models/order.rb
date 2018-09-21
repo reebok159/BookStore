@@ -53,11 +53,11 @@ class Order < ApplicationRecord
   end
 
   def coupon_discount
-    coupon&.discount || 0
+    coupon&.discount.to_i
   end
 
   def delivery_price
-    delivery_method&.cost || 0
+    delivery_method&.cost.to_i
   end
 
   def pre_total_price
@@ -68,11 +68,11 @@ class Order < ApplicationRecord
     update(coupon: nil) if total_quantity.zero? && coupon
   end
 
-  def merge_order_items(order2)
-    order_items2 = order2&.order_items
-    return if order_items2.blank?
+  def merge_order_items(second_order)
+    second_order_items = second_order&.order_items
+    return if second_order_items.blank?
 
-    order_items2.each do |item|
+    second_order_items.each do |item|
       found_item = order_items.find_by(book_id: item.book_id)
       found_item.increment!(:quantity, item.quantity) && next if found_item
       order_items.push(item)

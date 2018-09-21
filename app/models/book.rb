@@ -3,6 +3,7 @@
 class Book < ApplicationRecord
   MAX_FULL_DESC_SHOW = 300
   BOOKS_PER_PAGE = 12
+  BESTSELLERS_COUNT = 4
   paginates_per BOOKS_PER_PAGE
 
   SORT_PARAMS = {
@@ -30,7 +31,7 @@ class Book < ApplicationRecord
   scope :select_sort, ->(val) { order(SORT_PARAMS[val]) if SORT_PARAMS.key?(val) }
   scope :search, ->(val) { where('lower(name) LIKE ?', "%#{val.downcase}%") if val.present? }
 
-  def self.bestsellers(num = 4)
+  def self.bestsellers(num = BESTSELLERS_COUNT)
     select('books.*')
       .from('order_items')
       .joins(

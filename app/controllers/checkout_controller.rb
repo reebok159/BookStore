@@ -31,7 +31,7 @@ class CheckoutController < ApplicationController
   end
 
   def return_to_confirm?
-    return true if params.key?(:edit) && @form.filled?
+    params.key?(:edit) && @form.filled?
   end
 
   def redirect_if_empty
@@ -40,7 +40,7 @@ class CheckoutController < ApplicationController
 
   def goto_active_step
     @form.order.update(checkout_state: step) if params.key?(:edit)
-    jump_to(@form.order.checkout_state) unless step.to_s == @form.order.checkout_state
+    jump_to(@form.order.checkout_state) if step.to_s != @form.order.checkout_state
   end
 
   def active_order
