@@ -1,0 +1,4 @@
+- books.each_slice(4) do |slice|
+  .row
+    - slice.each do |book|
+      = render 'book', book: book

@@ -1,0 +1,65 @@
+%main.container
+  #slider.carousel.slide{'data-ride': "carousel"}
+    %ol.carousel-indicators
+      - @latest.each_with_index do |book, i|
+        %li{ class: ("active" if i.zero?), 'data-target': "#slider", 'data-slide-to': i }
+    .carousel-inner{role: "listbox"}
+      - @latest.each_with_index do |book, i|
+        .item{ class: ("active" if i.zero?) }
+          .row
+            .col-sm-5
+              .general-img-wrap
+                = image_tag(book.cover(:book_image), class: 'img-shadow general-thumbnail-img', alt: book.name)
+            .col-sm-7
+              .mb-60
+                %h1
+                  = book.name
+                %p.lead
+                  = book.short_desc
+                %p.lead.small
+                  = book.authors_list
+                .general-align
+                  = form_for :order_item, url: order_items_path, method: :post do |f|
+                    = f.hidden_field :book_id, value: book.id
+                    = button_tag(t('action.buynow'), type: 'submit', class: 'btn btn-primary')
+    %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
+      %span.icon-prev{'aria-hidden': "true"}
+      %span.sr-only Previous
+    %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
+      %span.icon-next{'aria-hidden': "true"}
+      %span.sr-only Next
+.container
+  .jumbotron.text-center.mb-0
+    %h2.h1
+      = t('mainpage.welcome1')
+    .mb-res-50
+      %p
+        = t('mainpage.welcome2')
+    = link_to t('mainpage.getstarted'), books_path, class: "btn btn-default"
+  .mb-35
+    %h3
+      = t('mainpage.bestsellers')
+    .row
+      - @bestsellers.each do |item|
+        .col-sm-6.col-md-3
+          .general-thumb-wrap
+            .thumbnail.general-thumbnail
+              = image_tag(item.cover(:thumb), class: 'img-shadow general-thumbnail-img', alt: item.name)
+              .thumb-hover
+                .general-thumb-link-wrap
+                  = link_to book_path(item), class: "thumb-hover-link" do
+                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                  = form_for :order_item, url: order_items_path, method: :post do |f|
+                    = f.hidden_field :book_id, value: item.id
+                    = button_tag(type: 'submit', class: 'thumb-hover-link ico-cart') do
+                      %i.fa.fa-shopping-cart.thumb-icon
+          .mb-35
+            .clearfix
+              %p.pull-right.font-16.in-gold-500
+                = number_to_currency(item.price, price_options)
+              %p.title.mr-55
+                = item.name
+            %span.divider-sm
+            %p.lead.small
+              = item.authors_list
+

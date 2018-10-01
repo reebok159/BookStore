@@ -1,0 +1,77 @@
+version: 2
+jobs:
+  build:
+    parallelism: 3
+    docker:
+      - image: circleci/ruby:2.4.1-node-browsers
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          RAILS_ENV: test
+          POSTGRES_USER: postgres
+          POSTGRES_DB: book_store-dip_test
+    branches:
+      only:
+        - dev
+    working_directory: ~/bookstore-test
+    steps:
+      - checkout
+
+      - run:
+          name: Update repositories
+          command: sudo apt-get update
+
+      # Install System Dependencies
+      - run:
+          name: Install System Dependencies
+          command: sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+
+      # Restore bundle cache
+      - type: cache-restore
+        name: Restore bundle cache
+        key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Bundle Install
+          command: bundle install --path vendor/bundle
+
+      # Store bundle cache
+      - type: cache-save
+        name: Store bundle cache
+        key: rails-demo-bundle-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+      # Only necessary if app uses webpacker or yarn in some other way
+      - type: cache-restore
+        name: Restore yarn cache
+        key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Yarn Install
+          command: yarn install
+
+      # Store yarn / webpacker cache
+      - type: cache-save
+        name: Store yarn cache
+        key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+        paths:
+          - ~/.yarn-cache
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+
+      # Run rspec in parallel
+      - type: shell
+        command: TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+        command: bundle exec rspec --profile 10 --format RspecJunitFormatter --out test-results/rspec.xml --format progress -- ${TESTFILES}
+
+      # Save test results for timing analysis
+      - store_test_results:
+          path: test_results

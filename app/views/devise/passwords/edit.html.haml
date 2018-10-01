@@ -1,0 +1,20 @@
+%main.container.general-main-wrap
+  .text-center
+    %h1.mb-30
+      = I18n.t('password.edit.setnewpass')
+  = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "general-form" }) do |f|
+    = f.error_notification
+    = f.input :reset_password_token, as: :hidden
+    = f.full_error :reset_password_token
+    .form-group.mb-25
+      = f.label :password, "#{I18n.t('password.edit.typenewpass')}", class: "control-label input-label"
+      = f.input :password, label: false, required: true, autofocus: true, :input_html => { :class => "form-control"}, placeholder: "#{I18n.t('password.edit.typenewpass')}"
+      = f.label :password_confirmation, "#{I18n.t('password.edit.confirmpass')}", class: "control-label input-label"
+      = f.input :password_confirmation, label: false, required: true, :input_html => { :class => "form-control"}, placeholder: "#{I18n.t('password.edit.confirmpass')}"
+    .text-center
+      = f.button :submit, "#{I18n.t('password.edit.change')}", class: "btn btn-default mb-20"
+
+
+
+
+

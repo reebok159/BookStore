@@ -1,0 +1,10 @@
+!!! 5
+%html
+  %head
+    = render partial: 'layouts/partials/header'
+  %body
+    .egn-container
+      = render partial: 'layouts/partials/top'
+      = render partial: 'layouts/partials/flash'
+      = yield
+    = render partial: 'layouts/partials/footer'

@@ -1,0 +1,20 @@
+.col-xs-6.col-sm-3
+  .general-thumb-wrap
+    .thumbnail.general-thumbnail
+      = image_tag(book.cover(:thumb), class: 'img-shadow general-thumbnail-img', alt: book.name)
+      .thumb-hover
+        .general-thumb-link-wrap
+          = link_to book_path(book), class: "thumb-hover-link" do
+            %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+          = form_for :order_item, url: order_items_path, method: :post do |f|
+            = f.hidden_field :book_id, value: book.id
+            = button_tag(type: 'submit', class: 'thumb-hover-link ico-cart') do
+              %i.fa.fa-shopping-cart.thumb-icon
+  .general-thumb-info
+    %p.title
+      = book.name
+    %p.font-16.in-gold-500
+      = number_to_currency(book.price, price_options)
+    %span.divider-sm
+    %p.lead.small
+      = book.authors_list

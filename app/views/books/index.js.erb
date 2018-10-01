@@ -1,0 +1,2 @@
+$("<%= escape_javascript(render 'books', books: @books) %>").appendTo('main.container .books-container');
+$('.text-center.view_more').html("<%=j render 'view_more', books: @books %>")

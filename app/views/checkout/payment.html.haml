@@ -1,0 +1,59 @@
+%main.container
+  = render "head"
+  %ul.steps.list-inline
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.steps.address')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.steps.delivery')
+    %li.step-divider
+    %li.step.active
+      %span.step-number 3
+      %span.step-text.hidden-xs
+        = t('checkout.steps.payment')
+    %li.step-divider
+    %li.step
+      %span.step-number 4
+      %span.step-text.hidden-xs
+        = t('checkout.steps.confirm')
+    %li.step-divider
+    %li.step
+      %span.step-number 5
+      %span.step-text.hidden-xs
+        = t('checkout.steps.complete')
+  %h3.general-subtitle
+    = t('.creditcard')
+  = simple_form_for @form.order, url: wizard_path, method: :patch, html: { novalidate: false } do |f|
+    %div.max-600.mb-80
+      = f.simple_fields_for :credit_card, @form.credit_cart_form do |card|
+        .form-group
+          = card.label :number, t('.cardnumber'), class: "control-label input-label"
+          = card.input :number, input_html: { class: "form-control"}, placeholder: "#{t('.cardnumber')}", label: false, required: true
+        .row
+          .col-sm-6
+            .form-group
+              = card.label :name, t('.nameoncard'), class: "control-label input-label"
+              = card.input :name, input_html: { class: "form-control"}, placeholder: "#{t('.nameoncard')}", label: false
+          .col-sm-3
+            .form-group
+              = card.label :expires, t('.mmyy'), class: "control-label input-label"
+              = card.input :expires, input_html: { class: "form-control"}, placeholder: "#{t('.mmyy')}", label: false, required: true
+          .col-sm-3
+            .form-group.relative
+              = card.label :cvv, t('.cvv'), class: "control-label input-label"
+              = card.input :cvv, input_html: { class: "form-control", type: "password"}, placeholder: "#{t('.cvv')}", label: false, required: true
+    .general-text-align
+      %p.in-gold-500.font-18
+        = t('checkout.ordersumm')
+      %table.general-summary-table
+        = render "cost", order: @form.order
+    .text-center
+      - if params.key? :edit
+        = hidden_field nil, "edit"
+      = f.button :submit, t('checkout.saveandcontinue'), class: "btn btn-default mb-80"

@@ -1,0 +1,84 @@
+%header.navbar.navbar-default
+  .container
+    .navbar-header
+      %button.navbar-toggle.pull-left{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+        %span.sr-only
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand Bookstore
+      = link_to cart_page_path, class: "shop-link pull-right visible-xs" do
+        %span.shop-icon{ style: ("background-color: transparent;" unless last_order.total_quantity > 0) }
+          %span.shop-quantity= last_order.total_quantity
+    = link_to cart_page_path, class: "shop-link pull-right hidden-xs" do
+      %span.shop-icon{ style: ("background-color: transparent;" unless last_order.total_quantity > 0) }
+        %span.shop-quantity= last_order.total_quantity
+    #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+      .visible-xs
+        %button.close{type: "button", 'aria-label': "Close"}
+          %span{'aria-hidden': "true"} &times;
+        %ul.nav.navbar-nav
+          %li
+            = link_to t('pages.home'), root_path
+          %li
+            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}= t('pages.shop')
+            %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+              - categories_list.each do |cat|
+                %li
+                  = link_to cat[:name], books_path(category: cat[:id]), class: "collapse-link"
+              %li.divider{role: "separator"}
+                %li
+                  = link_to t('pages.allcats'), books_path
+          - unless user_signed_in?
+            %li
+              = link_to t('action.login'), new_user_session_path
+            %li
+              = link_to t('action.signup'), new_user_registration_path
+          - else
+            %li.dropdown
+              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}= t('pages.myaccount')
+              %ul.dropdown-menu
+                %li
+                  = link_to t('pages.orders'), orders_path
+                %li
+                  = link_to t('pages.settings'), edit_user_registration_path
+                %li.divider{role: "separator"}
+                %li
+                  = link_to t('action.logout'), destroy_user_session_path, method: :delete
+          %li.egn-search
+            = form_tag books_path, { class: "navbar-form navbar-right", method: :get} do |f|
+              = text_field_tag :search, params[:search], class: "form-control", placeholder: "#{t('search.placeholder')}", required: true
+              = button_tag '', class: "fa fa-search general-form-help"
+      .hidden-xs
+        %ul.nav.navbar-nav
+          %li.egn-search
+            = form_tag books_path, { class: "navbar-form navbar-right", method: :get} do |f|
+              = text_field_tag :search, params[:search], class: "form-control", placeholder: "#{t('search.placeholder')}", required: true
+              = button_tag '', class: "fa fa-search general-form-help"
+          %li
+            = link_to t('pages.home'), root_path
+          %li.dropdown
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}= t('pages.shop')
+            %ul.dropdown-menu
+              - categories_list.each do |cat|
+                %li
+                  = link_to cat[:name], books_path(category: cat[:id]), class: "collapse-link"
+              %li.divider{role: "separator"}
+                %li
+                  = link_to "#{t('pages.allcats')}", books_path
+          - unless user_signed_in?
+            %li
+              = link_to t('action.login'), new_user_session_path
+            %li
+              = link_to t('action.signup'), new_user_registration_path
+          - else
+            %li.dropdown
+              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}= t('pages.myaccount')
+              %ul.dropdown-menu
+                %li
+                  = link_to t('pages.orders'), orders_path
+                %li
+                  = link_to t('pages.settings'), edit_user_registration_path
+                %li.divider{role: "separator"}
+                %li
+                  = link_to t('action.logout'), destroy_user_session_path, method: :delete

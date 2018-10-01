@@ -1,33 +1,296 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  pages:
+    home: "Home"
+    shop: "Shop"
+    orders: "Orders"
+    settings: "Settings"
+    catalog: "Catalog"
+    allcats: "All Categories"
+    myaccount: "My account"
+  search:
+    placeholder: "Enter name to search"
+    notfound: "Not found \"%{text}\""
+  action:
+    login: "Log In"
+    logout: "Log Out"
+    signup: "Sign Up"
+    buynow: "Buy Now"
+    backtoresults: "Back to results"
+    view_more: "View More"
+    addtocart: "Add to Cart"
+    save: "Save"
+    readmore: 'Read More'
+  mainpage:
+    welcome1: "Welcome to our amazing Bookstore!"
+    welcome2: "We pore through hundreds of new books each month and select the five best we can find to share with our members."
+    getstarted: "Get Started"
+    bestsellers: "Best Sellers"
+  books:
+    all: 'All'
+    addtocart: "Add to Cart"
+    description: "Description"
+    published: "Year of publication"
+    dimensions: "Dimensions"
+    materials: "Materials"
+    reviews: "Reviews"
+    verifyreview: "Verified Reviewer"
+    filterbycategory: "Filter by category"
+    sortby: "Sort by"
+    newest: "Newest first"
+    popular: "Popular first"
+    lowprice: "Price: Low to high"
+    highprice: "Price: High to low"
+    title-az: "Title: A-Z"
+    title-za: "Title: Z-A"
+  auth:
+    login:
+      title_login: "Log In"
+      enteremail: "Enter Email"
+      password: "Enter Password"
+      forgotpassword: "Forgot Password?"
+      rememberme: "Remember me"
+      donthaveacc: "Don’t have an Account?"
+    signup:
+  phrase:
+    or: "or"
+  coupon:
+    noexist: "Coupon isn't exist"
+    cantactivate: "You cannot activate coupon"
+    sumerror: "You cannot activate coupon (order sum is not enough)"
+    termerror: "You cannot activate coupon (coupon has expired)"
+    alreadyactivated: "You cannot activate coupon (сoupon is already activated)"
+    activatesuccess: "Coupon activated!"
+  order_item:
+    create_success: "Item was added to cart"
+    create_fail: "Couldn't add item to cart"
+    update_fail: "Couldn't update item'"
+    clear_cart_fail: "Couldn't clear cart"
+    clear_cart_success: "Cart was cleared successfully"
+  reviews:
+    createsuccess: 'Thanks for Review. It will be published as soon as Admin will approve it.'
+    createfail: 'Cannot create review. %{errors}'
+    writereview: 'Write a review:'
+    post: 'Post'
+  users:
+    updatesuccess: 'User was updated'
+    updatefail: 'Data cannot be saved'
+    updpasssuccess: 'Successfully updated password'
+    updpassfail: 'Error. Password cannot be saved'
+    mustlogin: 'You must be logged in'
+    addrform:
+      firstname: 'First Name'
+      lastname: 'Last Name'
+      address: 'Address'
+      city: 'City'
+      zip: 'Zip'
+      country: 'Country'
+      selcountry: 'Select a country'
+      phone: 'Phone'
+      example: 'Example'
+  checkout:
+    title: 'Checkout'
+    emptycart: 'Your cart is empty'
+    thanks: 'Thank You for your Order!'
+    thanks2: 'An order information has been sent to %{email}'
+    allrequired: 'all fields are required'
+    saveandcontinue: 'Save and Continue'
+    ordersumm: 'Order Summary'
+    backtostore: 'Back to Store'
+    placeorder: 'Place Order'
+    isinvalid: 'is invalid'
+    order: 'Order'
+    itemlist:
+      book: 'Book'
+      price: 'Price'
+      quantity: 'Quantity'
+      total: 'Total'
+      subtotal: 'SubTotal'
+    steps:
+      address: 'Address'
+      delivery: 'Delivery'
+      payment: 'Payment'
+      confirm: 'Confirm'
+      complete: 'Complete'
+    cost_p:
+      subtotal: 'Subtotal'
+      coupon: 'Coupon'
+      shipping: 'Shipping'
+      total: 'Total'
+    address:
+      billaddress: 'Billing Address'
+      shaddress: 'Shipping Address'
+      usebilladdress: 'Use Billing Address'
+    delivery:
+      dmethod: 'Delivery Method'
+      method: 'Method'
+      days: 'Days'
+      price: 'Price'
+    payment:
+      creditcard: 'Credit Card'
+      cardnumber: 'Card Number'
+      nameoncard: 'Name on Card'
+      mmyy: 'MM / YY'
+      cvv: 'CVV'
+    confirm:
+      shipments: 'Shipments'
+      paymentinfo: 'Payment Information'
+      edit: 'edit'
+  orders:
+    title: 'My Orders'
+    filterby: 'Filter'
+    donthaveorders: "You don't have any orders"
+    filter:
+      all: 'All'
+      waitforproc: 'Waiting for processing'
+      newest: 'Newest first'
+      popular: 'Popular first'
+      lowtohigh: 'Price: Low to hight'
+      hightolow: 'Price: Low to hight'
+    list:
+      number: 'Number'
+      completedat: 'Completed at'
+      status: 'Status'
+      total: 'Total'
+    status:
+      in_progress: 'In Progress'
+      in_queue: 'In Queue'
+      in_delivery: 'In Delivery'
+      delivered: ' Delivered'
+      canceled: 'Canceled'
+  cart:
+    checkout: 'Checkout'
+    title: 'Cart'
+    empty: 'Cart is empty'
+    itemlist:
+      product: 'Product'
+      price: 'Price'
+      quantity: 'Quantity'
+      subtotal: 'SubTotal'
+    coupon:
+      enteryourcode: 'Enter Your Coupon Code'
+      apply: 'Apply Coupon'
+      updcart: 'Update cart'
+    total:
+      ordersumm: 'Order Summary'
+      subtotal: 'Subtotal'
+      coupon: 'Coupon'
+      ordertotal: 'Order Total'
+  settings:
+    title: 'Settings'
+    tabs:
+      address: 'Address'
+      privacy: 'Privacy'
+    billaddress: 'Billing Address'
+    shaddress: 'Shipping Address'
+    privacy:
+      email: 'Email'
+      enteremail: 'Enter your email'
+      password: 'Password'
+      old_pass: 'Old Password'
+      new_pass: 'New Password'
+      confirm_pass: 'Confirm Password'
+      removeacc: 'Remove Account'
+      areyousure: 'Are you sure?'
+      pleaseremove: 'Please Remove My Account'
+      iunderstantdatalost: 'I understand that all data will be lost'
+  password:
+    edit:
+      setnewpass: 'Set new password'
+      typenewpass: 'Type a new Password'
+      confirmpass: 'Confirm password'
+      change: 'Change'
+    new:
+      forgotpass: "Forgot your password?"
+      howtoresetphrase: "We'll email your instructions on how to reset it"
+      entermail: 'Enter your email'
+      emailinstructions: 'Email Instructions'
+      cancel: 'Cancel'
+  devise:
+    confirmations:
+      new:
+        resend_confirmation_instructions: "Resend confirmation instructions"
+    mailer:
+      email_changed:
+        greeting: "Hello %{recipient}!"
+        instruction_1: "We're contacting you to notify you that your email is being changed to %{email}"
+        instruction_2: "We're contacting you to notify you that your email has been changed to %{email}"
+      password_change:
+        greeting: "Hello %{recipient}!"
+        instruction: "We're contacting you to notify you that your password has been changed"
+      confirmation_instructions:
+        action: "Confirm my account"
+        greeting: "Welcome %{recipient}!"
+        instruction: "You can confirm your account email through the link below:"
+      reset_password_instructions:
+        action: "Change my password"
+        greeting: "Hello %{recipient}!"
+        instruction: "Someone has requested a link to change your password, and you can do this through the link below."
+        instruction_2: "If you didn't request this, please ignore this email."
+        instruction_3: "Your password won't change until you access the link above and create a new one."
+      unlock_instructions:
+        action: "Unlock my account"
+        greeting: "Hello %{recipient}!"
+        instruction: "Click the link below to unlock your account:"
+        message: "Your account has been locked due to an excessive amount of unsuccessful sign in attempts."
+    passwords:
+      new:
+        forgot_your_password: "Forgot your password?"
+        send_me_reset_password_instructions: "Send me reset password instructions"
+      edit:
+        change_your_password: "Change your password"
+        new_password: "New password"
+        confirm_new_password: "Confirm new password"
+        change_my_password: "Change my password"
+    registrations:
+      edit:
+        are_you_sure: "Are you sure?"
+        cancel_my_account: "Cancel my account"
+        leave_blank_if_you_don_t_want_to_change_it: "leave blank if you don't want to change it"
+        currently_waiting_confirmation_for_email: "Currently waiting confirmation for: %{email}"
+        title: "Edit %{resource}"
+        we_need_your_current_password_to_confirm_your_changes: "we need your current password to confirm your changes"
+        update: "Update"
+        unhappy: "Unhappy"
+      new:
+        sign_up: "Sign Up"
+        enter_email: 'Enter Email'
+        password: "Password"
+        characters_minimum: "characters minimum"
+        confirm_password: "Confirm Password"
+        have_an_account: "Have an Account?"
+    sessions:
+      new:
+        sign_in: "Sign in"
+    shared:
+      links:
+        back: "Back"
+        didn_t_receive_confirmation_instructions: "Didn't receive confirmation instructions?"
+        didn_t_receive_unlock_instructions: "Didn't receive unlock instructions?"
+        forgot_your_password: "Forgot your password?"
+        log_in: "Log in"
+        sign_in_with_provider: "Sign in with %{provider}"
+        sign_up: "Sign up"
+    unlocks:
+      new:
+        resend_unlock_instructions: "Resend unlock instructions"
+  activerecord:
+    credit_card:
+      validation:
+        expires_invalid: "expires date is inalid"
+        expired: "card is expired"
+    models:
+      user: "User"
+    attributes:
+      user:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        current_password: "Current password"
+        remember_me: "Remember me"
+  mailer:
+    order:
+      subject: '[BookStore] Order Information'
+      number: "Order number: R%{number}!"
+      message: 'Thank you for Your order!'
+      ordinfo: 'Order information'
+      items: 'Items'

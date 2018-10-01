@@ -1,0 +1,74 @@
+%main.container.general-main-wrap
+  %h1.mt-0.mb-25
+    = t('orders.title')
+  %p.lead.small.mb-10.visible-xs
+    = t('orders.filterby')
+  .dropdowns.dropdown.general-order-dropdown
+    = render 'filter'
+  .visible-xs
+    - if @orders.count.zero?
+      = t('orders.donthaveorders')
+    - @orders.each do |order|
+      .general-cart-item.divider-lg-bottom.pt-0
+        %table.table
+          %tr
+            %td.col-half
+              %span.in-grey-600
+                = t('orders.list.number')
+            %td.col-half
+              = link_to "##{order.number}", order_path(order), class: "general-order-number"
+          %tr
+            %td
+              %span.in-grey-600
+                = t('orders.list.completedat')
+            %td
+              %span.in-grey-900.font-16.fw-300
+                = order.format_mdate
+          %tr
+            %td
+              %span.in-grey-600
+                = t('orders.list.status')
+            %td
+              %span.font-16.in-grey-900.fw-300
+                = order.format_status
+          %tr
+            %td
+              %span.in-grey-600
+                = t('orders.list.total')
+            %td
+              %strong.font-16
+                = number_to_currency(order.total_price, price_options)
+  .hidden-xs.mb-res-50
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600
+              = t('orders.list.number')
+          %th
+            %span.in-grey-600
+              = t('orders.list.completedat')
+          %th
+            %span.in-grey-600
+              = t('orders.list.status')
+          %th
+            %span.in-grey-600
+              = t('orders.list.total')
+      %tbody
+        - if @orders.count.zero?
+          %tr
+            %td{colspan: 4, style: "text-align: center;"}
+              = t('orders.donthaveorders')
+        - @orders.each do |order|
+          %tr
+            %td
+              = link_to "##{order.number}", order_path(order), class: "general-order-number"
+            %td
+              %span.in-grey-900.font-16.fw-300
+                = order.format_mdate
+            %td
+              %span.font-16.in-grey-900.fw-300
+                = order.format_status
+            %td
+              %strong.font-16
+                = number_to_currency(order.total_price, price_options)
